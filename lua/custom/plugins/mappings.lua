@@ -25,7 +25,7 @@ vim.keymap.set('n', '<C-+>', ':IncreaseFont<CR>', { noremap = true, silent = tru
 vim.keymap.set('n', '<C-0>', ':ResetFontSize<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>bb', '<cmd>BufferLinePick<CR>', { desc = 'Pick buffer' })
 vim.keymap.set('n', '<C-s>', '<cmd>w!<cr>', { desc = 'Force write' })
-vim.keymap.set('n', '<C-q>', '<cmd>qa!<cr>', { desc = 'Force quit' })
+vim.keymap.set('n', '<C-q>', '<cmd>q!<cr>', { desc = 'Force quit' })
 vim.keymap.set('n', '|', '<cmd>vsplit<cr>', { desc = 'Vertical Split' })
 vim.keymap.set('n', '\\', '<cmd>split<cr>', { desc = 'Horizontal Split' })
 vim.keymap.set('n', '<leader>H', '<cmd>nohl<cr>', { desc = 'Horizontal Split' })
