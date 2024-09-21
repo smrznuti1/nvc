@@ -1,6 +1,7 @@
 local lspconfig = require 'lspconfig'
-local default_capabilities = require('cmp_nvim_lsp').default_capabilities()
-default_capabilities.offsetEncoding = { 'utf-16' }
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+capabilities.offsetEncoding = { 'utf-16' }
 lspconfig.clangd.setup {
   settings = {
     clangd = {
@@ -18,7 +19,7 @@ lspconfig.clangd.setup {
     '--function-arg-placeholders',
     '--fallback-style=llvm',
   },
-  capabilities = default_capabilities,
+  capabilities = capabilities,
 }
 
 return {}
