@@ -1,5 +1,7 @@
 local lspconfig = require 'lspconfig'
+local cmp = require 'cmp_nvim_lsp'
 local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
+lsp_capabilities = vim.tbl_deep_extend('force', lsp_capabilities, cmp.default_capabilities())
 lspconfig.pylsp.setup {
   settings = {
     pylsp = {
