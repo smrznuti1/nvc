@@ -14,5 +14,8 @@ vim.api.nvim_create_user_command('BDAll', '%bd! | e#', {})
 vim.api.nvim_create_user_command('NT', 'bd! % | term', {})
 vim.api.nvim_create_user_command('NUT', 'bd! % | Uterm', {})
 vim.api.nvim_create_user_command('CC', 'CopilotChat', {})
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
 
 return {}
