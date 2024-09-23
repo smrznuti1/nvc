@@ -2,6 +2,7 @@ local lspconfig = require 'lspconfig'
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 capabilities.offsetEncoding = { 'utf-16' }
+
 lspconfig.clangd.setup {
   settings = {
     clangd = {
@@ -20,6 +21,16 @@ lspconfig.clangd.setup {
     '--fallback-style=llvm',
   },
   capabilities = capabilities,
+  root_dir = lspconfig.util.root_pattern(
+    '.clangd',
+    '.clang-tidy',
+    '.clang-format',
+    'compile_commands.json',
+    'compile_flags.txt',
+    'configure.ac',
+    '.git',
+    'Makefile'
+  ),
 }
 
 return {}
