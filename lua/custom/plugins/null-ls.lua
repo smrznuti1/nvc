@@ -29,6 +29,7 @@ return {
         null_ls.builtins.diagnostics.eslint,
         null_ls.builtins.formatting.fixjson,
         null_ls.builtins.formatting.latexindent,
+        null_ls.builtins.formatting.prettierd,
         -- null_ls.builtins.completion.spell,
       },
     }
