@@ -56,4 +56,10 @@ vim.keymap.set('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Terminal down window
 vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Terminal up window navigation' })
 vim.keymap.set('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Terminal right window navigation' })
 
+-- Highlight
+-- vim.cmd 'autocmd CursorMoved * set nohlsearch'
+-- vim.api.nvim_set_keymap('n', 'n', 'n:set hlsearch<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<S-n>', 'n:set hlsearch<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '#', 'n:set hlsearch<CR>', { noremap = true, silent = true })
+
 return {}
