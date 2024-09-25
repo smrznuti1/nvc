@@ -1,3 +1,4 @@
+local builtin = require 'telescope.builtin'
 -- Workdir
 vim.keymap.set('n', '<leader>b;', ':let @+ = expand("%:p")<cr>', { desc = 'Copy Name' })
 vim.keymap.set('n', '<leader>t;', ':tc %:p:h<cr>', { desc = 'Change Directory to file path' })
@@ -10,7 +11,11 @@ vim.keymap.set('n', '<leader>,', function()
   vim.fn.execute(command)
 end)
 
+-- Files
 vim.keymap.set('n', '<leader>L', ':!ls<cr>', { desc = 'List Items' })
+vim.keymap.set('n', '<leader>sF', function()
+  builtin.find_files { hidden = true }
+end, { desc = '[S]earch [F]iles (Hidden included)' })
 
 -- LSP
 vim.keymap.set('n', 'gv', ':vs | lua vim.lsp.buf.definition()<cr>', { desc = 'Goto Definition split vertical' })
