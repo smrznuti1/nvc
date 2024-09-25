@@ -57,9 +57,9 @@ vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Terminal up window n
 vim.keymap.set('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Terminal right window navigation' })
 
 -- Highlight
--- vim.cmd 'autocmd CursorMoved * set nohlsearch'
--- vim.api.nvim_set_keymap('n', 'n', 'n:set hlsearch<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<S-n>', 'n:set hlsearch<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '#', 'n:set hlsearch<CR>', { noremap = true, silent = true })
+vim.cmd 'autocmd CursorMoved * set nohlsearch'
+vim.api.nvim_set_keymap('n', 'n', 'n:set hlsearch<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-n>', '<S-n>:set hlsearch<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '#', '#:set hlsearch<CR>', { noremap = true, silent = true })
 
 return {}
