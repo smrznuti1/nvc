@@ -68,12 +68,12 @@ return {
     vim.keymap.set('v', 'M', mc.matchCursors)
 
     -- Rotate visual selection contents.
-    vim.keymap.set('v', '<leader>t', function()
-      mc.transposeCursors(1)
-    end)
-    vim.keymap.set('v', '<leader>T', function()
-      mc.transposeCursors(-1)
-    end)
+    -- vim.keymap.set('v', '<leader>t', function()
+    --   mc.transposeCursors(1)
+    -- end)
+    -- vim.keymap.set('v', '<leader>T', function()
+    --   mc.transposeCursors(-1)
+    -- end)
 
     -- Customize how cursors look.
     vim.api.nvim_set_hl(0, 'MultiCursorCursor', { link = 'Cursor' })
