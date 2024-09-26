@@ -45,8 +45,7 @@ vim.keymap.set('n', '<leader>D', ':!ri -Force %<cr>', { desc = 'Delete Item' })
 -- Tabs
 vim.keymap.set('n', '<leader>be', ':tabe %<cr>', { desc = 'Open in New Tab' })
 vim.keymap.set('n', '<leader>tq', ':tabclose<cr>', { desc = 'Open in New Tab' })
-vim.keymap.set('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Tab Previous' })
-vim.keymap.set('n', ']t', '<cmd>tabNext<cr>', { desc = 'Tab Next' })
+vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Tab Next' })
 vim.keymap.set('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Tab Previous' })
 
 -- Terminal
