@@ -33,7 +33,7 @@ return {
         'shellcheck',
         'beautysh',
         'ansible-lint',
-        'ansible-language-server',
+        -- 'ansible-language-server',
       },
     }
   end,
