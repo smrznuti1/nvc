@@ -32,7 +32,7 @@ return {
         'bash-language-server',
         'shellcheck',
         'beautysh',
-        'ansible-lint',
+        -- 'ansible-lint',
         -- 'ansible-language-server',
       },
     }
