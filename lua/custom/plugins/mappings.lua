@@ -1,9 +1,25 @@
+-- Funcs
+local function change_cwd_to_terminal_path()
+  vim.defer_fn(function()
+    vim.cmd('tc ' .. vim.fn.getreg '+')
+  end, 50) -- 100 milliseconds delay
+end
+
+_G.change_cwd_to_terminal_path = change_cwd_to_terminal_path
+
 local builtin = require 'telescope.builtin'
 -- Workdir
 vim.keymap.set('n', '<leader>b;', ':let @+ = expand("%:p")<cr>', { desc = 'Copy Name' })
 vim.keymap.set('n', '<leader>t;', ':tc %:p:h<cr>', { desc = 'Change Directory to file path' })
 vim.keymap.set('n', '<leader>tr', ':tc <C-r>+<cr>', { desc = 'Change Directory to file path' })
 vim.keymap.set('n', '<leader>-', ':tc -<cr>:pwd<cr>', { desc = 'Cd -' })
+
+vim.api.nvim_set_keymap(
+  't',
+  '<M-a>',
+  'pwc<CR><C-\\><C-n>:lua change_cwd_to_terminal_path()<CR>',
+  { noremap = true, silent = true, desc = 'Change to terminal path' }
+)
 
 vim.keymap.set('n', '<leader>,', function()
   local output = string.gsub(vim.fn.expand '%', '.md', '.pdf')
