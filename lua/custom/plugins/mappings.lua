@@ -35,7 +35,7 @@ vim.keymap.set('n', '<leader>H', '<cmd>nohl<cr>', { desc = 'Horizontal Split' })
 
 -- Buffer
 vim.keymap.set('n', '<leader>bb', '<cmd>BufferLinePick<CR>', { desc = 'Pick buffer' })
-vim.keymap.set('n', '<C-s>', '<cmd>w!<cr>', { desc = 'Force write' })
+-- vim.keymap.set('n', '<C-s>', '<cmd>w!<cr>', { desc = 'Force write' })
 vim.keymap.set('n', '<leader>q', '<cmd>q!<cr>', { desc = 'Force quit' })
 vim.keymap.set('n', '[b', '<cmd>BufferLineCyclePrev<CR>', { desc = 'Buffer Previous' })
 vim.keymap.set('n', ']b', '<cmd>BufferLineCycleNext<CR>', { desc = 'Buffer Next' })
