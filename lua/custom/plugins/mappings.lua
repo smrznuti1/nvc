@@ -2,7 +2,7 @@
 local function change_cwd_to_terminal_path()
   vim.defer_fn(function()
     vim.cmd('tc ' .. vim.fn.getreg '+')
-  end, 50) -- 100 milliseconds delay
+  end, 100) -- 100 milliseconds delay
 end
 
 _G.change_cwd_to_terminal_path = change_cwd_to_terminal_path
