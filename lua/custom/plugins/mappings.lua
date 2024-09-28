@@ -5,6 +5,15 @@ local function change_cwd_to_terminal_path()
   end, 100) -- 100 milliseconds delay
 end
 
+function close_buffer_force()
+  local buftype = vim.bo.buftype
+  if buftype == 'terminal' then
+    vim.api.nvim_command 'q'
+  else
+    vim.api.nvim_command 'q!'
+  end
+end
+
 _G.change_cwd_to_terminal_path = change_cwd_to_terminal_path
 
 local builtin = require 'telescope.builtin'
@@ -52,7 +61,7 @@ vim.keymap.set('n', '<leader>H', '<cmd>nohl<cr>', { desc = 'Horizontal Split' })
 -- Buffer
 vim.keymap.set('n', '<leader>bb', '<cmd>BufferLinePick<CR>', { desc = 'Pick buffer' })
 -- vim.keymap.set('n', '<C-s>', '<cmd>w!<cr>', { desc = 'Force write' })
-vim.keymap.set('n', '<leader>q', '<cmd>q!<cr>', { desc = 'Force quit' })
+vim.api.nvim_set_keymap('n', '<leader>q', ':lua close_buffer_force()<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '[b', '<cmd>BufferLineCyclePrev<CR>', { desc = 'Buffer Previous' })
 vim.keymap.set('n', ']b', '<cmd>BufferLineCycleNext<CR>', { desc = 'Buffer Next' })
 vim.keymap.set('n', '<leader>Q', ':bd!<cr>', { desc = 'Delete buffer' })
