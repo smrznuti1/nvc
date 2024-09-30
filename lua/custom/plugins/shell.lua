@@ -18,6 +18,13 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 
-vim.cmd [[set autochdir]]
+-- vim.opt.autochdir = true
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = '*',
+  callback = function()
+    vim.cmd 'silent! lcd %:p:h'
+  end,
+})
 
 return {}
