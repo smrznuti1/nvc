@@ -99,13 +99,20 @@ vim.keymap.set('n', '<leader>gA', ':G add -A<cr>', { desc = 'Git stage all' })
 -- vim.keymap.set('n', '<leader>gc', ':G commit -m ', { desc = 'Git commit' })
 vim.keymap.set('n', '<leader>gs', ':G status<cr>', { desc = 'Git status' })
 -- vim.keymap.set('n', '<leader>gk', ':G checkout ', { desc = 'Git checkout' })
+
 vim.keymap.set('n', '<leader>gk', function()
-  local commit_message = vim.fn.input 'Checkout Destination: '
-  vim.cmd('G checkout "' .. commit_message .. '"')
+  local checkout_desitnation = vim.fn.input 'Checkout Destination: '
+  vim.cmd('G checkout "' .. checkout_desitnation .. '"')
 end, { desc = 'Git checkout' })
+
 vim.keymap.set('n', '<leader>gc', function()
   local commit_message = vim.fn.input 'Commit message: '
   vim.cmd('G commit -m "' .. commit_message .. '"')
 end, { desc = 'Git commit' })
+
+vim.keymap.set('n', '<leader>gl', function()
+  local number_of_commits = vim.fn.input 'Number of commits: '
+  vim.cmd('G log --oneline -n "' .. number_of_commits .. '"')
+end, { desc = 'Git log' })
 
 return {}
