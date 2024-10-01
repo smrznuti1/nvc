@@ -97,7 +97,7 @@ vim.keymap.set('n', '<leader>gF', ':G push --force<cr>', { desc = 'Git push forc
 vim.keymap.set('n', '<leader>gf', ':G fetch<cr>', { desc = 'Git fetch' })
 vim.keymap.set('n', '<leader>gA', ':G add -A<cr>', { desc = 'Git stage all' })
 -- vim.keymap.set('n', '<leader>gc', ':G commit -m ', { desc = 'Git commit' })
-vim.keymap.set('n', '<leader>gs', ':G status<cr>', { desc = 'Git status' })
+vim.keymap.set('n', '<leader>gs', ':G<cr>', { desc = 'Git status' })
 -- vim.keymap.set('n', '<leader>gk', ':G checkout ', { desc = 'Git checkout' })
 
 vim.keymap.set('n', '<leader>gk', function()
