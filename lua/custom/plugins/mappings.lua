@@ -88,4 +88,15 @@ vim.api.nvim_set_keymap('n', 'n', 'n:set hlsearch<CR>', { noremap = true, silent
 vim.api.nvim_set_keymap('n', '<S-n>', '<S-n>:set hlsearch<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '#', '#:set hlsearch<CR>', { noremap = true, silent = true })
 
+-- Git
+vim.keymap.set('n', '<leader>gb', ':G branch<cr>', { desc = 'Git branch' })
+vim.keymap.set('n', '<leader>gB', ':G branch -a <cr>', { desc = 'Git branch all' })
+vim.keymap.set('n', '<leader>gp', ':G pull<cr>', { desc = 'Git pull' })
+vim.keymap.set('n', '<leader>gP', ':G push<cr>', { desc = 'Git push' })
+vim.keymap.set('n', '<leader>gF', ':G push --force<cr>', { desc = 'Git push force' })
+vim.keymap.set('n', '<leader>gf', ':G fetch<cr>', { desc = 'Git fetch' })
+vim.keymap.set('n', '<leader>gA', ':G add -A<cr>', { desc = 'Git stage all' })
+vim.keymap.set('n', '<leader>gc', ':G commit -m ', { desc = 'Git commit' })
+vim.keymap.set('n', '<leader>gs', ':G status<cr>', { desc = 'Git status' })
+
 return {}
