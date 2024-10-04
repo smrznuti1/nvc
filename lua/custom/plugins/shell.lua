@@ -27,4 +27,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
 })
 
+vim.opt.shortmess = vim.opt.shortmess + 'A'
+
 return {}
