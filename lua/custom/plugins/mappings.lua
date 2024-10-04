@@ -101,8 +101,8 @@ vim.keymap.set('n', '<leader>gs', ':G<cr>', { desc = 'Git status' })
 -- vim.keymap.set('n', '<leader>gk', ':G checkout ', { desc = 'Git checkout' })
 
 vim.keymap.set('n', '<leader>gk', function()
-  local checkout_desitnation = vim.fn.input 'Checkout Destination: '
-  vim.cmd('G checkout "' .. checkout_desitnation .. '"')
+  local checkout_destination = vim.fn.input 'Checkout Destination: '
+  vim.cmd('G checkout ' .. checkout_destination)
 end, { desc = 'Git checkout' })
 
 vim.keymap.set('n', '<leader>gc', function()
