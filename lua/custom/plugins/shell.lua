@@ -20,10 +20,36 @@ vim.opt.softtabstop = 2
 
 -- vim.opt.autochdir = true
 
+-- vim.api.nvim_create_autocmd('BufEnter', {
+--   pattern = '*',
+--   callback = function()
+--     vim.cmd 'silent! lcd %:p:h'
+--   end,
+-- })
+
 vim.api.nvim_create_autocmd('BufEnter', {
   pattern = '*',
   callback = function()
-    vim.cmd 'silent! lcd %:p:h'
+    local function find_git_root(path)
+      local git_path = path .. '/.git'
+      if vim.loop.fs_stat(git_path) then
+        return path
+      end
+      local parent = vim.fn.fnamemodify(path, ':h')
+      if parent == path then
+        return nil
+      end
+      return find_git_root(parent)
+    end
+
+    local file_path = vim.fn.expand('%:p:h')
+    local git_root = find_git_root(file_path)
+
+    if git_root then
+      vim.cmd('silent! lcd ' .. git_root)
+    else
+      vim.cmd('silent! lcd ' .. file_path)
+    end
   end,
 })
 
