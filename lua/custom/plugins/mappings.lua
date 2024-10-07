@@ -1,8 +1,24 @@
 -- Funcs
 local function change_cwd_to_terminal_path()
+  local function find_git_root(path)
+    local git_path = path .. '/.git'
+    if vim.loop.fs_stat(git_path) then
+      return path
+    end
+    local parent = vim.fn.fnamemodify(path, ':h')
+    if parent == path then
+      return nil
+    end
+    return find_git_root(parent)
+  end
   vim.defer_fn(function()
-    vim.cmd('tc ' .. vim.fn.getreg '+')
-  end, 100) -- 100 milliseconds delay
+    local git_root = find_git_root(vim.fn.getreg '+')
+    if git_root then
+      vim.cmd('silent! tc ' .. git_root)
+    else
+      vim.cmd('silent! tc ' .. vim.fn.getreg '+')
+    end
+  end, 100)
 end
 
 function close_buffer_force()
