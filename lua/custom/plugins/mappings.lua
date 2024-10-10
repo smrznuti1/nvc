@@ -21,7 +21,7 @@ local function change_cwd_to_terminal_path()
   end, 100)
 end
 
-function close_buffer_force()
+function Close_buffer_force()
   local buftype = vim.bo.buftype
   if buftype == 'terminal' then
     vim.api.nvim_command 'q'
@@ -79,7 +79,7 @@ vim.keymap.set('n', '<leader>H', '<cmd>nohl<cr>', { desc = 'Horizontal Split' })
 -- Buffer
 vim.keymap.set('n', '<leader>bb', '<cmd>BufferLinePick<CR>', { desc = 'Pick buffer' })
 -- vim.keymap.set('n', '<C-s>', '<cmd>w!<cr>', { desc = 'Force write' })
-vim.api.nvim_set_keymap('n', '<leader>q', ':lua close_buffer_force()<CR>', { noremap = true, silent = true, desc = 'Close buffer' })
+vim.api.nvim_set_keymap('n', '<leader>q', ':lua Close_buffer_force()<CR>', { noremap = true, silent = true, desc = 'Close buffer' })
 vim.keymap.set('n', '[b', '<cmd>BufferLineCyclePrev<CR>', { desc = 'Buffer Previous' })
 vim.keymap.set('n', ']b', '<cmd>BufferLineCycleNext<CR>', { desc = 'Buffer Next' })
 vim.keymap.set('n', '<leader>Q', ':bd!<cr>', { desc = 'Delete buffer' })
