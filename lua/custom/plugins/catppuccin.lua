@@ -37,8 +37,9 @@ return {
       },
       color_overrides = {
         mocha = {
-          lineNumbers = "#696c91",
-        }
+          lineNumbers = '#696c91',
+          cursorLineNr = '#e6e6ff'
+        },
       },
       custom_highlights = {},
       default_integrations = true,
@@ -54,13 +55,14 @@ return {
         },
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
       },
-        highlight_overrides = {
-            mocha = function(mocha)
-                return {
-                    LineNr = { fg = mocha.lineNumbers },
-                }
-            end,
-        },
+      highlight_overrides = {
+        mocha = function(mocha)
+          return {
+            LineNr = { fg = mocha.lineNumbers },
+            CursorLineNr = { fg = mocha.cursorLineNr },
+          }
+        end,
+      },
     }
 
     -- setup must be called before loading
