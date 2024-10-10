@@ -37,7 +37,7 @@ return {
       },
       color_overrides = {
         mocha = {
-          lineNumbers = "#5b5f8b",
+          lineNumbers = "#696c91",
         }
       },
       custom_highlights = {},
