@@ -35,7 +35,11 @@ return {
         operators = {},
         -- miscs = {}, -- Uncomment to turn off hard-coded styles
       },
-      color_overrides = {},
+      color_overrides = {
+        mocha = {
+          lineNumbers = "#5b5f8b",
+        }
+      },
       custom_highlights = {},
       default_integrations = true,
       integrations = {
@@ -50,6 +54,13 @@ return {
         },
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
       },
+        highlight_overrides = {
+            mocha = function(mocha)
+                return {
+                    LineNr = { fg = mocha.lineNumbers },
+                }
+            end,
+        },
     }
 
     -- setup must be called before loading
