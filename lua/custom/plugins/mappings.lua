@@ -79,11 +79,11 @@ vim.keymap.set('n', '<leader>H', '<cmd>nohl<cr>', { desc = 'Horizontal Split' })
 -- Buffer
 vim.keymap.set('n', '<leader>bb', '<cmd>BufferLinePick<CR>', { desc = 'Pick buffer' })
 -- vim.keymap.set('n', '<C-s>', '<cmd>w!<cr>', { desc = 'Force write' })
-vim.api.nvim_set_keymap('n', '<leader>q', ':lua close_buffer_force()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>q', ':lua close_buffer_force()<CR>', { noremap = true, silent = true, desc = 'Close buffer' })
 vim.keymap.set('n', '[b', '<cmd>BufferLineCyclePrev<CR>', { desc = 'Buffer Previous' })
 vim.keymap.set('n', ']b', '<cmd>BufferLineCycleNext<CR>', { desc = 'Buffer Next' })
 vim.keymap.set('n', '<leader>Q', ':bd!<cr>', { desc = 'Delete buffer' })
-vim.keymap.set('n', '<leader>D', ':!ri -Force %<cr>', { desc = 'Delete Item' })
+vim.keymap.set('n', '<leader>D', ':!ri -Force%<cr>', { noremap = true, desc = 'Delete Item' })
 
 -- Tabs
 vim.keymap.set('n', '<leader>te', ':tabe %<cr>', { desc = 'Open in New Tab' })
