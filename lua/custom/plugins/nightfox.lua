@@ -2,7 +2,7 @@ return {
   'EdenEast/nightfox.nvim',
   name = 'nightfox',
   style = 'duskfox',
-  lazy = false,
+  lazy = true,
   config = function()
     -- Default options
     require('nightfox').setup {
@@ -50,6 +50,6 @@ return {
     }
 
     -- setup must be called before loading
-    vim.cmd 'colorscheme duskfox'
+    -- vim.cmd 'colorscheme duskfox'
   end,
 }
