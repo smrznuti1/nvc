@@ -1,10 +1,26 @@
 return {
-    'goolord/alpha-nvim',
-    dependencies = {
-        'echasnovski/mini.icons',
-        'nvim-lua/plenary.nvim'
-    },
-    config = function ()
-        require'alpha'.setup(require'alpha.themes.theta'.config)
-    end
-};
+  'goolord/alpha-nvim',
+  dependencies = {
+    'echasnovski/mini.icons',
+    'nvim-lua/plenary.nvim',
+  },
+  config = function()
+    local dashboard = require "alpha.themes.dashboard"
+    dashboard.section.header.val = {
+      "  ███████ ███    ███ ██████  ████████",
+      "  ██      ████  ████ ██   ██     ████",
+      "  ███████ ██ ████ ██ ██████    ████  ",
+      "       ██ ██  ██  ██ ██   ██ ████    ",
+      "  ███████ ██      ██ ██   ██ ████████",
+      " ",
+      "    ███    ██ ██    ██ ██ ███    ███",
+      "    ████   ██ ██    ██ ██ ████  ████",
+      "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
+      "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
+      "    ██   ████   ████   ██ ██      ██",
+    }
+    dashboard.section.header.opts.hl = "DashboardHeader"
+    dashboard.section.footer.opts.hl = "DashboardFooter"
+    require('alpha').setup(dashboard.config)
+  end,
+}
