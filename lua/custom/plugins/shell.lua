@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
       end
       for _, client in pairs(clients) do
         local client_filetypes = client.config.filetypes
-        if client_filetypes and vim.tbl_contains(client_filetypes, vim.bo.filetype ) then
+        if client_filetypes and vim.tbl_contains(client_filetypes, vim.bo.filetype) then
           local root_dir = client.config.root_dir
           if root_dir then
             return root_dir
@@ -67,6 +67,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
     local lsp_root = find_lsp_root_dir()
 
     if lsp_root then
+      print('lsp root', lsp_root)
       vim.cmd('silent! lcd ' .. lsp_root)
     elseif git_root then
       vim.cmd('silent! lcd ' .. git_root)
