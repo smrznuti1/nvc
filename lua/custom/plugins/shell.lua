@@ -30,6 +30,9 @@ vim.opt.softtabstop = 2
 vim.api.nvim_create_autocmd('BufEnter', {
   pattern = '*',
   callback = function()
+    if vim.bo.buftype ~= '' then
+      return
+    end
     local function find_git_root(path)
       local git_path = path .. '/.git'
       if vim.loop.fs_stat(git_path) then
@@ -42,10 +45,30 @@ vim.api.nvim_create_autocmd('BufEnter', {
       return find_git_root(parent)
     end
 
-    local file_path = vim.fn.expand('%:p:h')
-    local git_root = find_git_root(file_path)
+    local function find_lsp_root_dir()
+      local clients = vim.lsp.get_clients()
+      if not clients then
+        return nil
+      end
+      for _, client in pairs(clients) do
+        local client_filetypes = client.config.filetypes
+        if client_filetypes and vim.tbl_contains(client_filetypes, vim.bo.filetype ) then
+          local root_dir = client.config.root_dir
+          if root_dir then
+            return root_dir
+          end
+        end
+      end
+      return nil
+    end
 
-    if git_root then
+    local file_path = vim.fn.expand '%:p:h'
+    local git_root = find_git_root(file_path)
+    local lsp_root = find_lsp_root_dir()
+
+    if lsp_root then
+      vim.cmd('silent! lcd ' .. lsp_root)
+    elseif git_root then
       vim.cmd('silent! lcd ' .. git_root)
     else
       vim.cmd('silent! lcd ' .. file_path)
