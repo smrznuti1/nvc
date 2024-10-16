@@ -28,8 +28,8 @@ lspconfig.clangd.setup {
     'compile_commands.json',
     'compile_flags.txt',
     'configure.ac',
-    '.git',
-    'Makefile'
+    'Makefile',
+    '.git'
   ),
 }
 
