@@ -62,17 +62,21 @@ vim.api.nvim_create_autocmd('BufEnter', {
       return nil
     end
 
-    local file_path = vim.fn.expand '%:p:h'
-    local git_root = find_git_root(file_path)
-    local lsp_root = find_lsp_root_dir()
+    local function set_path()
+      local file_path = vim.fn.expand '%:p:h'
+      local git_root = find_git_root(file_path)
+      local lsp_root = find_lsp_root_dir()
 
-    if lsp_root then
-      vim.cmd('silent! lcd ' .. lsp_root)
-    elseif git_root then
-      vim.cmd('silent! lcd ' .. git_root)
-    else
-      vim.cmd('silent! lcd ' .. file_path)
+      if lsp_root then
+        vim.cmd('silent! lcd ' .. lsp_root)
+      elseif git_root then
+        vim.cmd('silent! lcd ' .. git_root)
+      else
+        vim.cmd('silent! lcd ' .. file_path)
+      end
     end
+
+    vim.defer_fn(set_path, 500)
   end,
 })
 
