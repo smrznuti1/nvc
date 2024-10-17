@@ -67,7 +67,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
     local lsp_root = find_lsp_root_dir()
 
     if lsp_root then
-      print('lsp root', lsp_root)
       vim.cmd('silent! lcd ' .. lsp_root)
     elseif git_root then
       vim.cmd('silent! lcd ' .. git_root)
