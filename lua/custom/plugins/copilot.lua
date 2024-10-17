@@ -21,7 +21,7 @@ return {
         accept = "<M-l>",
         prev = "<M-[>",
         next = "<M-]>",
-        dismiss = "<C-]>",
+        -- dismiss = "<C-]>",
       },
     },
   },
