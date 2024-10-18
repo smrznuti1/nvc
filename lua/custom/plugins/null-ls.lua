@@ -16,7 +16,6 @@
 --   end,
 -- }
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local util = require 'lspconfig.util'
 
 return {
   'nvimtools/none-ls.nvim',
@@ -32,11 +31,8 @@ return {
       sources = {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.prettierd,
-        require("none-ls.formatting.latexindent"),
+        require 'none-ls.formatting.latexindent',
       },
-        root_dir = function(fname)
-          return util.root_pattern '.git'(fname) or util.path.dirname(fname)
-        end,
     }
   end,
 }
