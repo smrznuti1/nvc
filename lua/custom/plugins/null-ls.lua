@@ -16,9 +16,18 @@
 --   end,
 -- }
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+local util = require 'lspconfig.util'
+
 return {
-  'jose-elias-alvarez/null-ls.nvim',
+  'nvimtools/none-ls.nvim',
+  dependencies = {
+    'nvimtools/none-ls-extras.nvim',
+  },
   capabilities = capabilities,
+
+  root_dir = function(fname)
+    return util.root_pattern '.git'(fname) or util.path.dirname(fname)
+  end,
 
   config = function()
     local null_ls = require 'null-ls'
@@ -26,11 +35,8 @@ return {
     null_ls.setup {
       sources = {
         null_ls.builtins.formatting.stylua,
-        null_ls.builtins.diagnostics.eslint,
-        null_ls.builtins.formatting.fixjson,
-        null_ls.builtins.formatting.latexindent,
         null_ls.builtins.formatting.prettierd,
-        -- null_ls.builtins.completion.spell,
+        require("none-ls.formatting.latexindent"),
       },
     }
   end,
