@@ -25,10 +25,6 @@ return {
   },
   capabilities = capabilities,
 
-  root_dir = function(fname)
-    return util.root_pattern '.git'(fname) or util.path.dirname(fname)
-  end,
-
   config = function()
     local null_ls = require 'null-ls'
 
@@ -38,6 +34,9 @@ return {
         null_ls.builtins.formatting.prettierd,
         require("none-ls.formatting.latexindent"),
       },
+        root_dir = function(fname)
+          return util.root_pattern '.git'(fname) or util.path.dirname(fname)
+        end,
     }
   end,
 }
