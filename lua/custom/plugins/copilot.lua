@@ -25,4 +25,8 @@ return {
       },
     },
   },
+  config = function()
+        require('copilot').setup()
+    vim.cmd 'Copilot disable'
+  end,
 }
