@@ -1,7 +1,6 @@
 return {
   'zbirenbaum/copilot.lua',
   lazy = false,
-  enabled = false,
   opts = {
     filetypes = {
       ['*'] = true,
