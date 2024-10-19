@@ -99,6 +99,7 @@ vim.keymap.set('t', '<C-h>', '<cmd>wincmd h<cr>', { desc = 'Terminal left window
 vim.keymap.set('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Terminal down window navigation' })
 vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Terminal up window navigation' })
 vim.keymap.set('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Terminal right window navigation' })
+vim.keymap.set({ 'n', 't' }, '<M-l>', '<cmd>FloatermToggle<cr>', { silent = true, noremap = true })
 vim.keymap.set('n', '<C-x>', ':sp | te ', {})
 
 -- Highlight
