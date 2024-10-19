@@ -86,7 +86,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
 
 vim.opt.shortmess = vim.opt.shortmess + 'A'
 
-vim.opt.expandtab = true
+vim.cmd 'set expandtab'
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
