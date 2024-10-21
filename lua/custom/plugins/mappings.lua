@@ -1,4 +1,16 @@
 -- Funcs
+function shell_and_file_completion(arg_lead, cmd_line, cursor_pos)
+  local handle = io.popen('compgen -c -- ' .. arg_lead .. ' && compgen -f -- ' .. arg_lead)
+  local result = handle:read("*a")
+  handle:close()
+
+  local matches = {}
+  for match in result:gmatch("[^\r\n]+") do
+    table.insert(matches, match)
+  end
+  return matches
+end
+
 function custom_completion(arg_lead, cmd_line, cursor_pos)
   local words = vim.split(cmd_line, '%s+')
   local last_word = words[#words]
@@ -132,6 +144,11 @@ vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Terminal up window n
 vim.keymap.set('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Terminal right window navigation' })
 vim.keymap.set({ 'n', 't' }, '<M-l>', '<cmd>FTermToggle<cr>', { silent = true, noremap = true })
 vim.keymap.set('n', '<C-x>', executeShellCommand, { silent = true, noremap = true })
+
+
+vim.api.nvim_create_user_command('Run', function (opts)
+    vim.cmd('sp | te ' .. opts.args)
+end, {nargs = 1, complete='customlist,v:lua.shell_and_file_completion'})
 -- vim.keymap.set('n', '<C-x>', ':sp | te ', {})
 
 -- Highlight
