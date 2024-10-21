@@ -12,11 +12,14 @@ local function change_cwd_to_terminal_path()
     return find_git_root(parent)
   end
   vim.defer_fn(function()
-    local git_root = find_git_root(vim.fn.getreg '+')
+    local path = vim.fn.getreg '+'
+    local git_root = find_git_root(path)
     if git_root then
       vim.cmd('silent! tc ' .. git_root)
+      print(git_root)
     else
-      vim.cmd('silent! tc ' .. vim.fn.getreg '+')
+      vim.cmd('silent! tc ' .. path)
+      print(path)
     end
   end, 100)
 end
@@ -44,7 +47,7 @@ vim.keymap.set('n', '<C-p>', ':pwd<cr>', { noremap = false, desc = 'Print Workin
 vim.api.nvim_set_keymap(
   't',
   '<M-a>',
-  'pwc<CR><C-\\><C-n>:lua change_cwd_to_terminal_path()<CR>',
+  'pwc<CR><C-\\><C-n><cmd>lua change_cwd_to_terminal_path()<CR>',
   { noremap = true, silent = true, desc = 'Change to terminal path' }
 )
 
