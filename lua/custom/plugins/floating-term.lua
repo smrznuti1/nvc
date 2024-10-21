@@ -10,7 +10,7 @@ return {
       ---Command to run inside the terminal
       ---NOTE: if given string[], it will skip the shell and directly executes the command
       ---@type fun():(string|string[])|string|string[]
-      cmd = os.getenv 'SHELL',
+      cmd = 'pwsh',
 
       ---Neovim's native window border. See `:h nvim_open_win` for more configuration options.
       border = 'single',
