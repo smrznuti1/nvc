@@ -143,12 +143,13 @@ vim.keymap.set('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Terminal down window
 vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Terminal up window navigation' })
 vim.keymap.set('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Terminal right window navigation' })
 vim.keymap.set({ 'n', 't' }, '<M-l>', '<cmd>FTermToggle<cr>', { silent = true, noremap = true })
-vim.keymap.set('n', '<C-x>', executeShellCommand, { silent = true, noremap = true })
+vim.keymap.set('n', '<C-x>', ':sp | te ', {  noremap = true })
 
+vim.api.nvim_create_user_command('Run', executeShellCommand, {})
 
-vim.api.nvim_create_user_command('Run', function (opts)
-    vim.cmd('sp | te ' .. opts.args)
-end, {nargs = 1, complete='customlist,v:lua.shell_and_file_completion'})
+-- vim.api.nvim_create_user_command('Run', function (opts)
+--     vim.cmd('sp | te ' .. opts.args)
+-- end, {nargs = 1, complete='customlist,v:lua.shell_and_file_completion'})
 -- vim.keymap.set('n', '<C-x>', ':sp | te ', {})
 
 -- Highlight
