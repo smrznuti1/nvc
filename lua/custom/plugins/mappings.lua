@@ -92,7 +92,7 @@ vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Tab Next' })
 vim.keymap.set('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Tab Previous' })
 vim.keymap.set({ 'n', 't' }, '<M-=>', '<cmd>tabnext<cr>', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 't' }, '<M-->', '<cmd>tabprevious<cr>', { noremap = true, silent = true })
-vim.keymap.set({'n', 't'}, '<M-b>', '<cmd>tabe | te ddgr<cr><cmd>startinsert<cr>', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 't' }, '<M-b>', '<cmd>tabe | te ddgr --noua<cr><cmd>startinsert<cr>', { noremap = true, silent = true })
 
 -- Terminal
 vim.keymap.set('n', '<leader>T', ':term<cr>', { desc = 'Terminal Here' })
