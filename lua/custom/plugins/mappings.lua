@@ -1,5 +1,5 @@
 -- Funcs
-local function custom_completion(arg_lead, cmd_line, cursor_pos)
+function custom_completion(arg_lead, cmd_line, cursor_pos)
   local words = vim.split(cmd_line, '%s+')
   local last_word = words[#words]
   local shellcmd_completions = vim.fn.getcompletion(last_word, 'shellcmd')
@@ -17,8 +17,6 @@ local function custom_completion(arg_lead, cmd_line, cursor_pos)
   end, completions)
   -- return vim.tbl_extend('keep', shellcmd_completions, file_completions)
 end
-
-_G.custom_completion = custom_completion
 
 local function executeShellCommand()
   vim.ui.input({ prompt = 'Command: ', completion = 'customlist,v:lua.custom_completion' }, function(input)
