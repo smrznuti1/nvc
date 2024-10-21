@@ -1,4 +1,33 @@
 -- Funcs
+local function custom_completion(arg_lead, cmd_line, cursor_pos)
+  local words = vim.split(cmd_line, '%s+')
+  local last_word = words[#words]
+  local shellcmd_completions = vim.fn.getcompletion(last_word, 'shellcmd')
+  local file_completions = vim.fn.getcompletion(last_word, 'file')
+  local completions = vim.tbl_extend('keep', shellcmd_completions, file_completions)
+
+  table.remove(words, #words)
+  local current_cmd = table.concat(words, ' ')
+
+  return vim.tbl_map(function(entry)
+    if current_cmd ~= '' then
+      return current_cmd .. ' ' .. entry
+    end
+    return entry
+  end, completions)
+  -- return vim.tbl_extend('keep', shellcmd_completions, file_completions)
+end
+
+_G.custom_completion = custom_completion
+
+local function executeShellCommand()
+  vim.ui.input({ prompt = 'Command: ', completion = 'customlist,v:lua.custom_completion' }, function(input)
+    if input then
+      vim.fn.execute("call jobstart('" .. input .. "')")
+    end
+  end)
+end
+
 local function change_cwd_to_terminal_path()
   local function find_git_root(path)
     local git_path = path .. '/.git'
@@ -104,7 +133,8 @@ vim.keymap.set('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Terminal down window
 vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Terminal up window navigation' })
 vim.keymap.set('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Terminal right window navigation' })
 vim.keymap.set({ 'n', 't' }, '<M-l>', '<cmd>FTermToggle<cr>', { silent = true, noremap = true })
-vim.keymap.set('n', '<C-x>', ':sp | te ', {})
+vim.keymap.set('n', '<C-x>', executeShellCommand, { silent = true, noremap = true })
+-- vim.keymap.set('n', '<C-x>', ':sp | te ', {})
 
 -- Highlight
 vim.cmd 'autocmd CursorMoved * set nohlsearch'
