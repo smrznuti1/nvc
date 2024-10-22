@@ -49,7 +49,7 @@ return {
     -- Add and remove cursors with control + left click.
     vim.keymap.set('n', '<c-leftmouse>', mc.handleMouse)
 
-    vim.keymap.set({ 'n', 'v' }, '<c-q>', function()
+    vim.keymap.set({ 'n', 'v' }, '<M-q>', function()
       if mc.cursorsEnabled() then
         -- Stop other cursors from moving.
         -- This allows you to reposition the main cursor.
