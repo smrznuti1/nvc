@@ -7,9 +7,24 @@ return {
     mc.setup()
 
     -- Add cursors above/below the main cursor.
+    vim.keymap.set({ 'n', 'v' }, '<M-k>', function()
+      local count = vim.v.count1
+      for i = 1, 10, 1 do
+        mc.addCursor 'k'
+      end
+    end)
+
+    vim.keymap.set({ 'n', 'v' }, '<M-j>', function()
+      local count = vim.v.count1
+      for i = 1, 10, 1 do
+        mc.addCursor 'j'
+      end
+    end)
+
     vim.keymap.set({ 'n', 'v' }, '<up>', function()
       mc.addCursor 'k'
     end)
+
     vim.keymap.set({ 'n', 'v' }, '<down>', function()
       mc.addCursor 'j'
     end)
