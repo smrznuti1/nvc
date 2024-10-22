@@ -122,7 +122,8 @@ vim.keymap.set('n', '<leader>H', '<cmd>nohl<cr>', { desc = 'Horizontal Split' })
 -- Buffer
 vim.keymap.set('n', '<leader>bb', '<cmd>BufferLinePick<CR>', { desc = 'Pick buffer' })
 -- vim.keymap.set('n', '<C-s>', '<cmd>w!<cr>', { desc = 'Force write' })
-vim.api.nvim_set_keymap('n', '<leader>q', ':lua Close_buffer_force()<CR>', { noremap = true, silent = true, desc = 'Close buffer' })
+-- vim.api.nvim_set_keymap('n', '<leader>q', ':lua Close_buffer_force()<CR>', { noremap = true, silent = true, desc = 'Close buffer' })
+vim.keymap.set({ 'n', 't', 'v' }, '<C-q>', Close_buffer_force, { noremap = true, silent = true, desc = 'Close buffer' })
 vim.keymap.set('n', '[b', '<cmd>BufferLineCyclePrev<CR>', { desc = 'Buffer Previous' })
 vim.keymap.set('n', ']b', '<cmd>BufferLineCycleNext<CR>', { desc = 'Buffer Next' })
 vim.keymap.set('n', '<leader>Q', ':bd!<cr>', { desc = 'Delete buffer' })
@@ -150,8 +151,7 @@ vim.keymap.set('n', '<leader>E', '<cmd>e .<cr>', { silent = true })
 
 vim.api.nvim_create_user_command('Command', function(input)
   vim.fn.execute(':FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ' .. input.args)
-end, { nargs = '*', complete='customlist,v:lua.completionForRun' })
-
+end, { nargs = '*', complete = 'customlist,v:lua.completionForRun' })
 
 -- Highlight
 vim.cmd 'autocmd CursorMoved * set nohlsearch'
