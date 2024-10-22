@@ -1,11 +1,11 @@
 -- Funcs
 function shell_and_file_completion(arg_lead, cmd_line, cursor_pos)
   local handle = io.popen('compgen -c -- ' .. arg_lead .. ' && compgen -f -- ' .. arg_lead)
-  local result = handle:read("*a")
+  local result = handle:read '*a'
   handle:close()
 
   local matches = {}
-  for match in result:gmatch("[^\r\n]+") do
+  for match in result:gmatch '[^\r\n]+' do
     table.insert(matches, match)
   end
   return matches
@@ -136,14 +136,15 @@ vim.keymap.set({ 'n', 't' }, '<M-=>', '<cmd>tabnext<cr>', { noremap = true, sile
 vim.keymap.set({ 'n', 't' }, '<M-->', '<cmd>tabprevious<cr>', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 't' }, '<M-b>', '<cmd>tabe | te ddgr --noua<cr><cmd>startinsert<cr>', { noremap = true, silent = true })
 
--- Terminal
+-- Terminal & Navigation
 vim.keymap.set('n', '<leader>T', ':term<cr>', { desc = 'Terminal Here' })
 vim.keymap.set('t', '<C-h>', '<cmd>wincmd h<cr>', { desc = 'Terminal left window navigation' })
 vim.keymap.set('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Terminal down window navigation' })
 vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Terminal up window navigation' })
 vim.keymap.set('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Terminal right window navigation' })
 vim.keymap.set({ 'n', 't' }, '<M-l>', '<cmd>FTermToggle<cr>', { silent = true, noremap = true })
-vim.keymap.set('n', '<C-x>', ':sp | te ', {  noremap = true })
+vim.keymap.set('n', '<C-x>', ':sp | te ', { noremap = true })
+vim.keymap.set('n', '<leader>E', '<cmd>e .<cr>', { silent = true })
 
 vim.api.nvim_create_user_command('Run', executeShellCommand, {})
 
