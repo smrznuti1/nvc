@@ -33,7 +33,16 @@ end
 local function executeShellCommand()
   vim.ui.input({ prompt = 'Command: ', completion = 'customlist,v:lua.custom_completion' }, function(input)
     if input then
-      vim.fn.execute("call jobstart('" .. input .. "')")
+      require('FTerm').scratch {
+        dimensions = {
+          height = 0.5,
+          width = 0.8,
+          x = 0.5,
+          y = 1,
+        },
+        cmd = input,
+      }
+      -- vim.fn.execute("call jobstart('" .. input .. "')")
     end
   end)
 end
@@ -143,7 +152,8 @@ vim.keymap.set('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Terminal down window
 vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Terminal up window navigation' })
 vim.keymap.set('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Terminal right window navigation' })
 vim.keymap.set({ 'n', 't' }, '<M-l>', '<cmd>FTermToggle<cr>', { silent = true, noremap = true })
-vim.keymap.set('n', '<C-x>', ':sp | te ', { noremap = true })
+vim.keymap.set('n', '<C-x>', executeShellCommand, { noremap = true })
+-- vim.keymap.set('n', '<C-x>', ':sp | te ', { noremap = true })
 vim.keymap.set('n', '<leader>E', '<cmd>e .<cr>', { silent = true })
 
 vim.api.nvim_create_user_command('Run', executeShellCommand, {})
