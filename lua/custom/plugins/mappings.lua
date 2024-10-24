@@ -146,7 +146,7 @@ vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Terminal up window n
 vim.keymap.set('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Terminal right window navigation' })
 vim.keymap.set({ 'n', 't', 'i' }, '<M-l>', '<cmd>FloatermNext<cr>', { silent = true, noremap = true })
 -- vim.keymap.set('n', '<C-x>', executeShellCommand, { noremap = true })
-vim.keymap.set({ 'n', 'i' }, '<C-x>', '<esc>:Command ', { noremap = true })
+vim.keymap.set({ 'n', 'i', 't' }, '<C-x>', '<C-\\><C-n>:Command ', { noremap = true })
 vim.keymap.set('n', '<leader>E', '<cmd>e .<cr>', { silent = true })
 
 vim.api.nvim_create_user_command('Command', function(input)
