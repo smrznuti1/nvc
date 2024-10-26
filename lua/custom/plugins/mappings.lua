@@ -136,7 +136,7 @@ vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Tab Next' })
 vim.keymap.set('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Tab Previous' })
 vim.keymap.set({ 'n', 't', 'i' }, '<M-=>', '<cmd>tabnext<cr>', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 't', 'i' }, '<M-->', '<cmd>tabprevious<cr>', { noremap = true, silent = true })
-vim.keymap.set({ 'n', 't', 'i' }, '<M-b>', '<cmd>OpenDdgr()<cr>', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 't', 'i' }, '<M-b>', '<cmd>OpenDdgr<cr>i', { noremap = true, silent = true })
 
 -- Terminal & Navigation
 vim.keymap.set('n', '<leader>T', ':term<cr>', { desc = 'Terminal Here' })
