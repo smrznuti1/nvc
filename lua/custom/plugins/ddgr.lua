@@ -5,10 +5,10 @@ function Ddgr:get_opts()
   local editor_width = vim.api.nvim_get_option_value('columns', {})
   local editor_height = vim.api.nvim_get_option_value('lines', {})
 
-  local width = math.floor(editor_width * 0.5) -- 50% of the editor width
-  local height = math.floor(editor_height * 0.8) -- 80% of the editor height
-  local row = math.floor(editor_height / 2) -- Centered vertically
-  local col = math.floor((editor_width - width) / 2) -- Centered horizontally
+  local width = math.floor(editor_width * 0.65)
+  local height = math.floor(editor_height * 0.8)
+  local row = math.floor(editor_height / 2)
+  local col = math.floor((editor_width - width) / 2)
 
   self.opts = {
     relative = 'editor',
