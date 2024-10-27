@@ -44,6 +44,7 @@ function Ddgr:openWindow()
   else
     self.win = vim.api.nvim_open_win(self.buf, true, self.opts)
   end
+    vim.cmd('startinsert')
 end
 
 DdgrClass = Ddgr:new()
