@@ -24,19 +24,25 @@ end
 function Ddgr:new()
   local instance = setmetatable({}, Ddgr)
   instance.buf = nil
+  instance.win = nil
 
   return instance
 end
 
 -- Method to get the value
 function Ddgr:openWindow()
+  if self.win and vim.api.nvim_win_is_valid(self.win) then
+    vim.api.nvim_win_close(self.win, false)
+    self.win = nil
+    return
+  end
   Ddgr:get_opts()
   if not self.buf or not vim.api.nvim_buf_is_valid(self.buf) then
     self.buf = vim.api.nvim_create_buf(false, true)
-    vim.api.nvim_open_win(self.buf, true, self.opts)
+    self.win = vim.api.nvim_open_win(self.buf, true, self.opts)
     vim.fn.termopen 'ddgr --noua'
   else
-    vim.api.nvim_open_win(self.buf, true, self.opts)
+    self.win = vim.api.nvim_open_win(self.buf, true, self.opts)
   end
 end
 
