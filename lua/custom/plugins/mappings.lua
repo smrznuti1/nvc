@@ -140,15 +140,21 @@ vim.keymap.set({ 'n', 't', 'i' }, '<M-b>', '<cmd>OpenDdgr<cr>', { noremap = true
 
 -- Terminal & Navigation
 vim.keymap.set('n', '<leader>T', ':term<cr>', { desc = 'Terminal Here' })
-vim.keymap.set('t', '<C-h>', '<cmd>wincmd h<cr>', { desc = 'Terminal left window navigation' })
-vim.keymap.set('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Terminal down window navigation' })
-vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Terminal up window navigation' })
-vim.keymap.set('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Terminal right window navigation' })
+
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    vim.keymap.set('t', '<C-h>', '<cmd>wincmd h<cr>', { desc = 'Terminal left window navigation' })
+    vim.keymap.set('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Terminal down window navigation' })
+    vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Terminal up window navigation' })
+    vim.keymap.set('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Terminal right window navigation' })
+  end,
+})
+
 vim.keymap.set({ 'n', 't', 'i' }, '<M-l>', '<cmd>FloatermNext<cr><C-\\><C-n><C-g>', { silent = true, noremap = true })
 vim.keymap.set({ 'n', 't', 'i' }, '<M-e>', '<cmd>FloatermToggle<cr><C-\\><C-n><C-g>', { silent = true, noremap = true })
 -- vim.keymap.set('n', '<C-x>', executeShellCommand, { noremap = true })
 vim.keymap.set({ 'n', 'i', 't' }, '<C-x>', '<C-\\><C-n>:Command ', { noremap = true })
-vim.keymap.set('n', '<leader>e', '<cmd>e .<cr>', { silent = true, noremap = true})
+vim.keymap.set('n', '<leader>e', '<cmd>e .<cr>', { silent = true, noremap = true })
 
 vim.api.nvim_create_user_command('Command', function(input)
   vim.fn.execute(':FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ' .. input.args)
