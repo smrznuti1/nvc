@@ -148,7 +148,7 @@ vim.keymap.set({ 'n', 't', 'i' }, '<M-l>', '<cmd>FloatermNext<cr><C-\\><C-n><C-g
 vim.keymap.set({ 'n', 't', 'i' }, '<M-e>', '<cmd>FloatermToggle<cr><C-\\><C-n><C-g>', { silent = true, noremap = true })
 -- vim.keymap.set('n', '<C-x>', executeShellCommand, { noremap = true })
 vim.keymap.set({ 'n', 'i', 't' }, '<C-x>', '<C-\\><C-n>:Command ', { noremap = true })
-vim.keymap.set('n', '<leader>e', '<cmd>e .<cr>', { silent = true, noremap = true })
+vim.keymap.set('n', '<leader>e', '<cmd>e .<cr>', { silent = true, noremap = true})
 
 vim.api.nvim_create_user_command('Command', function(input)
   vim.fn.execute(':FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ' .. input.args)
