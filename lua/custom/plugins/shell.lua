@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
       end
       for _, client in pairs(clients) do
         if client.name == 'null-ls' then
-          return nil
+          goto continue
         end
 
         local client_filetypes = client.config.filetypes
@@ -62,6 +62,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
             return root_dir
           end
         end
+          ::continue::
       end
       return nil
     end
