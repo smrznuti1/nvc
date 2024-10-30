@@ -50,19 +50,17 @@ vim.api.nvim_create_autocmd('BufEnter', {
       if not clients then
         return nil
       end
+      local pathLen = 0
+      local clientForPath = nil
       for _, client in pairs(clients) do
-        if client.name == 'null-ls' then
-          return nil
-        end
-
-        local client_filetypes = client.config.filetypes
-        if client_filetypes and vim.tbl_contains(client_filetypes, vim.bo.filetype) then
-          local root_dir = client.config.root_dir
-          if root_dir then
-            return root_dir
-          end
+        if client.root_dir and string.len(client.root_dir) > pathLen then
+          clientForPath = client
+          pathLen = string.len(client.root_dir)
         end
       end
+        if clientForPath then
+          return clientForPath.root_dir
+        end
       return nil
     end
 
