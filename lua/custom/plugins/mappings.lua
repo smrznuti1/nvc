@@ -140,7 +140,7 @@ vim.keymap.set({ 'n', 't', 'i' }, '<M-b>', '<cmd>OpenDdgr<cr>', { noremap = true
 
 -- Terminal & Navigation
 vim.keymap.set('n', '<leader>T', ':term<cr>', { desc = 'Terminal Here' })
-
+vim.keymap.set('n', '<leader>tf', '<cmd>FloatermToggle terminal<cr>', { desc = 'Terminal Here' })
 vim.keymap.set('t', '<C-h>', '<cmd>wincmd h<cr>', { desc = 'Terminal left window navigation' })
 vim.keymap.set('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Terminal down window navigation' })
 vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Terminal up window navigation' })
