@@ -21,7 +21,7 @@ lspconfig.pylsp.setup {
         -- import sorting
         pyls_isort = { enabled = true },
         rope_autoimport = {
-          enabled = false,
+          enabled = true,
           completions = { enabled = true },
           code_actions = { enabled = true },
         },
@@ -32,11 +32,7 @@ lspconfig.pylsp.setup {
     debounce_text_changes = 200,
   },
   capabilities = lsp_capabilities,
-  root_dir = lspconfig.util.root_pattern(
-    'pyproject.toml',
-    'requirements.txt',
-    '.git'
-  ),
+  root_dir = lspconfig.util.root_pattern('pyproject.toml', 'requirements.txt', '.git'),
 }
 
 return {}
