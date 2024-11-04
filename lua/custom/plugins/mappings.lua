@@ -76,7 +76,11 @@ end
 _G.change_cwd_to_terminal_path = change_cwd_to_terminal_path
 
 local builtin = require 'telescope.builtin'
---
+-- CMD
+vim.api.nvim_create_user_command('Command', function(input)
+  vim.fn.execute(':FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ' .. input.args)
+end, { nargs = '*', complete = 'customlist,v:lua.completionForRun' })
+
 -- Workdir
 vim.keymap.set('n', '<leader>b;', ':let @+ = expand("%:p")<cr>', { desc = 'Copy Name' })
 vim.keymap.set('n', '<leader>t;', ':tc %:p:h<cr>', { desc = 'Change Directory to file path' })
@@ -151,10 +155,6 @@ vim.keymap.set({ 'n', 't', 'i' }, '<M-e>', '<cmd>FloatermToggle<cr><C-\\><C-n><C
 -- vim.keymap.set('n', '<C-x>', executeShellCommand, { noremap = true })
 vim.keymap.set({ 'n', 'i', 't' }, '<C-x>', '<C-\\><C-n>:Command ', { noremap = true })
 vim.keymap.set('n', '<leader>e', '<cmd>e .<cr>', { silent = true, noremap = true })
-
-vim.api.nvim_create_user_command('Command', function(input)
-  vim.fn.execute(':FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ' .. input.args)
-end, { nargs = '*', complete = 'customlist,v:lua.completionForRun' })
 
 -- Highlight
 vim.cmd 'autocmd CursorMoved * set nohlsearch'
