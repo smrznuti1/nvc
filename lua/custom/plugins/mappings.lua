@@ -134,6 +134,7 @@ vim.keymap.set('n', '[b', '<cmd>BufferLineCyclePrev<CR>', { desc = 'Buffer Previ
 vim.keymap.set('n', ']b', '<cmd>BufferLineCycleNext<CR>', { desc = 'Buffer Next' })
 vim.keymap.set('n', '<leader>Q', ':bd!<cr>', { desc = 'Delete buffer' })
 vim.keymap.set('n', '<leader>D', ':!ri -Force%<cr>', { noremap = true, desc = 'Delete Item' })
+vim.keymap.set('n', '<leader>E', '<cmd>e #<cr>', { noremap = true, desc = 'Open previous buffer' })
 
 -- Tabs
 vim.keymap.set('n', '<leader>te', ':tabe %<cr>', { desc = 'Open in New Tab' })
