@@ -166,6 +166,7 @@ vim.api.nvim_set_keymap('n', '<S-n>', '<S-n>:set hlsearch<CR>', { noremap = true
 vim.api.nvim_set_keymap('n', '#', '#:set hlsearch<CR>', { noremap = true, silent = true })
 
 -- Git
+vim.keymap.set({ 'n', 'i', 't' }, '<M-g>', ':G ', { noremap = true })
 vim.keymap.set('n', '<leader>gb', ':G branch<cr>', { desc = 'Git branch' })
 vim.keymap.set('n', '<leader>gB', ':G branch -a <cr>', { desc = 'Git branch all' })
 vim.keymap.set('n', '<leader>gp', ':G pull<cr>', { desc = 'Git pull' })
