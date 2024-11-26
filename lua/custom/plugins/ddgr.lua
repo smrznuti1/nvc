@@ -29,7 +29,6 @@ function Ddgr:new()
   return instance
 end
 
--- Method to get the value
 function Ddgr:openWindow()
   if self.win and vim.api.nvim_win_is_valid(self.win) then
     vim.api.nvim_win_close(self.win, false)
@@ -40,11 +39,11 @@ function Ddgr:openWindow()
   if not self.buf or not vim.api.nvim_buf_is_valid(self.buf) then
     self.buf = vim.api.nvim_create_buf(false, true)
     self.win = vim.api.nvim_open_win(self.buf, true, self.opts)
-    vim.fn.termopen 'ddgr --noua'
+    vim.fn.termopen '$env:BROWSER="w3m"; ddgr --noua'
   else
     self.win = vim.api.nvim_open_win(self.buf, true, self.opts)
   end
-    vim.cmd('startinsert')
+  vim.cmd 'startinsert'
 end
 
 DdgrClass = Ddgr:new()
