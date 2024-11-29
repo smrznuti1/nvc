@@ -15,7 +15,7 @@ lspconfig.pylsp.setup {
         pyflakes = { enabled = false },
         pycodestyle = { enabled = true, maxLineLength = 200 },
         -- type checker
-        pylsp_mypy = { enabled = true, live_mode = true, strict = true },
+        pylsp_mypy = { enabled = true, live_mode = true, strict = false },
         -- auto-completion options
         jedi_completion = { fuzzy = true },
         -- import sorting
