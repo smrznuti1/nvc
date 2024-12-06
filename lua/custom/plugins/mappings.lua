@@ -3,7 +3,7 @@ function completionForRun(arg_lead, cmd_line, cursor_pos)
   local shellcmd_completions = vim.fn.getcompletion(arg_lead, 'shellcmd')
   local file_completions = vim.fn.getcompletion('edit ' .. arg_lead, 'cmdline')
   file_completions = vim.tbl_map(function(item)
-    return item:gsub('([ %%#$])', '\\%1')
+    return item:gsub('([ ()%%#$])', '\\%1')
   end, file_completions)
   return vim.tbl_extend('keep', file_completions, shellcmd_completions)
 end
@@ -83,7 +83,7 @@ _G.change_cwd_to_terminal_path = change_cwd_to_terminal_path
 local builtin = require 'telescope.builtin'
 -- CMD
 vim.api.nvim_create_user_command('Command', function(input)
-  vim.fn.execute(':FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ' .. input.args:gsub('\\ ', '` '))
+  vim.fn.execute(':FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ' .. input.args:gsub('\\([ ()%%#$])', '`%1'))
 end, { nargs = '*', complete = 'customlist,v:lua.completionForRun' })
 
 -- Workdir
