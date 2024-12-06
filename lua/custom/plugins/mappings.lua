@@ -83,7 +83,7 @@ _G.change_cwd_to_terminal_path = change_cwd_to_terminal_path
 local builtin = require 'telescope.builtin'
 -- CMD
 vim.api.nvim_create_user_command('Command', function(input)
-  vim.fn.execute(':FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ' .. input.args:gsub('\\', '`'))
+  vim.fn.execute(':FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ' .. input.args:gsub('\\ ', '` '))
 end, { nargs = '*', complete = 'customlist,v:lua.completionForRun' })
 
 -- Workdir
