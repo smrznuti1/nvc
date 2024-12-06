@@ -1,7 +1,7 @@
 -- Funcs
 function completionForRun(arg_lead, cmd_line, cursor_pos)
   local shellcmd_completions = vim.fn.getcompletion(arg_lead, 'shellcmd')
-  local file_completions = vim.fn.getcompletion('edit ' .. arg_lead, 'cmdline')
+  local file_completions = vim.fn.getcompletion(arg_lead, 'file_in_path')
   file_completions = vim.tbl_map(function(item)
     return item:gsub('([ %%#$])', '\\%1')
   end, file_completions)
