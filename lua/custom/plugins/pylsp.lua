@@ -17,7 +17,15 @@ lspconfig.pylsp.setup {
         -- type checker
         pylsp_mypy = { enabled = true, live_mode = true, strict = false },
         -- auto-completion options
-        jedi_completion = { fuzzy = true },
+        jedi_completion = {
+          enabled = true,
+          fuzzy = true,
+          include_params = true,
+          include_class_objects = true,
+          include_function_objects = true,
+          resolve_at_most = 10,
+          eager = true,
+        },
         -- import sorting
         pyls_isort = { enabled = true },
         rope_autoimport = {
@@ -26,7 +34,7 @@ lspconfig.pylsp.setup {
           code_actions = { enabled = false },
         },
         rope_completion = {
-          eager = true,
+          eager = false,
         },
       },
     },
