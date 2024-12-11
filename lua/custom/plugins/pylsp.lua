@@ -18,7 +18,7 @@ lspconfig.pylsp.setup {
         pylsp_mypy = { enabled = true, live_mode = true, strict = false },
         -- auto-completion options
         jedi_completion = {
-          enabled = true,
+          enabled = false,
           fuzzy = true,
           include_params = true,
           include_class_objects = true,
@@ -34,7 +34,8 @@ lspconfig.pylsp.setup {
           code_actions = { enabled = true },
         },
         rope_completion = {
-          eager = false,
+          enabled = true,
+          eager = true,
         },
       },
     },
