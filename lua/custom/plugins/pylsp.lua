@@ -22,7 +22,7 @@ lspconfig.pylsp.setup {
         pyls_isort = { enabled = true },
         rope_autoimport = {
           enabled = true,
-          completions = { enabled = true },
+          completions = { enabled = false },
           code_actions = { enabled = true },
         },
       },
