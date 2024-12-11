@@ -29,7 +29,7 @@ lspconfig.pylsp.setup {
         -- import sorting
         pyls_isort = { enabled = true },
         rope_autoimport = {
-          enabled = true,
+          enabled = false,
           completions = { enabled = false },
           code_actions = { enabled = true },
         },
