@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-tags
-test.sh
-.luarc.json
-nvim
+# Compiled Lua sources
+luac.out
 
 # luarocks build files
 *.src.rock
