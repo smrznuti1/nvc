@@ -146,7 +146,7 @@ vim.keymap.set(
   { desc = "Goto Definition split horizontal" }
 )
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action" })
-vim.keymap.set({ "n" }, "<leader>lr", "<cmd>LspRestart<cr>", { silent= true, noremap = true })
+vim.keymap.set({ "n" }, "<leader>lr", "<cmd>LspRestart<cr>", { silent = true, noremap = true })
 
 -- Fonts
 vim.keymap.set("n", "<C-->", ":DecreaseFont<CR>", { noremap = true, silent = true })
@@ -252,5 +252,9 @@ vim.keymap.set("n", "<leader>gl", function()
   local number_of_commits = vim.fn.input("Number of commits: ")
   vim.cmd('G log --oneline -n "' .. number_of_commits .. '"')
 end, { desc = "Git log" })
+
+-- Other
+vim.keymap.set("n", "<CR>", "o<Esc>", { desc = "New Line" })
+vim.keymap.set("n", "<S-CR>", "O<Esc>", { desc = "New Line Before" })
 
 return {}
