@@ -1,14 +1,14 @@
 return {
-  'CopilotC-Nvim/CopilotChat.nvim',
-  branch = 'canary',
+  "CopilotC-Nvim/CopilotChat.nvim",
+  branch = "main",
   dependencies = {
-    { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
-    { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
+    { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+    { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
   },
   config = function()
-    require('CopilotChat').setup {
+    require("CopilotChat").setup({
       debug = true, -- Enable debugging
       -- See Configuration section for rest
-    }
+    })
   end,
 }
