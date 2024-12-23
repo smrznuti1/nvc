@@ -173,7 +173,8 @@ vim.keymap.set("n", "[b", "<cmd>BufferLineCyclePrev<CR>", { desc = "Buffer Previ
 vim.keymap.set("n", "]b", "<cmd>BufferLineCycleNext<CR>", { desc = "Buffer Next" })
 vim.keymap.set("n", "<leader>Q", ":bd!<cr>", { desc = "Delete buffer" })
 vim.keymap.set("n", "<leader>D", ":!ri -Force%<cr>", { noremap = true, desc = "Delete Item" })
-vim.keymap.set("n", "<leader>E", "<cmd>e #<cr>", { noremap = true, desc = "Open previous buffer" })
+vim.keymap.set("n", "<leader>bp", "<cmd>e #<cr>", { noremap = true, desc = "Open previous buffer" })
+
 
 -- Tabs
 vim.keymap.set("n", "<leader>te", ":tabe %<cr>", { desc = "Open in New Tab" })
@@ -216,7 +217,14 @@ vim.keymap.set(
 )
 -- vim.keymap.set('n', '<C-x>', executeShellCommand, { noremap = true })
 vim.keymap.set({ "n", "i", "t" }, "<C-x>", "<C-\\><C-n>:Command ", { noremap = true })
-vim.keymap.set("n", "<leader>e", "<cmd>e .<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>e", "<cmd>Oil<cr>", { silent = true, noremap = true, desc = "Open Oil" })
+vim.keymap.set("n", "<leader>E", function ()
+    local cur_buf = vim.fn.bufnr('%')
+    if ( vim.fn.bufexists(cur_buf) == 1 ) then
+        vim.api.nvim_buf_delete(cur_buf, {force=true})
+    end
+    vim.cmd("Oil")
+end, { noremap = true, desc = "Open Oil but close last buffer" })
 
 -- Highlight
 vim.cmd("autocmd CursorMoved * set nohlsearch")
