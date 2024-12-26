@@ -2,8 +2,8 @@ Ddgr = {}
 Ddgr.__index = Ddgr
 
 function Ddgr:get_opts()
-  local editor_width = vim.api.nvim_get_option_value('columns', {})
-  local editor_height = vim.api.nvim_get_option_value('lines', {})
+  local editor_width = vim.api.nvim_get_option_value("columns", {})
+  local editor_height = vim.api.nvim_get_option_value("lines", {})
 
   local width = math.floor(editor_width * 0.65)
   local height = math.floor(editor_height * 0.8)
@@ -11,13 +11,13 @@ function Ddgr:get_opts()
   local col = math.floor((editor_width - width) / 2)
 
   self.opts = {
-    relative = 'editor',
+    relative = "editor",
     width = width,
     height = height,
     row = row,
     col = col,
-    style = 'minimal',
-    border = 'single',
+    style = "minimal",
+    border = "single",
   }
 end
 
@@ -39,11 +39,11 @@ function Ddgr:openWindow()
   if not self.buf or not vim.api.nvim_buf_is_valid(self.buf) then
     self.buf = vim.api.nvim_create_buf(false, true)
     self.win = vim.api.nvim_open_win(self.buf, true, self.opts)
-    vim.fn.termopen '$env:BROWSER="w3m"; ddgr --noua'
+    vim.fn.termopen('$env:BROWSER="qutebrowser"; ddgr --noua')
   else
     self.win = vim.api.nvim_open_win(self.buf, true, self.opts)
   end
-  vim.cmd 'startinsert'
+  vim.cmd("startinsert")
 end
 
 DdgrClass = Ddgr:new()
@@ -52,6 +52,6 @@ function OpenDdgr()
   DdgrClass:openWindow()
 end
 
-vim.api.nvim_create_user_command('OpenDdgr', OpenDdgr, {})
+vim.api.nvim_create_user_command("OpenDdgr", OpenDdgr, {})
 
 return {}
