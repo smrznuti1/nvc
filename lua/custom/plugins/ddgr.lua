@@ -39,7 +39,7 @@ function Ddgr:openWindow()
   if not self.buf or not vim.api.nvim_buf_is_valid(self.buf) then
     self.buf = vim.api.nvim_create_buf(false, true)
     self.win = vim.api.nvim_open_win(self.buf, true, self.opts)
-    vim.fn.termopen('$env:BROWSER="qutebrowser"; ddgr --noua')
+    vim.fn.termopen('$env:BROWSER="firefox"; ddgr --noua')
   else
     self.win = vim.api.nvim_open_win(self.buf, true, self.opts)
   end
