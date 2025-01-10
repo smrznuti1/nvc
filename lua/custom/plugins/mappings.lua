@@ -146,7 +146,11 @@ vim.keymap.set(
   { desc = "Goto Definition split horizontal" }
 )
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action" })
-vim.keymap.set({ "n" }, "<leader>lr", "<cmd>LspRestart<cr>", { silent = true, noremap = true })
+vim.keymap.set({ "n" }, "<leader>lR", "<cmd>LspRestart<cr>", { silent = true, noremap = true })
+vim.keymap.set({"n"}, "<leader>lr", function ()
+    local new_name = vim.fn.input({prompt = "New name: "})
+   vim.lsp.buf.rename(new_name) 
+end, {silent=true, desc = "Rename across project"})
 
 -- Fonts
 vim.keymap.set("n", "<C-->", ":DecreaseFont<CR>", { noremap = true, silent = true })
