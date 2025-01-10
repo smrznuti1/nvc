@@ -147,10 +147,10 @@ vim.keymap.set(
 )
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action" })
 vim.keymap.set({ "n" }, "<leader>lR", "<cmd>LspRestart<cr>", { silent = true, noremap = true })
-vim.keymap.set({"n"}, "<leader>lr", function ()
-    local new_name = vim.fn.input({prompt = "New name: "})
-   vim.lsp.buf.rename(new_name) 
-end, {silent=true, desc = "Rename across project"})
+vim.keymap.set({ "n" }, "<leader>lr", function()
+  local new_name = vim.fn.input({ prompt = "New name: " })
+  vim.lsp.buf.rename(new_name)
+end, { silent = true, desc = "Rename across project" })
 
 -- Fonts
 vim.keymap.set("n", "<C-->", ":DecreaseFont<CR>", { noremap = true, silent = true })
@@ -230,7 +230,7 @@ vim.keymap.set("n", "<leader>E", function()
   local cur_buf = vim.fn.bufnr("%")
   vim.cmd("Oil")
   local oil_buf = vim.fn.bufnr("%")
-  if ( oil_buf ~= cur_buf ) and ( vim.fn.bufexists(cur_buf) == 1 ) then
+  if (oil_buf ~= cur_buf) and (vim.fn.bufexists(cur_buf) == 1) then
     -- vim.api.nvim_buf_delete(cur_buf, { force = true })
     vim.cmd("bd! " .. cur_buf)
   end
