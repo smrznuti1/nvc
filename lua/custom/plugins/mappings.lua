@@ -275,5 +275,6 @@ end, { desc = "Git log" })
 -- Other
 vim.keymap.set("n", "<CR>", "o<Esc>", { desc = "New Line" })
 vim.keymap.set("n", "<S-CR>", "O<Esc>", { desc = "New Line Before" })
+vim.keymap.set("n", "<M-s>", ":Telescope file_browser<CR>")
 
 return {}
