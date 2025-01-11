@@ -279,7 +279,8 @@ vim.keymap.set("n", "<S-CR>", "O<Esc>", { desc = "New Line Before" })
 vim.keymap.set({ "n", "v", "i" }, "<M-s>", function()
   local buffername = vim.fn.bufname()
   if string.match(buffername, "/$") then
-    vim.fn.execute("Telescope file_browser path=" .. require("oil").get_current_dir(), "silent")
+    local current_dir = require("oil").get_current_dir()
+    vim.fn.execute("Telescope file_browser path=" .. string.gsub(current_dir, " ", "\\ "), "silent")
   else
     vim.fn.execute("Telescope file_browser", "silent")
   end
