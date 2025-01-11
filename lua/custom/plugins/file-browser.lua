@@ -5,6 +5,7 @@ return {
   -- IMPORTANT!: this is only a showcase of how you can set default options!
   lazy = false,
   config = function()
+    local fb_actions = require("telescope").extensions.file_browser.actions
     require("telescope").setup({
       extensions = {
         file_browser = {
@@ -13,6 +14,9 @@ return {
           hijack_netrw = true,
           mappings = {
             ["i"] = {
+              ["<C-q>"] = function (bufnmr)
+                vim.fn.execute("q!", "silent")
+              end
               -- your custom insert mode mappings
             },
             ["n"] = {
