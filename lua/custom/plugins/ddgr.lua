@@ -14,7 +14,7 @@ function Ddgr:get_opts()
     relative = "editor",
     width = width,
     height = height,
-    row = row,
+    row = row - editor_height/3,
     col = col,
     style = "minimal",
     border = "single",
