@@ -17,6 +17,7 @@ if vim.g.neovide then
   vim.g.neovide_floating_blur_amount_x = 5.0
   vim.g.neovide_floating_blur_amount_y = 5.0
   vim.g.neovide_background_color = "#0f1117" .. alpha()
+  vim.g.neovide_fullscreen = true
 end
 
 return {}
