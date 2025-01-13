@@ -1,4 +1,4 @@
 return {
-  'tpope/vim-sleuth',
+  -- 'tpope/vim-sleuth',
   -- config = function() require("vim-sleuth").setup {} end,
 }
