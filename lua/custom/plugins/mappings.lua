@@ -198,7 +198,7 @@ vim.keymap.set({ "n", "t", "i" }, "<M-b>", "<cmd>OpenDdgr<cr>", { noremap = true
 vim.keymap.set("n", "<leader>T", ":term<cr>", { desc = "Terminal Here" })
 vim.keymap.set(
   { "n", "t", "i" },
-  "<M-f>",
+  "<M-t>",
   "<cmd>FloatermToggle terminal<cr>",
   { desc = "Terminal Here" }
 )
