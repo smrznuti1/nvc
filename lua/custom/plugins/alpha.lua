@@ -1,12 +1,12 @@
 return {
-  'goolord/alpha-nvim',
+  "goolord/alpha-nvim",
   dependencies = {
-    'echasnovski/mini.icons',
-    'nvim-lua/plenary.nvim',
+    "echasnovski/mini.icons",
+    "nvim-lua/plenary.nvim",
   },
   config = function()
-    local dashboard = require "alpha.themes.dashboard"
-    dashboard.section.header.val = {
+    local dashboard = require("alpha.themes.theta")
+    dashboard.header.val = {
       "  ███████ ███    ███ ██████  ████████",
       "  ██      ████  ████ ██   ██     ████",
       "  ███████ ██ ████ ██ ██████    ████  ",
@@ -19,8 +19,21 @@ return {
       "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
       "    ██   ████   ████   ██ ██      ██",
     }
-    dashboard.section.header.opts.hl = "DashboardHeader"
-    dashboard.section.footer.opts.hl = "DashboardFooter"
-    require('alpha').setup(dashboard.config)
+    -- dashboard.section.header.val = {
+    --   "  ███████ ███    ███ ██████  ████████",
+    --   "  ██      ████  ████ ██   ██     ████",
+    --   "  ███████ ██ ████ ██ ██████    ████  ",
+    --   "       ██ ██  ██  ██ ██   ██ ████    ",
+    --   "  ███████ ██      ██ ██   ██ ████████",
+    --   " ",
+    --   "    ███    ██ ██    ██ ██ ███    ███",
+    --   "    ████   ██ ██    ██ ██ ████  ████",
+    --   "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
+    --   "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
+    --   "    ██   ████   ████   ██ ██      ██",
+    -- }
+    -- dashboard.section.header.opts.hl = "DashboardHeader"
+    -- dashboard.section.footer.opts.hl = "DashboardFooter"
+    require("alpha").setup(dashboard.config)
   end,
 }
