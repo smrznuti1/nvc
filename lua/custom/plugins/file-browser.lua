@@ -14,9 +14,9 @@ return {
           hijack_netrw = true,
           mappings = {
             ["i"] = {
-              ["<C-q>"] = function (bufnmr)
+              ["<C-q>"] = function(bufnmr)
                 vim.fn.execute("q!", "silent")
-              end
+              end,
               -- your custom insert mode mappings
             },
             ["n"] = {

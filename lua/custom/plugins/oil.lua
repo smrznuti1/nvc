@@ -70,6 +70,8 @@ return {
         ["<C-h>"] = "actions.select_split",
         ["<C-t>"] = "actions.select_tab",
         ["gp"] = "actions.preview",
+        ["gd"] = "actions.preview_scroll_down",
+        ["gu"] = "actions.preview_scroll_up",
         ["<C-c>"] = "actions.close",
         ["gl"] = "actions.refresh",
         ["-"] = "actions.parent",
