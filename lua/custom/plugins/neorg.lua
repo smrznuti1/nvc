@@ -19,9 +19,10 @@ return {
     vim.api.nvim_create_autocmd("BufWritePre", {
       pattern = "*norg*",
       callback = function()
-        local key = vim.api.nvim_replace_termcodes("<C-o>", true, false, true)
-        vim.api.nvim_feedkeys("gg=G", "n", true)
-        vim.api.nvim_feedkeys(key, "n", true)
+        vim.fn.feedkeys("gg=G``")
+        -- local key = vim.api.nvim_replace_termcodes("<C-o>", true, false, true)
+        -- vim.api.nvim_feedkeys("gg=G", "n", true)
+        -- vim.api.nvim_feedkeys(key, "n", true)
       end,
     })
   end,
