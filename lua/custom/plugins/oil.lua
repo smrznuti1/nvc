@@ -81,6 +81,13 @@ return {
         ["gs"] = "actions.change_sort",
         ["gx"] = "actions.open_external",
         ["g."] = "actions.toggle_hidden",
+        ["/"] = function(bufnr)
+          local builtin = require("telescope.builtin")
+          builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+            winblend = 10,
+            previewer = false,
+          }))
+        end,
         ["g\\"] = "actions.toggle_trash",
       },
       -- Configuration for the floating keymaps help window
