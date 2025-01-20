@@ -103,6 +103,8 @@ vim.api.nvim_create_user_command("Command", function(input)
   )
 end, { nargs = "*", complete = "customlist,v:lua.completionForRun" })
 
+vim.api.nvim_create_user_command("Notes", "Neorg workspace notes", {})
+
 -- Workdir
 vim.keymap.set("n", "<leader>b;", ':let @+ = expand("%:p")<cr>', { desc = "Copy Name" })
 vim.keymap.set("n", "<leader>t;", ":tc %:p:h<cr>", { desc = "Change Directory to file path" })
