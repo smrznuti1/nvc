@@ -7,6 +7,30 @@ return {
       load = {
         ["core.defaults"] = {},
         ["core.concealer"] = {}, -- We added this line!
+                --
+        -- ["core.completion"] = {},
+        ["core.export"] = {},
+        ["core.export.markdown"] = {},
+        -- ["core.latex.renderer"] = {},
+        ["core.summary"] = {},
+                --
+        ["core.text-objects"] = {},
+        ["core.autocommands"] = {},
+        ["core.clipboard"] = {},
+        ["core.dirman.utils"] = {},
+        ["core.fs"] = {},
+        ["core.highlights"] = {},
+                --
+        ["core.integrations.nvim-cmp"] = {},
+        ["core.integrations.treesitter"] = {},
+        ["core.neorgcmd"] = {},
+        ["core.neorgcmd.commands.return"] = {},
+        ["core.queries.native"] = {},
+        ["core.scanner"] = {},
+        ["core.storage"] = {},
+        ["core.syntax"] = {},
+        ["core.tempus"] = {},
+        ["core.ui"] = {},
         ["core.dirman"] = {
           config = {
             workspaces = {
