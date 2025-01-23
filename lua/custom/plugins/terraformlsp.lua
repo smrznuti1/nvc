@@ -18,7 +18,7 @@ lspconfig.terraformls.setup({
 })
 
 lspconfig.tflint.setup({
-  cmd = { "tflint" },
+  -- cmd = { "tflint" },
   filetypes = { "hcl", "tf", "tfvars", "terraform" },
   root_dir = function(fname)
     return lspconfig.util.root_pattern(".terraform", ".git")(fname) or vim.fs.dirname(fname)
