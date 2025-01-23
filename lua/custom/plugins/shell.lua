@@ -17,6 +17,7 @@ vim.api.nvim_create_user_command("CC", "CopilotChat", {})
 
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevelstart = 99
+vim.opt.number = true
 
 -- vim.opt.autochdir = true
 

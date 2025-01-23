@@ -7,20 +7,20 @@ return {
       load = {
         ["core.defaults"] = {},
         ["core.concealer"] = {}, -- We added this line!
-                --
+        --
         -- ["core.completion"] = {},
         ["core.export"] = {},
         ["core.export.markdown"] = {},
         -- ["core.latex.renderer"] = {},
         ["core.summary"] = {},
-                --
+        --
         ["core.text-objects"] = {},
         ["core.autocommands"] = {},
         ["core.clipboard"] = {},
         ["core.dirman.utils"] = {},
         ["core.fs"] = {},
         ["core.highlights"] = {},
-                --
+        --
         ["core.integrations.nvim-cmp"] = {},
         ["core.integrations.treesitter"] = {},
         ["core.neorgcmd"] = {},
