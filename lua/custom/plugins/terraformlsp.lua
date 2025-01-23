@@ -3,7 +3,7 @@ local lspconfig = require("lspconfig")
 local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
 lsp_capabilities = vim.tbl_deep_extend("force", lsp_capabilities, cmp.default_capabilities())
 lspconfig.terraformls.setup({
-  -- cmd = { "terraform-ls", "serve" },
+  cmd = { "terraform-ls", "serve" },
   filetypes = { "hcl", "tf", "tfvars", "terraform" },
   root_dir = function(fname)
     return lspconfig.util.root_pattern(".terraform", ".git")(fname) or vim.fs.dirname(fname)
@@ -18,7 +18,7 @@ lspconfig.terraformls.setup({
 })
 
 lspconfig.tflint.setup({
-  -- cmd = { "tflint" },
+  cmd = { "tflint" },
   filetypes = { "hcl", "tf", "tfvars", "terraform" },
   root_dir = function(fname)
     return lspconfig.util.root_pattern(".terraform", ".git")(fname) or vim.fs.dirname(fname)
