@@ -15,6 +15,12 @@ lspconfig.terraformls.setup({
   --     path = "/usr/bin/terraform",
   --   },
   -- },
+  vim.api.nvim_create_autocmd("BufEnter", {
+        pattern="*.tf",
+        callback = function ()
+            vim.bo.filetype = "terraform"
+        end
+    }),
 })
 
 lspconfig.tflint.setup({
