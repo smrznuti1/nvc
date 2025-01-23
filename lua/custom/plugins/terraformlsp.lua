@@ -15,7 +15,7 @@ lspconfig.terraformls.setup({
   --     path = "/usr/bin/terraform",
   --   },
   -- },
-  vim.api.nvim_create_autocmd("BufEnter", {
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
         pattern="*.tf",
         callback = function ()
             vim.bo.filetype = "terraform"
