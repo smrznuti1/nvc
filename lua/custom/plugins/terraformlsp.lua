@@ -10,11 +10,11 @@ lspconfig.terraformls.setup({
     -- or lspconfig.util.path.dirname(fname)
   end,
   capabilities = lsp_capabilities,
-  init_options = {
-    terraform = {
-      path = "/usr/bin/terraform",
-    },
-  },
+  -- init_options = {
+  --   terraform = {
+  --     path = "/usr/bin/terraform",
+  --   },
+  -- },
 })
 
 lspconfig.tflint.setup({
