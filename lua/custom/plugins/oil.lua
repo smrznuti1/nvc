@@ -89,6 +89,10 @@ return {
           }))
         end,
         ["g\\"] = "actions.toggle_trash",
+        ["gP"] = function(bufnr)
+          local path = require("oil").get_current_dir(bufnr)
+          vim.fn.setreg("+", path)
+        end,
       },
       -- Configuration for the floating keymaps help window
       keymaps_help = {
