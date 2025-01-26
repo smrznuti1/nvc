@@ -5,8 +5,8 @@ return {
   config = function()
     local bookmarks = {
       ["ChatGPT"] = "https://chatgpt.com",
+      ["DeepSeek"] = "https://chat.deepseek.com/",
       ["GitHub"] = {
-        ["DeepSeek"] = "https://chat.deepseek.com/",
         ["GitHub.com"] = "https://github.com/",
         ["Code Search"] = "https://github.com/search?q=%s&type=code",
         ["Repo Search"] = "https://github.com/search?q=%s&type=repositories",
