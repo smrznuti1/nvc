@@ -5,7 +5,8 @@ return {
     "nvim-lua/nvim-web-devicons",
   },
   config = function()
-    require("oil").setup({
+    local oil_module = require("oil")
+    oil_module.setup({
       -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
       -- Set to false if you still want to use netrw.
       default_file_explorer = true,
@@ -90,7 +91,7 @@ return {
         end,
         ["g\\"] = "actions.toggle_trash",
         ["gP"] = function(bufnr)
-          local path = require("oil").get_current_dir(bufnr)
+          local path = oil_module.get_current_dir(bufnr)
           vim.fn.setreg("+", path)
         end,
       },
