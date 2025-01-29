@@ -9,6 +9,12 @@ return {
     require("CopilotChat").setup({
       debug = true, -- Enable debugging
       -- See Configuration section for rest
+      vim.keymap.set(
+        { "v" },
+        "<leader>cc",
+        "<cmd>CopilotChat<cr>",
+        { desc = "Opet Copilot Chat for current selection", silent = true }
+      ),
     })
   end,
 }
