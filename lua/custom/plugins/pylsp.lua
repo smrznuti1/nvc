@@ -1,17 +1,17 @@
-local lspconfig = require 'lspconfig'
-local cmp = require 'cmp_nvim_lsp'
+local cmp = require("cmp_nvim_lsp")
+local lspconfig = require("lspconfig")
 local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
-lsp_capabilities = vim.tbl_deep_extend('force', lsp_capabilities, cmp.default_capabilities())
-lspconfig.pylsp.setup {
+lsp_capabilities = vim.tbl_deep_extend("force", lsp_capabilities, cmp.default_capabilities())
+lspconfig.pylsp.setup({
   settings = {
     pylsp = {
       plugins = {
         -- formatter options
         black = { enabled = false },
-        autopep8 = { cmd = 'autopep8', enabled = true },
+        autopep8 = { cmd = "autopep8", enabled = true },
         yapf = { enabled = false },
         -- linter options
-        pylint = { enabled = false, executable = 'pylint' },
+        pylint = { enabled = false, executable = "pylint" },
         pyflakes = { enabled = false },
         pycodestyle = { enabled = true, maxLineLength = 200 },
         -- type checker
@@ -44,7 +44,7 @@ lspconfig.pylsp.setup {
     debounce_text_changes = 200,
   },
   capabilities = lsp_capabilities,
-  root_dir = lspconfig.util.root_pattern('pyproject.toml', 'requirements.txt', '.git'),
-}
+  root_dir = lspconfig.util.root_pattern("pyproject.toml", "requirements.txt", ".git"),
+})
 
 return {}
