@@ -183,7 +183,7 @@ vim.keymap.set("n", "<leader>D", ":!ri -Force%<cr>", { noremap = true, desc = "D
 vim.keymap.set("n", "<leader>bp", "<cmd>e #<cr>", { noremap = true, desc = "Open previous buffer" })
 
 -- Tabs
-vim.keymap.set("n", "<leader>te", ":tabe %<cr>", { desc = "Open in New Tab" })
+vim.keymap.set("n", "<leader>te", ":tab sb<cr>", { desc = "Open in New Tab" })
 vim.keymap.set("n", "<leader>tq", ":tabclose<cr>", { desc = "Open in New Tab" })
 vim.keymap.set("n", "]t", "<cmd>tabnext<cr>", { desc = "Tab Next" })
 vim.keymap.set("n", "[t", "<cmd>tabprevious<cr>", { desc = "Tab Previous" })
