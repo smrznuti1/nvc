@@ -42,14 +42,22 @@ return {
     })
     vim.wo.foldlevel = 99
     vim.wo.conceallevel = 2
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      pattern = "*norg*",
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "norg",
       callback = function()
-        vim.fn.feedkeys("gg=G``")
-        -- local key = vim.api.nvim_replace_termcodes("<C-o>", true, false, true)
-        -- vim.api.nvim_feedkeys("gg=G", "n", true)
-        -- vim.api.nvim_feedkeys(key, "n", true)
+        vim.keymap.set({ "n" }, "<leader>f", function()
+          vim.fn.feedkeys("gg=G``")
+        end, { desc = "Format buffer" })
       end,
     })
+    -- vim.api.nvim_create_autocmd("BufWritePre", {
+    --   pattern = "*norg*",
+    --   callback = function()
+    --     vim.fn.feedkeys("gg=G``")
+    --     -- local key = vim.api.nvim_replace_termcodes("<C-o>", true, false, true)
+    --     -- vim.api.nvim_feedkeys("gg=G", "n", true)
+    --     -- vim.api.nvim_feedkeys(key, "n", true)
+    --   end,
+    -- })
   end,
 }
