@@ -40,6 +40,8 @@ return {
         },
       },
     })
+    vim.wo.foldlevel = 99
+    vim.wo.conceallevel = 2
     vim.api.nvim_create_autocmd("BufWritePre", {
       pattern = "*norg*",
       callback = function()
