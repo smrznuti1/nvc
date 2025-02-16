@@ -94,7 +94,7 @@ end
 
 _G.change_cwd_to_terminal_path = change_cwd_to_terminal_path
 
-local builtin = require("telescope.builtin")
+-- local builtin = require("telescope.builtin")
 -- CMD
 vim.api.nvim_create_user_command("Command", function(input)
   vim.fn.execute(
@@ -130,9 +130,9 @@ end)
 
 -- Files
 vim.keymap.set("n", "<leader>L", ":!ls<cr>", { desc = "List Items" })
-vim.keymap.set("n", "<leader>sF", function()
-  builtin.find_files({ hidden = true })
-end, { desc = "[S]earch [F]iles (Hidden included)" })
+-- vim.keymap.set("n", "<leader>sF", function()
+--   builtin.find_files({ hidden = true })
+-- end, { desc = "[S]earch [F]iles (Hidden included)" })
 
 -- LSP
 vim.keymap.set(
@@ -278,14 +278,14 @@ end, { desc = "Git log" })
 vim.keymap.set("n", "<CR>", "o<Esc>", { desc = "New Line" })
 vim.keymap.set("n", "<S-CR>", "O<Esc>", { desc = "New Line Before" })
 -- vim.keymap.set({ "n", "v", "i" }, "<M-s>", ":Telescope file_browser<CR>")
-vim.keymap.set({ "n", "v", "i" }, "<M-s>", function()
-  local buffername = vim.fn.bufname()
-  if string.match(buffername, "/$") then
-    local current_dir = require("oil").get_current_dir()
-    vim.fn.execute("Telescope file_browser path=" .. string.gsub(current_dir, " ", "\\ "), "silent")
-  else
-    vim.fn.execute("Telescope file_browser", "silent")
-  end
-end)
+-- vim.keymap.set({ "n", "v", "i" }, "<M-s>", function()
+--   local buffername = vim.fn.bufname()
+--   if string.match(buffername, "/$") then
+--     local current_dir = require("oil").get_current_dir()
+--     vim.fn.execute("Telescope file_browser path=" .. string.gsub(current_dir, " ", "\\ "), "silent")
+--   else
+--     vim.fn.execute("Telescope file_browser", "silent")
+--   end
+-- end)
 
 return {}

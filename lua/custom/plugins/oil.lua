@@ -82,13 +82,16 @@ return {
         ["gs"] = "actions.change_sort",
         ["gx"] = "actions.open_external",
         ["g."] = "actions.toggle_hidden",
-        ["/"] = function(bufnr)
-          local builtin = require("telescope.builtin")
-          builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-            winblend = 10,
-            previewer = false,
-          }))
+        ["/"] = function()
+          require("snacks.picker").lines()
         end,
+        -- ["/"] = function(bufnr)
+        --   local builtin = require("telescope.builtin")
+        --   builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+        --     winblend = 10,
+        --     previewer = false,
+        --   }))
+        -- end,
         ["g\\"] = "actions.toggle_trash",
         ["gP"] = function(bufnr)
           local path = oil_module.get_current_dir(bufnr)
