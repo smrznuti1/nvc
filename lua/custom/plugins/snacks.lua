@@ -28,7 +28,7 @@ return {
   keys = {
     -- Top Pickers & Explorer
     {
-      "<leader>sf",
+      "<leader>sF",
       function()
         Snacks.picker.smart()
       end,
@@ -84,13 +84,13 @@ return {
       end,
       desc = "Find Config File",
     },
-    -- {
-    --   "<leader>sF",
-    --   function()
-    --     Snacks.picker.files()
-    --   end,
-    --   desc = "Find Files",
-    -- },
+    {
+      "<leader>sf",
+      function()
+        Snacks.picker.files()
+      end,
+      desc = "Find Files",
+    },
     -- {
     --   "<leader>fg",
     --   function()
