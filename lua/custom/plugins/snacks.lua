@@ -13,7 +13,24 @@ return {
       enabled = true,
       timeout = 3000,
     },
-    picker = { enabled = true },
+    picker = {
+      enabled = true,
+      jump = {
+        jumplist = true,
+        tagstack = false,
+        reuse_win = false,
+        close = true,
+        match = false,
+      },
+      win = {
+        input = {
+          keys = {
+            ["<S-Tab>"] = { "list_up", mode = { "i", "n" } },
+            ["<Tab>"] = { "list_down", mode = { "i", "n" } },
+          },
+        },
+      },
+    },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = false },
@@ -55,13 +72,13 @@ return {
     --   end,
     --   desc = "Command History",
     -- },
-    -- {
-    --   "<leader>n",
-    --   function()
-    --     Snacks.picker.notifications()
-    --   end,
-    --   desc = "Notification History",
-    -- },
+    {
+      "<leader>n",
+      function()
+        Snacks.picker.notifications()
+      end,
+      desc = "Notification History",
+    },
     -- {
     --   "<leader>e",
     --   function()
@@ -524,8 +541,6 @@ return {
           Snacks.debug.backtrace()
         end
         vim.print = _G.dd -- Override print to use snacks for `:=` command
-
-        -- Create some toggle mappings
       end,
     })
   end,
