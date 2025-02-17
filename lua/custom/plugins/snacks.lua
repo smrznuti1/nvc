@@ -7,14 +7,14 @@ return {
     bigfile = { enabled = true },
     dashboard = {
       enabled = true,
-            preset = {
-      header = [[
+      preset = {
+        header = [[
 ███████ ███    ███ ██████  ████████
 ██      ████  ████ ██   ██     ████
 ███████ ██ ████ ██ ██████    ████  
      ██ ██  ██  ██ ██   ██ ████    
 ███████ ██      ██ ██   ██ ████████]],
-}
+      },
     },
     explorer = { enabled = false },
     indent = { enabled = true },
@@ -28,7 +28,7 @@ return {
       jump = {
         jumplist = true,
         tagstack = false,
-        reuse_win = false,
+        reuse_win = true,
         close = true,
         match = false,
       },
