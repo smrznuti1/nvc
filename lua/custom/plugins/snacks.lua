@@ -32,6 +32,11 @@ return {
         close = true,
         match = false,
       },
+      formatters = {
+        file = {
+          truncate = 100,
+        },
+      },
       win = {
         input = {
           keys = {
