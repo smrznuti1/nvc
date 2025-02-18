@@ -50,6 +50,7 @@ return {
     scope = { enabled = true },
     scroll = { enabled = false },
     statuscolumn = { enabled = true },
+    scratch = { ft = "norg" },
     words = { enabled = true },
     styles = {
       notification = {
