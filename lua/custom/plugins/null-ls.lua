@@ -18,21 +18,22 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 return {
-  'nvimtools/none-ls.nvim',
+  "nvimtools/none-ls.nvim",
   dependencies = {
-    'nvimtools/none-ls-extras.nvim',
+    "nvimtools/none-ls-extras.nvim",
   },
   capabilities = capabilities,
 
   config = function()
-    local null_ls = require 'null-ls'
+    local null_ls = require("null-ls")
 
-    null_ls.setup {
+    null_ls.setup({
       sources = {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.prettierd,
-        require 'none-ls.formatting.latexindent',
+        require("none-ls.formatting.latexindent"),
+        null_ls.builtins.diagnostics.actionlint,
       },
-    }
+    })
   end,
 }
