@@ -47,7 +47,7 @@ return {
       callback = function()
         vim.keymap.set({ "n" }, "<leader>f", function()
           vim.fn.feedkeys("gg=G``")
-        end, { desc = "Format buffer" })
+        end, { desc = "Format buffer", buffer = true})
       end,
     })
     -- vim.api.nvim_create_autocmd("BufWritePre", {
