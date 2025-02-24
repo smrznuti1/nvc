@@ -25,12 +25,15 @@ return {
     },
     picker = {
       enabled = true,
+      main = {
+        file = false,
+      },
       jump = {
         jumplist = true,
         tagstack = false,
         reuse_win = true,
         close = true,
-        match = false,
+        match = true,
       },
       formatters = {
         file = {
