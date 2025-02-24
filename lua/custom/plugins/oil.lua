@@ -163,6 +163,29 @@ return {
         -- Whether the preview window is automatically updated when the cursor is moved
         update_on_cursor_moved = true,
       },
+      preview_win = {
+        -- Whether the preview window is automatically updated when the cursor is moved
+        update_on_cursor_moved = true,
+        -- How to open the preview window "load"|"scratch"|"fast_scratch"
+        preview_method = "fast_scratch",
+        -- A function that returns true to disable preview on a file e.g. to avoid lag
+        disable_preview = function(filename)
+          local file = io.open(filename, "r")
+
+          if not file then
+            return false
+          end
+          local size = file:seek("end")
+          file:close()
+
+          if size > 1024 * 1024 then
+            return true
+          end
+          return false
+        end,
+        -- Window-local options to use for preview window buffers
+        win_options = {},
+      },
       -- Configuration for the floating progress window
       progress = {
         max_width = 0.9,
