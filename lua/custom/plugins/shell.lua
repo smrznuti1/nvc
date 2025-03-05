@@ -100,6 +100,6 @@ vim.cmd("set expandtab")
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
-vim.o.cmdheight = 1
+vim.o.cmdheight = 0
 
 return {}
