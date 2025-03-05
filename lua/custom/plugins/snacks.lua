@@ -40,6 +40,20 @@ return {
           truncate = 100,
         },
       },
+      matcher = {
+        fuzzy = true,
+        smartcase = true,
+        ignorecase = true,
+        sort_empty = false,
+        filename_bonus = true,
+        file_pos = true,
+        cwd_bonus = true,
+        frecency = false,
+        history_bonus = false,
+      },
+      sort = {
+        fields = { "score:desc", "#text", "idx" },
+      },
       win = {
         input = {
           keys = {
