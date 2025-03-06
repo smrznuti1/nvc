@@ -7,7 +7,7 @@ return {
   },
   config = function()
     require("CopilotChat").setup({
-      debug = true, -- Enable debugging
+      debug = false, -- Enable debugging
       -- See Configuration section for rest
       vim.keymap.set(
         { "v" },
