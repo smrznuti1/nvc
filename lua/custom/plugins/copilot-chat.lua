@@ -9,10 +9,15 @@ return {
     require("CopilotChat").setup({
       debug = false, -- Enable debugging
       -- See Configuration section for rest
+      --
+      vim.api.nvim_create_user_command("CC", function()
+        vim.cmd("CopilotChat")
+        vim.cmd("wincmd =")
+      end, {}),
       vim.keymap.set(
         { "v" },
         "<leader>cc",
-        "<cmd>CopilotChat<cr>",
+        "<cmd>CC<cr>",
         { desc = "Opet Copilot Chat for current selection", silent = true }
       ),
     })
