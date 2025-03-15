@@ -3,7 +3,7 @@ return {
   lazy = false,
   name = "catppuccin",
   config = function()
-    require("catppuccin").setup({
+    local configuration = {
       flavour = "auto", -- latte, frappe, macchiato, mocha
       background = { -- :h background
         light = "latte",
@@ -37,6 +37,27 @@ return {
       },
       color_overrides = {
         mocha = {
+          red = "#ff657a",
+          maroon = "#F29BA7",
+          peach = "#ff9b5e",
+          yellow = "#eccc81",
+          green = "#a8be81",
+          -- teal = "#9cd1bb",
+          -- sky = "#A6C9E5",
+          -- sapphire = "#86AACC",
+          -- blue = "#5d81ab",
+          -- lavender = "#66729C",
+          -- mauve = "#b18eab",
+          text = "#fcfcfa",
+          surface2 = "#535763",
+          surface1 = "#3a3d4b",
+          surface0 = "#30303b",
+          base = "#202027",
+          mantle = "#1c1d22",
+          crust = "#171719",
+          -- base = "#000000",
+          -- mantle = "#000000",
+          -- crust = "#000000",
           lineNumbers = "#696c91",
           cursorLineNr = "#e6e6ff",
         },
@@ -48,7 +69,7 @@ return {
         gitsigns = true,
         nvimtree = true,
         treesitter = true,
-        notify = false,
+        notify = true,
         mini = {
           enabled = true,
           indentscope_color = "",
@@ -63,14 +84,17 @@ return {
           }
         end,
       },
-    })
+    }
+
+    require("catppuccin").setup(configuration)
 
     -- setup must be called before loading
     vim.cmd.colorscheme("catppuccin")
 
     vim.api.nvim_create_user_command("TT", function()
       local catppuccin = require("catppuccin")
-      catppuccin.setup({ transparent_background = not catppuccin.options.transparent_background })
+      configuration.transparent_background = not configuration.transparent_background
+      catppuccin.setup(configuration)
       vim.cmd.colorscheme("catppuccin")
     end, {})
   end,
