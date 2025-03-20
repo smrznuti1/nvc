@@ -270,7 +270,11 @@ end, { desc = "Git commit" })
 
 vim.keymap.set("n", "<leader>gl", function()
   local number_of_commits = vim.fn.input("Number of commits: ")
-  vim.cmd('G log --oneline -n "' .. number_of_commits .. '"')
+  vim.cmd(
+    "G log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative -n '"
+      .. number_of_commits
+      .. "'"
+  )
 end, { desc = "Git log" })
 
 -- Other
