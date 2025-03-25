@@ -115,7 +115,7 @@ vim.keymap.set("n", "<C-p>", ":pwd<cr>", { noremap = false, desc = "Print Workin
 vim.api.nvim_set_keymap(
   "t",
   "<M-a>",
-  "pwc<CR><C-\\><C-n><cmd>lua change_cwd_to_terminal_path()<CR>",
+  'pwc<CR><C-\\><C-n><cmd>lua vim.cmd("cd " .. vim.fn.getreg("+"))<CR>',
   { noremap = true, silent = true, desc = "Change to terminal path" }
 )
 
