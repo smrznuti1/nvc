@@ -24,7 +24,7 @@ return {
         "gitleaks",
         -- 'isort',
         -- 'prettier',
-        "pyflakes",
+        -- "pyflakes",
         -- 'taplo',
         -- 'yaml-language-server',
         "yamlfix",
