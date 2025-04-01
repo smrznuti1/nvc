@@ -34,8 +34,8 @@ lspconfig.pylsp.setup({
           code_actions = { enabled = true },
         },
         rope_completion = {
-          enabled = true,
-          eager = true,
+          enabled = false,
+          eager = false,
         },
       },
     },
