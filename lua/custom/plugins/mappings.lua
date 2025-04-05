@@ -104,8 +104,8 @@ vim.api.nvim_create_user_command("Command", function(input)
 end, { nargs = "*", complete = "customlist,v:lua.completionForRun" })
 
 vim.api.nvim_create_user_command("Notes", "Neorg workspace notes", {})
-vim.api.nvim_create_user_command("Pwd", function ()
-   vim.notify(vim.fn.getcwd()) 
+vim.api.nvim_create_user_command("Pwd", function()
+  vim.notify(vim.fn.getcwd())
 end, {})
 
 -- Workdir
@@ -215,13 +215,24 @@ vim.keymap.set("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Terminal right windo
 vim.keymap.set({ "n", "t", "i" }, "<M-l>", function()
   vim.cmd("FloatermNext")
   vim.api.nvim_command("stopinsert")
-  vim.notify(vim.fn.bufname())
+  local bufname = vim.fn.bufname()
+  if bufname:match("^term://") then
+    local bufname_shorten = bufname:gsub("^term://[^:]*:", "")
+    vim.notify(bufname_shorten)
+  end
 end, { silent = false, noremap = true })
 
 vim.keymap.set({ "n", "t", "i" }, "<M-e>", function()
   vim.cmd("FloatermToggle")
   vim.api.nvim_command("stopinsert")
-  vim.notify(vim.fn.bufname())
+
+  local bufname = vim.fn.bufname()
+  if bufname:match("^term://") then
+    local bufname_shorten = bufname:gsub("^term://[^:]*:", "")
+    vim.notify(bufname_shorten)
+  end
+
+  -- vim.notify(vim.fn.bufname())
 end, { silent = true, noremap = true })
 -- vim.keymap.set('n', '<C-x>', executeShellCommand, { noremap = true })
 vim.keymap.set({ "n", "i", "t" }, "<C-x>", "<C-\\><C-n>:Command ", { noremap = true })
