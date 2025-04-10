@@ -1,7 +1,7 @@
 return {
-  -- "catppuccin/nvim",
+  "catppuccin/nvim",
+  name = "catppuccin",
   -- lazy = false,
-  -- name = "catppuccin",
   -- config = function()
   --   local configuration = {
   --     flavour = "auto", -- latte, frappe, macchiato, mocha
