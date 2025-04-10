@@ -2,6 +2,7 @@ return {
   "folke/tokyonight.nvim",
   lazy = false,
   priority = 1000,
+  opts = {},
   config = function()
     local _, _, tokyoconf = require("tokyonight").load()
     tokyoconf.transparent = true
