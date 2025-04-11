@@ -5,7 +5,7 @@ return {
   opts = {},
   config = function()
     local _, _, tokyoconf = require("tokyonight").load()
-    tokyoconf.transparent = true
+    tokyoconf.transparent = false
 
     tokyoconf.on_highlights = function(highlights, colors)
       highlights.LineNr = {
@@ -23,7 +23,7 @@ return {
     vim.cmd.colorscheme("tokyonight-night")
 
     vim.api.nvim_create_user_command("TT", function()
-            tokyoconf.transparent = not tokyoconf.transparent
+      tokyoconf.transparent = not tokyoconf.transparent
       require("tokyonight").setup(tokyoconf)
       vim.cmd.colorscheme("tokyonight-night")
     end, {})
