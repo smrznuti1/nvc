@@ -48,7 +48,10 @@ return {
         comment = { "italic" },
       },
       overrides = function(colors)
-        return {}
+        return {
+          CursorLineNr = { "#EC672E" },
+          LineNr = { "#8d72ad" },
+        }
       end,
     }
 
@@ -60,6 +63,5 @@ return {
       require("cuddlefish").setup(configuration)
       vim.cmd.colorscheme("cuddlefish")
     end, {})
-
   end,
 }
