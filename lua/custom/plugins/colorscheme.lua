@@ -51,6 +51,8 @@ return {
         return {
           CursorLineNr = { "#EC672E" },
           LineNr = { "#8d72ad" },
+          OilDir = { "#cc6a1f" },
+          OilDirHidden = { "#6e391a" },
         }
       end,
     }
