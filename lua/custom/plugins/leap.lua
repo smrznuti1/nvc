@@ -10,6 +10,6 @@ return {
     -- vim.keymap.set({ "n", "x", "o" }, "zs", "<Plug>(leap-forward)")
     -- vim.keymap.set({ "n", "x", "o" }, "zS", "<Plug>(leap-backward)")
     vim.keymap.set({ "n", "x", "o" }, "<M-S-F>", "<Plug>(leap-from-window)")
-    vim.api.nvim_set_hl(0, "LeapBackdrop", { fg = "#613869" })
+    -- vim.api.nvim_set_hl(0, "LeapBackdrop", { fg = "#613869" })
   end,
 }
