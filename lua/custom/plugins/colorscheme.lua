@@ -55,6 +55,7 @@ return {
           OilDirHidden = { "#6e391a" },
           LeapBackdrop = { "#613869" },
           Cursor = { fg = "#ede874", bg = "#7d5a8c" },
+          Visual = { bg = "#5d4f63" },
         }
       end,
     }
