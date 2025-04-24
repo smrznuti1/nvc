@@ -1,6 +1,6 @@
 return {
   "smrznuti1/multicursor.nvim",
-  branch = "1.0",
+  branch = "main",
   config = function()
     local mc = require("multicursor-nvim")
 
