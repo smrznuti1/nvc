@@ -40,6 +40,8 @@ lspconfig.pylsp.setup({
         ruff = {
           enabled = true, -- Enable the plugin
           formatEnabled = true, -- Enable formatting using ruffs formatter
+          -- executable = "<path-to-ruff-bin>", -- Custom path to ruff
+          -- config = "<path_to_custom_ruff_toml>", -- Custom config for ruff to use
           extendSelect = { "I" }, -- Rules that are additionally used by ruff
           extendIgnore = { "C90" }, -- Rules that are additionally ignored by ruff
           format = { "I" }, -- Rules that are marked as fixable by ruff that should be fixed when running textDocument/formatting
