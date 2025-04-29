@@ -8,7 +8,7 @@ lspconfig.pylsp.setup({
       plugins = {
         -- formatter options
         black = { enabled = false },
-        autopep8 = { cmd = "autopep8", enabled = true },
+        autopep8 = { cmd = "autopep8", enabled = false },
         yapf = { enabled = false },
         -- linter options
         pylint = { enabled = false, executable = "pylint" },
