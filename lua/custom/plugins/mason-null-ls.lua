@@ -27,6 +27,7 @@ return {
         -- "pyflakes",
         -- 'taplo',
         -- 'yaml-language-server',
+        "jedi-language-server",
         "yamlfix",
         "cmakelang",
         "cmake-language-server",
