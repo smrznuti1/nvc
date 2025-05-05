@@ -26,6 +26,11 @@ lspconfig.pylsp.setup({
           resolve_at_most = 10,
           eager = true,
         },
+        jedi_definition = { enabled = false },
+        jedi_hover = { enabled = false },
+        jedi_references = { enabled = false },
+        jedi_signature_help = { enabled = false },
+        jedi_symbols = { enabled = false },
         -- import sorting
         pyls_isort = { enabled = true },
         rope_autoimport = {
@@ -34,7 +39,7 @@ lspconfig.pylsp.setup({
           code_actions = { enabled = true },
         },
         rope_completion = {
-          enabled = true,
+          enabled = false,
           eager = true,
         },
         ruff = {
