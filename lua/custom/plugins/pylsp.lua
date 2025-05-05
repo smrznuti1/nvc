@@ -13,7 +13,7 @@ lspconfig.pylsp.setup({
         -- linter options
         pylint = { enabled = false, executable = "pylint" },
         pyflakes = { enabled = false },
-        pycodestyle = { enabled = true, maxLineLength = 200 },
+        pycodestyle = { enabled = false, maxLineLength = 200 },
         -- type checker
         pylsp_mypy = { enabled = true, live_mode = true, strict = false },
         -- auto-completion options
@@ -32,7 +32,7 @@ lspconfig.pylsp.setup({
         jedi_signature_help = { enabled = false },
         jedi_symbols = { enabled = false },
         -- import sorting
-        pyls_isort = { enabled = true },
+        pyls_isort = { enabled = false },
         rope_autoimport = {
           enabled = false,
           completions = { enabled = true },
@@ -48,7 +48,7 @@ lspconfig.pylsp.setup({
           -- executable = "<path-to-ruff-bin>", -- Custom path to ruff
           -- config = "<path_to_custom_ruff_toml>", -- Custom config for ruff to use
           extendSelect = { "I" }, -- Rules that are additionally used by ruff
-          extendIgnore = { "C90" }, -- Rules that are additionally ignored by ruff
+          extendIgnore = { "C90", "I004" }, -- Rules that are additionally ignored by ruff
           format = { "I" }, -- Rules that are marked as fixable by ruff that should be fixed when running textDocument/formatting
           severities = { ["D212"] = "I" }, -- Optional table of rules where a custom severity is desired
           unsafeFixes = false, -- Whether or not to offer unsafe fixes as code actions. Ignored with the "Fix All" action
