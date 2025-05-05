@@ -1,6 +1,6 @@
 local lspconfig = require 'lspconfig'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
 lspconfig.typos_lsp.setup {
   -- Logging level of the language server. Logs appear in :LspLog. Defaults to error.
   -- cmd_env = { RUST_LOG = "error" },

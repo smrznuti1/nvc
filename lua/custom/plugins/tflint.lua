@@ -1,7 +1,7 @@
 local lspconfig = require 'lspconfig'
-local cmp = require 'cmp_nvim_lsp'
+local cmp = require 'blink.cmp'
 local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
-lsp_capabilities = vim.tbl_deep_extend('force', lsp_capabilities, cmp.default_capabilities())
+lsp_capabilities = vim.tbl_deep_extend('force', lsp_capabilities, cmp.get_lsp_capabilities())
 lspconfig.tflint.setup = {
   default_config = {
     cmd = { 'tflint', '--langserver' },
