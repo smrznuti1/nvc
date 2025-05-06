@@ -928,6 +928,9 @@ require("lazy").setup({
           lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
         },
       },
+      cmdline = {
+        enabled = false,
+      },
 
       snippets = { preset = "luasnip" },
 
