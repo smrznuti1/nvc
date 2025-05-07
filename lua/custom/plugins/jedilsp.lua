@@ -117,6 +117,12 @@ require("lspconfig").jedi_language_server.setup({
       },
     },
   },
+  capabilities = lsp_capabilities,
+  root_dir = function(fname)
+    return lspconfig.util.root_pattern("pyproject.toml", "requirements.txt", ".git")(fname)
+      or vim.fs.dirname(fname)
+  end,
+  -- root_dir = lspconfig.util.root_pattern("pyproject.toml", "requirements.txt", ".git"),
 })
 
 return {}
