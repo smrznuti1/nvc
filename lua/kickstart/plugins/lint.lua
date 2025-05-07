@@ -36,7 +36,7 @@ return {
       lint.linters_by_ft["inko"] = nil
       lint.linters_by_ft["janet"] = nil
       lint.linters_by_ft["json"] = nil
-      lint.linters_by_ft["python"] = { "ruff" }
+      lint.linters_by_ft["python"] = { "ruff", "mypy" }
       lint.linters_by_ft["markdown"] = { "markdownlint" }
       lint.linters_by_ft["rst"] = nil
       lint.linters_by_ft["ruby"] = nil
