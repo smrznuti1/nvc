@@ -37,7 +37,7 @@ return {
         accent = "pink",
       },
       editor = {
-        transparent_background = false,
+        transparent_background = true,
       },
       style = {
         tabline = { "reverse" },
