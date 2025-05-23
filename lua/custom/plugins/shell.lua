@@ -64,7 +64,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
         local client_filetypes = client.config.filetypes
         if client_filetypes and vim.tbl_contains(client_filetypes, vim.bo.filetype) then
           local root_dir = client.config.root_dir
-          for _, ws in pairs(client.config.workspace_folders) do
+          local workspace_folders = pairs(client.config.workspace_folders)
+          if not workspace_folders then
+            goto continue
+          end
+          for _, ws in workspace_folders do
             root_dir = ws["name"]
             if root_dir and buffer_path:sub(1, #root_dir) == root_dir then
               if not longest_root_dir or #root_dir > #longest_root_dir then
