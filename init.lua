@@ -1011,7 +1011,15 @@ require("lazy").setup({
       -- cursor location to LINE:COLUMN
       ---@diagnostic disable-next-line: duplicate-set-field
       statusline.section_location = function()
-        return "%2l:%-2v"
+        local mode = vim.fn.mode()
+        if mode == "v" or mode == "V" or mode == "\22" then
+          local start = vim.fn.line("v")
+          local finish = vim.fn.line(".")
+          local count = math.abs(finish - start) + 1
+          return string.format("%2d:%-2d [%dL]", vim.fn.line("."), vim.fn.col("."), count)
+        else
+          return "%2l:%-2v"
+        end
       end
 
       -- ... and there is more!
