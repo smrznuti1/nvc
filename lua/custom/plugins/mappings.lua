@@ -222,6 +222,16 @@ vim.keymap.set({ "n", "t", "i" }, "<M-l>", function()
   end
 end, { silent = false, noremap = true })
 
+vim.keymap.set({ "n", "t", "i" }, "<M-h>", function()
+  vim.cmd("FloatermPrev")
+  vim.api.nvim_command("stopinsert")
+  local bufname = vim.fn.bufname()
+  if bufname:match("^term://") then
+    local bufname_shorten = bufname:gsub("^term://[^:]*:", "")
+    vim.notify(bufname_shorten)
+  end
+end, { silent = false, noremap = true })
+
 vim.keymap.set({ "n", "t", "i" }, "<M-e>", function()
   vim.cmd("FloatermToggle")
   vim.api.nvim_command("stopinsert")
