@@ -67,7 +67,16 @@ return {
     scope = { enabled = true },
     scroll = { enabled = false },
     statuscolumn = { enabled = true },
-    scratch = { ft = "norg" },
+    scratch = {
+      ft = "norg",
+      root = vim.fn.stdpath("data") .. "/scratch",
+      autowrite = true,
+      filekey = {
+        cwd = false, -- use current working directory
+        branch = true, -- use current branch name
+        count = true, -- use vim.v.count1
+      },
+    },
     words = { enabled = true },
     styles = {
       notification = {
