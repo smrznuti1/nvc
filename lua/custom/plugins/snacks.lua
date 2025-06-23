@@ -63,6 +63,7 @@ return {
               "explorer_open",
               mode = { "n" },
             },
+            ["gy"] = { "explorer_yank", mode = { "n" } },
           },
         },
       },
