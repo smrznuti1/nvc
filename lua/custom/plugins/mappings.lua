@@ -121,7 +121,7 @@ vim.keymap.set("t", "<M-a>", function()
     -- vim.cmd("tcd " .. vim.fn.getreg("+"))
     vim.api.nvim_set_current_dir(vim.trim(vim.fn.getreg("+")))
     vim.cmd("stopinsert")
-  end, 100)
+  end, 200)
 end, { noremap = true, silent = true, desc = "Change to terminal path" })
 
 -- vim.api.nvim_set_keymap(
