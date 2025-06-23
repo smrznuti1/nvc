@@ -576,6 +576,10 @@ return {
       pattern = "VeryLazy",
       callback = function()
         -- Setup some globals for debugging (lazy-loaded)
+        vim.keymap.set({ "n", "t", "i" }, "<M-a>", function()
+          Snacks.picker.files({ hidden = true })
+          vim.cmd("startinsert")
+        end, { desc = "Find Files" })
         _G.dd = function(...)
           Snacks.debug.inspect(...)
         end

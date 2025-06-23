@@ -115,15 +115,15 @@ vim.keymap.set("n", "<leader>tr", ":tc <C-r>+<cr>", { desc = "Change Directory t
 vim.keymap.set("n", "<leader>-", ":tc -<cr>:Pwd<cr>", { desc = "Cd -" })
 vim.keymap.set("n", "<C-p>", ":Pwd<cr>", { noremap = false, desc = "Print Working Directory" })
 
-vim.keymap.set("t", "<M-a>", function()
-  vim.fn.feedkeys("pwc\n")
-  vim.defer_fn(function()
-    -- vim.cmd("tcd " .. vim.fn.getreg("+"))
-    vim.api.nvim_set_current_dir(vim.trim(vim.fn.getreg("+")))
-    vim.api.nvim_set_current_dir(vim.trim(vim.fn.getreg("+")))
-    vim.cmd("stopinsert")
-  end, 100)
-end, { noremap = true, silent = true, desc = "Change to terminal path" })
+-- vim.keymap.set("t", "<M-a>", function()
+--   vim.fn.feedkeys("pwc\n")
+--   vim.defer_fn(function()
+--     -- vim.cmd("tcd " .. vim.fn.getreg("+"))
+--     vim.api.nvim_set_current_dir(vim.trim(vim.fn.getreg("+")))
+--     vim.api.nvim_set_current_dir(vim.trim(vim.fn.getreg("+")))
+--     vim.cmd("stopinsert")
+--   end, 100)
+-- end, { noremap = true, silent = true, desc = "Change to terminal path" })
 
 vim.api.nvim_create_autocmd({ "TermRequest" }, {
   desc = "Handles OSC 7 dir change requests",
