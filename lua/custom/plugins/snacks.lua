@@ -583,6 +583,7 @@ return {
         -- Setup some globals for debugging (lazy-loaded)
         vim.keymap.set({ "n", "t", "i" }, "<M-a>", function()
           Snacks.picker.files({ hidden = true })
+          vim.cmd("FloatermHide")
           vim.cmd("startinsert")
         end, { desc = "Find Files" })
         _G.dd = function(...)
