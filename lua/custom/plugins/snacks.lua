@@ -582,7 +582,7 @@ return {
       callback = function()
         -- Setup some globals for debugging (lazy-loaded)
         vim.keymap.set({ "n", "t", "i" }, "<M-a>", function()
-          Snacks.picker.files({ focus = "input", hidden = true })
+          Snacks.picker.files({ cwd = vim.fn.getcwd(), focus = "input", hidden = true })
           vim.cmd("FloatermHide")
           vim.defer_fn(function()
             vim.cmd("startinsert")
