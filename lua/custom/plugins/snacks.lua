@@ -151,7 +151,7 @@ return {
     {
       "<leader>sf",
       function()
-        Snacks.picker.files({ hidden = true })
+        Snacks.picker.files({ hidden = true, ignored = true })
       end,
       desc = "Find Files",
     },
@@ -583,7 +583,7 @@ return {
         -- Setup some globals for debugging (lazy-loaded)
         vim.keymap.set({ "n", "t", "i" }, "<M-a>", function()
           local cwd = vim.fn.getcwd()
-          Snacks.picker.files({ cwd = cwd, focus = "input", hidden = true })
+          Snacks.picker.files({ cwd = cwd, focus = "input", hidden = true, ignored = true })
           vim.cmd("FloatermHide")
           vim.defer_fn(function()
             vim.cmd("startinsert")
