@@ -78,8 +78,8 @@ return {
       autowrite = true,
       filekey = {
         cwd = false, -- use current working directory
-        branch = true, -- use current branch name
-        count = true, -- use vim.v.count1
+        branch = false, -- use current branch name
+        count = false, -- use vim.v.count1
       },
     },
     words = { enabled = true },
