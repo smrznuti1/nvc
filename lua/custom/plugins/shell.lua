@@ -17,6 +17,11 @@ vim.api.nvim_create_user_command("BDAll", function()
 end, { force = true })
 vim.api.nvim_create_user_command("NT", "bd! % | term", {})
 vim.api.nvim_create_user_command("NUT", "bd! % | Uterm", {})
+vim.api.nvim_create_user_command(
+  "Clear",
+  ":bufdo if expand('%:p') !~ 'term:' | bdelete | endif",
+  {}
+)
 
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevelstart = 99
