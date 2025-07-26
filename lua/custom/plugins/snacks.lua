@@ -77,7 +77,7 @@ return {
       root = vim.fn.stdpath("data") .. "/scratch",
       autowrite = true,
       filekey = {
-        cwd = false, -- use current working directory
+        cwd = true, -- use current working directory
         branch = false, -- use current branch name
         count = false, -- use vim.v.count1
       },
