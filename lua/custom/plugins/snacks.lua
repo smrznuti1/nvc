@@ -587,7 +587,7 @@ return {
           vim.cmd("FloatermHide")
           vim.defer_fn(function()
             vim.cmd("startinsert")
-          end, 220)
+          end, 210)
         end, { desc = "Find Files" })
         _G.dd = function(...)
           Snacks.debug.inspect(...)
