@@ -44,7 +44,7 @@ return {
         fuzzy = true,
         smartcase = true,
         ignorecase = true,
-        sort_empty = false,
+        sort_empty = true,
         filename_bonus = true,
         file_pos = true,
         cwd_bonus = true,
