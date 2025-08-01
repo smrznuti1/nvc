@@ -28,6 +28,8 @@ vim.api.nvim_create_user_command(
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevelstart = 99
 vim.opt.number = true
+vim.o.wildmenu = true
+vim.o.wildmode = "longest:full,full"
 
 -- vim.opt.autochdir = true
 
