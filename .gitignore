@@ -49,3 +49,4 @@ scripts/nvim_doc_tools
 scripts/nvim-typecheck-action
 tmp/
 lazy-lock.json
+indent.log
