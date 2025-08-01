@@ -583,11 +583,13 @@ return {
         -- Setup some globals for debugging (lazy-loaded)
         vim.keymap.set({ "n", "t", "i" }, "<M-a>", function()
           local cwd = vim.fn.getcwd()
+          vim.api.nvim_feedkeys(
+            vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true),
+            "i",
+            false
+          )
           Snacks.picker.files({ cwd = cwd, focus = "input", hidden = true, ignored = true })
           vim.cmd("FloatermHide")
-          vim.defer_fn(function()
-            vim.cmd("startinsert")
-          end, 210)
         end, { desc = "Find Files" })
         _G.dd = function(...)
           Snacks.debug.inspect(...)
