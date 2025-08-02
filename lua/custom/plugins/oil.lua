@@ -205,5 +205,12 @@ return {
         border = "rounded",
       },
     })
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.api.nvim_create_augroup("OilAutoCwd", {}),
+      pattern = "oil",
+      callback = function()
+        vim.cmd.lchdir(require("oil").get_current_dir())
+      end,
+    })
   end,
 }
