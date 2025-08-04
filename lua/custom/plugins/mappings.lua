@@ -44,6 +44,7 @@ function custom_completion(arg_lead, cmd_line, cursor_pos)
 end
 
 local function executeShellCommand()
+  vim.cmd("startinsert")
   vim.ui.input(
     { prompt = "Command: ", completion = "customlist,v:lua.custom_completion" },
     function(input)
