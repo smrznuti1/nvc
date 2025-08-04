@@ -280,7 +280,7 @@ vim.keymap.set({ "n", "t", "i" }, "<M-e>", function()
 end, { silent = true, noremap = true })
 vim.keymap.set({ "n", "i", "t" }, "<C-x>", function()
   vim.api.nvim_feedkeys(
-    vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true),
+    vim.api.nvim_replace_termcodes("<C-\\><C-n>i", true, false, true),
     "i",
     false
   )
