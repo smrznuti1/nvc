@@ -44,7 +44,6 @@ function custom_completion(arg_lead, cmd_line, cursor_pos)
 end
 
 local function executeShellCommand()
-  vim.cmd("startinsert")
   vim.ui.input(
     { prompt = "Command: ", completion = "customlist,v:lua.custom_completion" },
     function(input)
@@ -279,7 +278,14 @@ vim.keymap.set({ "n", "t", "i" }, "<M-e>", function()
 
   -- vim.notify(vim.fn.bufname())
 end, { silent = true, noremap = true })
-vim.keymap.set({ "n", "i", "t" }, "<C-x>", executeShellCommand, { noremap = true })
+vim.keymap.set({ "n", "i", "t" }, "<C-x>", function()
+  vim.api.nvim_feedkeys(
+    vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true),
+    "i",
+    false
+  )
+  executeShellCommand()
+end, { noremap = true })
 -- vim.keymap.set({ "n", "i", "t" }, "<C-x>", "<C-\\><C-n>:Command ", { noremap = true })
 vim.keymap.set(
   "n",
