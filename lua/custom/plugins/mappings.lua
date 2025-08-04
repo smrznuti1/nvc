@@ -278,7 +278,7 @@ vim.keymap.set({ "n", "t", "i" }, "<M-e>", function()
 
   -- vim.notify(vim.fn.bufname())
 end, { silent = true, noremap = true })
-vim.keymap.set("n", "<C-x>", executeShellCommand, { noremap = true })
+vim.keymap.set({ "n", "i", "t" }, "<C-x>", executeShellCommand, { noremap = true })
 -- vim.keymap.set({ "n", "i", "t" }, "<C-x>", "<C-\\><C-n>:Command ", { noremap = true })
 vim.keymap.set(
   "n",
