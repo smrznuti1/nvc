@@ -28,6 +28,10 @@ function custom_completion(arg_lead, cmd_line, cursor_pos)
     command_completions
   )
 
+  completions = vim.tbl_map(function(entry)
+    return entry:gsub("[ ()%%#$]", "\\%0")
+  end, completions)
+
   table.remove(words, #words)
   local current_cmd = table.concat(words, " ")
 
@@ -44,15 +48,10 @@ local function executeShellCommand()
     { prompt = "Command: ", completion = "customlist,v:lua.custom_completion" },
     function(input)
       if input then
-        require("FTerm").scratch({
-          dimensions = {
-            height = 0.5,
-            width = 0.8,
-            x = 0.5,
-            y = 1,
-          },
-          cmd = input,
-        })
+        vim.fn.execute(
+          ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 "
+            .. input:gsub("\\([ ()%%#$])", "\\%1")
+        )
       end
     end
   )
@@ -279,8 +278,8 @@ vim.keymap.set({ "n", "t", "i" }, "<M-e>", function()
 
   -- vim.notify(vim.fn.bufname())
 end, { silent = true, noremap = true })
--- vim.keymap.set('n', '<C-x>', executeShellCommand, { noremap = true })
-vim.keymap.set({ "n", "i", "t" }, "<C-x>", "<C-\\><C-n>:Command ", { noremap = true })
+vim.keymap.set("n", "<C-x>", executeShellCommand, { noremap = true })
+-- vim.keymap.set({ "n", "i", "t" }, "<C-x>", "<C-\\><C-n>:Command ", { noremap = true })
 vim.keymap.set(
   "n",
   "<leader>e",
