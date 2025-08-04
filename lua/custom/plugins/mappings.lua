@@ -14,21 +14,18 @@ function completionForRun(arg_lead, cmd_line, cursor_pos)
 end
 
 function custom_completion(arg_lead, cmd_line, cursor_pos)
-  local zsh_completions =
-    vim.fn.systemlist("zsh -c 'compgen -A command -- " .. vim.fn.shellescape(arg_lead) .. "'")
-  -- local words = vim.split(cmd_line, "%s+")
-  -- local last_word = words[#words]
-  -- local cmdline_completions = vim.fn.getcompletion(last_word, "cmdline")
-  -- local command_completions = vim.fn.getcompletion(last_word, "command")
-  -- local shellcmd_completions = vim.fn.getcompletion(last_word, "shellcmd")
-  -- local file_completions = vim.fn.getcompletion(last_word, "file")
+  local words = vim.split(cmd_line, "%s+")
+  local last_word = words[#words]
+  local cmdline_completions = vim.fn.getcompletion(last_word, "cmdline")
+  local command_completions = vim.fn.getcompletion(last_word, "command")
+  local shellcmd_completions = vim.fn.getcompletion(last_word, "shellcmd")
+  local file_completions = vim.fn.getcompletion(last_word, "file")
   local completions = vim.tbl_extend(
     "keep",
-    zsh_completions
-    -- shellcmd_completions,
-    -- file_completions,
-    -- cmdline_completions,
-    -- command_completions
+    shellcmd_completions,
+    file_completions,
+    cmdline_completions,
+    command_completions
   )
 
   table.remove(words, #words)
