@@ -46,8 +46,9 @@ local function executeShellCommand()
     function(input)
       if input then
         vim.fn.execute(
-          ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ZDOTDIR=$HOME zsh -i -c "
+          ':FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ZDOTDIR=$HOME zsh -i -c "'
             .. input:gsub("\\([ ()%%#$])", "\\%1")
+            .. '"'
         )
       end
     end
