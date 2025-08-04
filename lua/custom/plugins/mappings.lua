@@ -28,7 +28,9 @@ function custom_completion(arg_lead, cmd_line, cursor_pos)
   table.remove(words, #words)
   local current_cmd = table.concat(words, " ")
 
-  vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-p>", true, false, true), "i")
+  if #completions > 1 then
+    vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-p>", true, false, true), "i")
+  end
 
   return vim.tbl_map(function(entry)
     if current_cmd ~= "" then
