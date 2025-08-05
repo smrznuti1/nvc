@@ -250,7 +250,12 @@ vim.keymap.set({ "n", "t", "i" }, "<M-l>", function()
   local bufname = vim.fn.bufname()
   if bufname:match("^term://") then
     local bufname_shorten = bufname:gsub("^term://[^:]*:", "")
-    vim.notify(bufname_shorten:sub(string.find(bufname_shorten, '"') + 1, #bufname_shorten - 1))
+    local quote_position = string.find(bufname_shorten, "'")
+    if quote_position ~= nil then
+      vim.notify(bufname_shorten:sub(quote_position + 1, #bufname_shorten - 1))
+    else
+      vim.notify(bufname_shorten)
+    end
   end
 end, { silent = false, noremap = true })
 
