@@ -44,11 +44,15 @@ local function executeShellCommand()
   vim.ui.input(
     { prompt = "Command: ", completion = "customlist,v:lua.custom_completion" },
     function(input)
-      if input then
+      if input ~= "" then
         vim.fn.execute(
           ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ZDOTDIR=$HOME zsh -i -c '"
             .. input:gsub("\\([ ()%%#$])", "\\%1"):gsub("'", '"')
             .. "'"
+        )
+      else
+        vim.fn.execute(
+          ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0"
         )
       end
     end
