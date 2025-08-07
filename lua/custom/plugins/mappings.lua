@@ -40,25 +40,47 @@ function custom_completion(arg_lead, cmd_line, cursor_pos)
 end
 
 local function executeShellCommand()
-  vim.ui.input(
-    { prompt = "Command: ", completion = "customlist,v:lua.custom_completion" },
-    function(input)
-      if input == nil then
-        return
-      end
-      if input ~= "" then
-        vim.fn.execute(
-          ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ZDOTDIR=$HOME zsh -i -c '"
-            .. input:gsub("\\([ ()%%#$])", "\\%1"):gsub("'", '"')
-            .. "'"
-        )
-      else
-        vim.fn.execute(
-          ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0"
-        )
-      end
+  require("snacks").input.input({
+    prompt = "Command:",
+    completion = "customlist,v:lua.custom_completion",
+    icon_pos = false,
+    prompt_pos = "left",
+  }, function(input)
+    if input == nil then
+      return
     end
-  )
+    if input ~= "" then
+      vim.fn.execute(
+        ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ZDOTDIR=$HOME zsh -i -c '"
+          .. input:gsub("\\([ ()%%#$])", "\\%1"):gsub("'", '"')
+          .. "'"
+      )
+    else
+      vim.fn.execute(
+        ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0"
+      )
+    end
+  end)
+  --
+  -- vim.ui.input(
+  --   { prompt = "Command: ", completion = "customlist,v:lua.custom_completion" },
+  --   function(input)
+  --     if input == nil then
+  --       return
+  --     end
+  --     if input ~= "" then
+  --       vim.fn.execute(
+  --         ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ZDOTDIR=$HOME zsh -i -c '"
+  --           .. input:gsub("\\([ ()%%#$])", "\\%1"):gsub("'", '"')
+  --           .. "'"
+  --       )
+  --     else
+  --       vim.fn.execute(
+  --         ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0"
+  --       )
+  --     end
+  --   end
+  -- )
 end
 
 local function change_cwd_to_terminal_path()
