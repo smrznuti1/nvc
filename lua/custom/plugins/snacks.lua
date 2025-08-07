@@ -95,7 +95,7 @@ return {
         border = "rounded",
         title_pos = "center",
         height = 1,
-        width = 60,
+        -- width = 60,
         relative = "cursor",
         noautocmd = true,
         row = 2,
