@@ -41,10 +41,10 @@ end
 
 local function executeShellCommand()
   vim.ui.input({
-    prompt = "Command: ",
+    prompt = "Command::",
     completion = "customlist,v:lua.custom_completion",
     icon_pos = false,
-    prompt_pos = "left",
+    prompt_pos = "title",
   }, function(input)
     if input == nil then
       return

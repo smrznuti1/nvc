@@ -93,7 +93,7 @@ return {
         backdrop = false,
         position = "float",
         border = "rounded",
-        title_pos = "center",
+        title_pos = "left",
         height = 1,
         -- width = 60,
         relative = "cursor",
