@@ -40,8 +40,8 @@ function custom_completion(arg_lead, cmd_line, cursor_pos)
 end
 
 local function executeShellCommand()
-  require("snacks").input.input({
-    prompt = "Command:",
+  vim.ui.input({
+    prompt = "Command: ",
     completion = "customlist,v:lua.custom_completion",
     icon_pos = false,
     prompt_pos = "left",
