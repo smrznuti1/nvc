@@ -144,14 +144,13 @@ vim.keymap.set("c", "<Esc>", function()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, false, true), "n", false)
   local input = vim.fn.getcmdline()
   vim.ui.input({
-    prompt = "Command::",
+    prompt = "cmdline",
     completion = "customlist,v:lua.custom_completion",
     icon_pos = false,
     prompt_pos = "title",
     default = input,
   }, function(input)
-    vim.notify(input)
-    vim.fn.execute(input)
+    vim.cmd(input)
   end)
 end, {})
 
