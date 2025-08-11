@@ -122,11 +122,38 @@ _G.change_cwd_to_terminal_path = change_cwd_to_terminal_path
 -- local builtin = require("telescope.builtin")
 -- CMD
 vim.api.nvim_create_user_command("Command", function(input)
-  vim.fn.execute(
-    ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 "
-      .. input.args:gsub("\\([ ()%%#$])", "`%1")
-  )
+  -- vim.fn.execute(
+  --   ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 "
+  --     .. input.args:gsub("\\([ ()%%#$])", "`%1")
+  -- )
+
+  if input.args ~= "" then
+    vim.fn.execute(
+      ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ZDOTDIR=$HOME zsh -i -c '"
+        .. input.args:gsub("\\([ ()%%#$])", "\\%1"):gsub("'", '"')
+        .. "'"
+    )
+  else
+    vim.fn.execute(
+      ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0"
+    )
+  end
 end, { nargs = "*", complete = "customlist,v:lua.completionForRun" })
+-- vim.keymap.set("c", "<Esc>", "<C-f>", {})
+vim.keymap.set("c", "<Esc>", function()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, false, true), "n", false)
+  local input = vim.fn.getcmdline()
+  vim.ui.input({
+    prompt = "Command::",
+    completion = "customlist,v:lua.custom_completion",
+    icon_pos = false,
+    prompt_pos = "title",
+    default = input,
+  }, function(input)
+    vim.notify(input)
+    vim.fn.execute(input)
+  end)
+end, {})
 
 vim.api.nvim_create_user_command("Notes", "Neorg workspace notes", {})
 vim.api.nvim_create_user_command("Pwd", function()
@@ -314,15 +341,15 @@ vim.keymap.set({ "n", "t", "i" }, "<M-e>", function()
 
   -- vim.notify(vim.fn.bufname())
 end, { silent = true, noremap = true })
-vim.keymap.set({ "n", "i", "t" }, "<C-x>", function()
-  vim.api.nvim_feedkeys(
-    vim.api.nvim_replace_termcodes("<C-\\><C-n>i", true, false, true),
-    "i",
-    false
-  )
-  executeShellCommand()
-end, { noremap = true })
--- vim.keymap.set({ "n", "i", "t" }, "<C-x>", "<C-\\><C-n>:Command ", { noremap = true })
+-- vim.keymap.set({ "n", "i", "t" }, "<C-x>", function()
+--   vim.api.nvim_feedkeys(
+--     vim.api.nvim_replace_termcodes("<C-\\><C-n>i", true, false, true),
+--     "i",
+--     false
+--   )
+--   executeShellCommand()
+-- end, { noremap = true })
+vim.keymap.set({ "n", "i", "t", "c" }, "<C-x>", "<C-\\><C-n>:Command ", { noremap = true })
 vim.keymap.set(
   "n",
   "<leader>e",
