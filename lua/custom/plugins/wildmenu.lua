@@ -58,6 +58,9 @@ return {
   config = function()
     require("wilder").setup({
       modes = { ":", "/", "?" },
+      accept_key = "<C-l>",
+      reject_key = "<C-h>",
+      accept_completion_auto_select = 0,
     })
   end,
 }
