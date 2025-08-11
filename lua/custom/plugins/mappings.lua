@@ -150,7 +150,8 @@ vim.keymap.set("c", "<Esc>", function()
     prompt_pos = "title",
     default = input,
   }, function(input)
-    vim.cmd(input)
+    vim.fn.histadd("cmd", input)
+    vim.fn.execute(input)
   end)
 end, {})
 
