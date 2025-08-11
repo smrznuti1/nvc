@@ -142,7 +142,11 @@ end, { nargs = "*", complete = "customlist,v:lua.completionForRun" })
 -- vim.keymap.set("c", "<Esc>", "<C-f>", {})
 vim.keymap.set("c", "<Esc>", function()
   local input = vim.fn.getcmdline()
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, false, true), "n", false)
+  vim.api.nvim_feedkeys(
+    vim.api.nvim_replace_termcodes("<C-c><C-\\><C-n>", true, false, true),
+    "n",
+    false
+  )
   if input:sub(0, 7) ~= "Command" then
     return
   end
