@@ -141,8 +141,11 @@ vim.api.nvim_create_user_command("Command", function(input)
 end, { nargs = "*", complete = "customlist,v:lua.completionForRun" })
 -- vim.keymap.set("c", "<Esc>", "<C-f>", {})
 vim.keymap.set("c", "<Esc>", function()
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, false, true), "n", false)
   local input = vim.fn.getcmdline()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, false, true), "n", false)
+  if input:sub(0, 7) ~= "Command" then
+    return
+  end
   vim.ui.input({
     prompt = "cmdline",
     completion = "customlist,v:lua.custom_completion",
