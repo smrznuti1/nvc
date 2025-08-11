@@ -1,38 +1,38 @@
-return {
-  "vzze/cmdline.nvim",
-  lazy = false,
-
-  config = function()
-    require("cmdline").setup({
-      cmdtype = ":", -- you can also add / and ? by using ":/?"
-      -- as a string
-
-      window = {
-        matchFuzzy = true,
-        offset = 1, -- depending on 'cmdheight' you might need to offset
-        debounceMs = 10, -- the lower the number the more responsive however
-        -- more resource intensive
-      },
-
-      hl = {
-        default = "Pmenu",
-        selection = "PmenuSel",
-        directory = "Directory",
-        substr = "LineNr",
-      },
-
-      column = {
-        maxNumber = 6,
-        minWidth = 20,
-      },
-
-      binds = {
-        next = "<Tab>",
-        back = "<S-Tab>",
-      },
-    })
-  end,
-}
+-- return {
+--   "vzze/cmdline.nvim",
+--   lazy = false,
+--
+--   config = function()
+--     require("cmdline").setup({
+--       cmdtype = ":", -- you can also add / and ? by using ":/?"
+--       -- as a string
+--
+--       window = {
+--         matchFuzzy = true,
+--         offset = 1, -- depending on 'cmdheight' you might need to offset
+--         debounceMs = 10, -- the lower the number the more responsive however
+--         -- more resource intensive
+--       },
+--
+--       hl = {
+--         default = "Pmenu",
+--         selection = "PmenuSel",
+--         directory = "Directory",
+--         substr = "LineNr",
+--       },
+--
+--       column = {
+--         maxNumber = 6,
+--         minWidth = 20,
+--       },
+--
+--       binds = {
+--         next = "<Tab>",
+--         back = "<S-Tab>",
+--       },
+--     })
+--   end,
+-- }
 -- return {
 --   "smolck/command-completion.nvim",
 --   lazy = false,
@@ -52,3 +52,12 @@ return {
 --     })
 --   end,
 -- }
+
+return {
+  "gelguy/wilder.nvim",
+  config = function()
+    require("wilder").setup({
+      modes = { ":", "/", "?" },
+    })
+  end,
+}
