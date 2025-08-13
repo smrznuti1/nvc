@@ -55,6 +55,7 @@ local function executeShellCommand()
           .. input:gsub("\\([ ()%%#$])", "\\%1"):gsub("'", '"')
           .. "'"
       )
+      vim.fn.histadd("input", input)
     else
       vim.fn.execute(
         ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0"
@@ -348,15 +349,15 @@ vim.keymap.set({ "n", "t", "i" }, "<M-e>", function()
 
   -- vim.notify(vim.fn.bufname())
 end, { silent = true, noremap = true })
--- vim.keymap.set({ "n", "i", "t" }, "<C-x>", function()
---   vim.api.nvim_feedkeys(
---     vim.api.nvim_replace_termcodes("<C-\\><C-n>i", true, false, true),
---     "i",
---     false
---   )
---   executeShellCommand()
--- end, { noremap = true })
-vim.keymap.set({ "n", "i", "t", "c" }, "<C-x>", "<C-\\><C-n>:Command ", { noremap = true })
+vim.keymap.set({ "n", "i", "t" }, "<C-x>", function()
+  vim.api.nvim_feedkeys(
+    vim.api.nvim_replace_termcodes("<C-\\><C-n>i", true, false, true),
+    "i",
+    false
+  )
+  executeShellCommand()
+end, { noremap = true })
+-- vim.keymap.set({ "n", "i", "t", "c" }, "<C-x>", "<C-\\><C-n>:Command ", { noremap = true })
 vim.keymap.set(
   "n",
   "<leader>e",

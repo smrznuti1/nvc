@@ -121,8 +121,48 @@ return {
           i_tab = { "<tab>", { "cmp_select_next", "cmp" }, mode = "i", expr = true },
           i_stab = { "<S-tab>", { "cmp_select_prev", "cmp" }, mode = "i", expr = true },
           i_ctrl_w = { "<c-w>", "<c-s-w>", mode = "i", expr = true },
-          i_up = { "<up>", { "hist_up" }, mode = { "i", "n" } },
-          i_down = { "<down>", { "hist_down" }, mode = { "i", "n" } },
+          i_up = {
+            "<up>",
+            function()
+              local bufnr = vim.api.nvim_get_current_buf()
+              local key = "snacks_input_hist_idx"
+              local idx = vim.b[bufnr][key] or -1
+              idx = idx - 1
+              if idx < 1 then
+                idx = vim.fn.histnr("input")
+              end
+              while vim.fn.histget("input", idx) == "" and idx > 0 do
+                idx = idx - 1
+              end
+              vim.b[bufnr][key] = idx
+              local text = vim.fn.histget("input", idx)
+              text = text or ""
+              vim.api.nvim_buf_set_lines(0, 0, -1, false, { text })
+              vim.api.nvim_win_set_cursor(0, { 1, #text })
+            end,
+            mode = { "i", "n" },
+          },
+          i_down = {
+            "<down>",
+            function()
+              local bufnr = vim.api.nvim_get_current_buf()
+              local key = "snacks_input_hist_idx"
+              local idx = vim.b[bufnr][key] or -1
+              idx = idx + 1
+              if idx < 1 or idx > vim.fn.histnr("input") + 1 then
+                idx = vim.fn.histnr("input") + 1
+              end
+              while vim.fn.histget("input", idx) == "" and idx <= vim.fn.histnr("input") do
+                idx = idx + 1
+              end
+              vim.b[bufnr][key] = idx
+              local text = vim.fn.histget("input", idx)
+              text = text or ""
+              vim.api.nvim_buf_set_lines(0, 0, -1, false, { text })
+              vim.api.nvim_win_set_cursor(0, { 1, #text })
+            end,
+            mode = { "i", "n" },
+          },
           q = "cancel",
         },
       },
