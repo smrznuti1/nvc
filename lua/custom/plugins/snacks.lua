@@ -128,6 +128,19 @@ return {
             mode = { "i", "n" },
           },
           i_esc = { "<esc>", { "cmp_close", "stopinsert" }, mode = "i", expr = true },
+          c_y = { "<C-y>", { "cmp_accept" }, mode = "i", expr = true },
+          c_l = {
+            "<C-l>",
+            function()
+              vim.api.nvim_feedkeys(
+                vim.api.nvim_replace_termcodes("<C-y><tab>", true, false, true),
+                "i",
+                false
+              )
+            end,
+            mode = "i",
+            expr = true,
+          },
           i_cr = { "<cr>", { "confirm" }, mode = { "i", "n" }, expr = true },
           i_tab = { "<tab>", { "cmp_select_next", "cmp" }, mode = "i", expr = true },
           i_stab = { "<S-tab>", { "cmp_select_prev", "cmp" }, mode = "i", expr = true },
