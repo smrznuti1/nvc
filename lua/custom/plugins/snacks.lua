@@ -116,6 +116,17 @@ return {
         },
         keys = {
           n_esc = { "<esc>", { "cmp_close", "cancel" }, mode = "n", expr = true },
+          c_c = {
+            "<C-c>",
+            function()
+              local bufnr = vim.api.nvim_get_current_buf()
+              vim.b[bufnr]["snacks_input_hist_idx"] = nil
+              local text = ""
+              vim.api.nvim_buf_set_lines(0, 0, -1, false, { text })
+              vim.api.nvim_win_set_cursor(0, { 1, #text })
+            end,
+            mode = { "i", "n" },
+          },
           i_esc = { "<esc>", { "cmp_close", "stopinsert" }, mode = "i", expr = true },
           i_cr = { "<cr>", { "confirm" }, mode = { "i", "n" }, expr = true },
           i_tab = { "<tab>", { "cmp_select_next", "cmp" }, mode = "i", expr = true },
