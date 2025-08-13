@@ -126,16 +126,15 @@ return {
             function()
               local bufnr = vim.api.nvim_get_current_buf()
               local key = "snacks_input_hist_idx"
-              local idx = vim.b[bufnr][key] or -1
-              idx = idx - 1
+              local idx = vim.b[bufnr][key] or vim.fn.histnr("input") + 1
 
-              if vim.b[bufnr]["input_line"] == nil then
+              if vim.b[bufnr]["input_line"] == nil or idx == (vim.fn.histnr("input") + 1) then
                 vim.b[bufnr]["input_line"] = vim.api.nvim_buf_get_text(bufnr, 0, 0, -1, -1, {})[1]
                   or ""
               end
-
-              if idx < 1 then
-                idx = vim.fn.histnr("input")
+              idx = idx - 1
+              if idx >= vim.fn.histnr("input") + 1 or idx < 1 then
+                idx = vim.fn.histnr("input") + 1
               end
               while
                 (
@@ -148,6 +147,9 @@ return {
               end
               vim.b[bufnr][key] = idx
               local text = vim.fn.histget("input", idx)
+              if idx == (vim.fn.histnr("input") + 1) then
+                text = vim.b[bufnr]["input_line"]
+              end
               text = text or ""
               vim.api.nvim_buf_set_lines(0, 0, -1, false, { text })
               vim.api.nvim_win_set_cursor(0, { 1, #text })
@@ -159,9 +161,9 @@ return {
             function()
               local bufnr = vim.api.nvim_get_current_buf()
               local key = "snacks_input_hist_idx"
-              local idx = vim.b[bufnr][key] or -1
+              local idx = vim.b[bufnr][key] or vim.fn.histnr("input") + 1
               idx = idx + 1
-              if idx < 1 or idx > vim.fn.histnr("input") + 1 then
+              if idx >= vim.fn.histnr("input") + 1 then
                 idx = vim.fn.histnr("input") + 1
               end
               while
@@ -175,7 +177,11 @@ return {
               end
               vim.b[bufnr][key] = idx
               local text = vim.fn.histget("input", idx)
+              if idx == (vim.fn.histnr("input") + 1) then
+                text = vim.b[bufnr]["input_line"]
+              end
               text = text or ""
+              -- text = text or ""
               vim.api.nvim_buf_set_lines(0, 0, -1, false, { text })
               vim.api.nvim_win_set_cursor(0, { 1, #text })
             end,
