@@ -128,10 +128,22 @@ return {
               local key = "snacks_input_hist_idx"
               local idx = vim.b[bufnr][key] or -1
               idx = idx - 1
+
+              if vim.b[bufnr]["input_line"] == nil then
+                vim.b[bufnr]["input_line"] = vim.api.nvim_buf_get_text(bufnr, 0, 0, -1, -1, {})[1]
+                  or ""
+              end
+
               if idx < 1 then
                 idx = vim.fn.histnr("input")
               end
-              while vim.fn.histget("input", idx) == "" and idx > 0 do
+              while
+                (
+                  vim.fn.histget("input", idx) == ""
+                  or string.sub(vim.fn.histget("input", idx), 1, #vim.b[bufnr]["input_line"])
+                    ~= vim.b[bufnr]["input_line"]
+                ) and idx > 0
+              do
                 idx = idx - 1
               end
               vim.b[bufnr][key] = idx
@@ -152,7 +164,13 @@ return {
               if idx < 1 or idx > vim.fn.histnr("input") + 1 then
                 idx = vim.fn.histnr("input") + 1
               end
-              while vim.fn.histget("input", idx) == "" and idx <= vim.fn.histnr("input") do
+              while
+                (
+                  vim.fn.histget("input", idx) == ""
+                  or string.sub(vim.fn.histget("input", idx), 1, #vim.b[bufnr]["input_line"])
+                    ~= vim.b[bufnr]["input_line"]
+                ) and idx <= vim.fn.histnr("input")
+              do
                 idx = idx + 1
               end
               vim.b[bufnr][key] = idx
