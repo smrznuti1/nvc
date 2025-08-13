@@ -133,9 +133,6 @@ return {
                   or ""
               end
               idx = idx - 1
-              if idx >= vim.fn.histnr("input") + 1 or idx < 1 then
-                idx = vim.fn.histnr("input") + 1
-              end
               while
                 (
                   vim.fn.histget("input", idx) == ""
@@ -145,9 +142,12 @@ return {
               do
                 idx = idx - 1
               end
+              if idx >= vim.fn.histnr("input") + 1 or idx < 1 then
+                idx = vim.fn.histnr("input") + 1
+              end
               vim.b[bufnr][key] = idx
               local text = vim.fn.histget("input", idx)
-              if idx == (vim.fn.histnr("input") + 1) then
+              if idx >= (vim.fn.histnr("input") + 1) then
                 text = vim.b[bufnr]["input_line"]
               end
               text = text or ""
