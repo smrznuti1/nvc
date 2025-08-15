@@ -52,7 +52,7 @@ local function executeShellCommand()
     if input ~= "" then
       vim.fn.execute(
         ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ZDOTDIR=$HOME zsh -i -c '"
-          .. input:gsub("\\([ ()%%#$])", "\\%1"):gsub("'", '"')
+          .. input:gsub("\\([ ()#%%$])", "\\%1"):gsub("'", '"')
           .. "'"
       )
       vim.fn.histadd("input", input)
