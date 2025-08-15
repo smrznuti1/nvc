@@ -1,3 +1,4 @@
+local snacks = require("custom.plugins.snacks")
 -- Funcs
 function completionForRun(arg_lead, cmd_line, cursor_pos)
   local shellcmd_completions = vim.fn.getcompletion(arg_lead, "shellcmd")
@@ -40,12 +41,18 @@ function custom_completion(arg_lead, cmd_line, cursor_pos)
 end
 
 local function executeShellCommand()
-  vim.ui.input({
+  local opts = {
     prompt = "Command::",
     completion = "customlist,v:lua.custom_completion",
     icon_pos = false,
     prompt_pos = "title",
-  }, function(input)
+  }
+  vim.ui.input(opts, function(input)
+    local inpt = require("snacks.input")
+    local win = inpt.input(opts, function() end).win or nil
+    if win ~= nil then
+      vim.api.nvim_win_close(win, true)
+    end
     if input == nil then
       return
     end
