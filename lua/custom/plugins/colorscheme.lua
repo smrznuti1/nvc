@@ -63,12 +63,14 @@ return {
     require("cuddlefish").setup(configuration)
     vim.cmd.colorscheme("cuddlefish")
     vim.cmd("highlight CursorLine cterm=underline gui=underline")
+    vim.g.terminal_color_8 = "#81439c"
 
     vim.api.nvim_create_user_command("TT", function()
       configuration.editor.transparent_background = not configuration.editor.transparent_background
       require("cuddlefish").setup(configuration)
       vim.cmd.colorscheme("cuddlefish")
       vim.cmd("highlight CursorLine cterm=underline gui=underline")
+      vim.g.terminal_color_8 = "#81439c"
     end, {})
   end,
 }
