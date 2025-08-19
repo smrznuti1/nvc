@@ -54,6 +54,7 @@ return {
           OilDir = { "#cc6a1f" },
           OilDirHidden = { "#6e391a" },
           LeapBackdrop = { "#613869" },
+          FloatermBorder = { fg = colors.text, bg = "none" },
           Cursor = { fg = "#ede874", bg = "#7d5a8c" },
           Visual = { bg = "#5d4f63" },
         }
