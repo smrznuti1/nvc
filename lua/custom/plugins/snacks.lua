@@ -143,6 +143,7 @@ return {
           },
           i_cr = { "<cr>", { "confirm" }, mode = { "i", "n" }, expr = true },
           i_tab = { "<tab>", { "cmp_select_next", "cmp" }, mode = "i", expr = true },
+          i_quit = { "<C-q>", { "destroy" }, mode = { "i", "n" }, expr = true },
           i_stab = { "<S-tab>", { "cmp_select_prev", "cmp" }, mode = "i", expr = true },
           i_ctrl_w = { "<c-w>", "<c-s-w>", mode = "i", expr = true },
           i_up = {

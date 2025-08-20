@@ -49,9 +49,10 @@ local function executeShellCommand()
   }
   vim.ui.input(opts, function(input)
     local inpt = require("snacks.input")
-    local win = inpt.input(opts, function() end).win or nil
+    local win = inpt.input(opts, function() end) or nil
     if win ~= nil then
-      vim.api.nvim_win_close(win, true)
+      win.destroy(win)
+      -- vim.api.nvim_win_close(win, true)
     end
     if input == nil then
       return
