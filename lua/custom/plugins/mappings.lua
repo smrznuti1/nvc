@@ -60,7 +60,7 @@ local function executeShellCommand()
     if input ~= "" then
       vim.fn.execute(
         ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 . ~/.zshrc; "
-          .. input:gsub("\\([()#%%$])", "%1"):gsub("([()#%%$])", "\\%1")
+          .. input:gsub("(?<!\\)([()#%%$])", "\\%1")
       )
       vim.fn.histadd("input", input)
     else
