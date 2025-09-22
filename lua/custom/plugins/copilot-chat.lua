@@ -41,7 +41,7 @@ return {
         { desc = "Opet Copilot Chat for current selection", silent = true }
       ),
       vim.keymap.set(
-        { "n", "i", "v" },
+        { "n", "i", "v", "t" },
         "<M-c>",
         "<cmd>CC<cr>",
         { desc = "Opet Copilot Chat", silent = true }
