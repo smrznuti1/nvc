@@ -14,7 +14,7 @@ return {
     g.mkdp_command_for_global = 0
     g.mkdp_open_to_the_world = 0
     g.mkdp_open_ip = ""
-    g.mkdp_browser = "firefox"
+    g.mkdp_browser = "zen-browser"
     g.mkdp_echo_preview_url = 0
     g.mkdp_browserfunc = ""
     g.mkdp_theme = "dark"

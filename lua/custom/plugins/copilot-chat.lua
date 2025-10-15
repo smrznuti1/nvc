@@ -16,7 +16,7 @@ return {
         height = 0.6, -- Fixed height in rows
         border = "rounded", -- 'single', 'double', 'rounded', 'solid'
         title = "AI Assistant",
-        zindex = 100, -- Ensure window stays on top
+        zindex = 50, -- Ensure window stays on top
       },
 
       headers = {
