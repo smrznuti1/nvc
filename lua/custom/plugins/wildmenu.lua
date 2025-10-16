@@ -22,7 +22,7 @@ return {
         -- 'single', 'double', 'rounded' or 'solid'
         -- can also be a list of 8 characters, see :h wilder#popupmenu_border_theme() for more details
         border = "rounded",
-        pumblend = 40,
+        pumblend = 30,
       }))
     )
     wilder.set_option("pipeline", {
