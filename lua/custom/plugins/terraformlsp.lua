@@ -1,14 +1,19 @@
 local cmp = require("blink.cmp")
-local lspconfig = require("lspconfig")
+-- local lspconfig = require("lspconfig")
 local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
 lsp_capabilities = vim.tbl_deep_extend("force", lsp_capabilities, cmp.get_lsp_capabilities())
-lspconfig.terraformls.setup({
+
+vim.lsp.config("terraformls", {
   cmd = { "terraform-ls", "serve" },
   filetypes = { "hcl", "tf", "tfvars", "terraform" },
-  root_dir = function(fname)
-    return lspconfig.util.root_pattern(".terraform", ".git")(fname) or vim.fs.dirname(fname)
-    -- or lspconfig.util.path.dirname(fname)
-  end,
+  root_markers = {
+    ".terraform",
+    ".git",
+  },
+  -- root_dir = function(fname)
+  --   return lspconfig.util.root_pattern(".terraform", ".git")(fname) or vim.fs.dirname(fname)
+  --   -- or lspconfig.util.path.dirname(fname)
+  -- end,
   capabilities = lsp_capabilities,
   -- init_options = {
   --   terraform = {
@@ -16,20 +21,26 @@ lspconfig.terraformls.setup({
   --   },
   -- },
   vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
-        pattern="*.tf",
-        callback = function ()
-            vim.bo.filetype = "terraform"
-        end
-    }),
+    pattern = "*.tf",
+    callback = function()
+      vim.bo.filetype = "terraform"
+    end,
+  }),
 })
 
-lspconfig.tflint.setup({
-  -- cmd = { "tflint" },
-  filetypes = { "hcl", "tf", "tfvars", "terraform" },
-  root_dir = function(fname)
-    return lspconfig.util.root_pattern(".terraform", ".git")(fname) or vim.fs.dirname(fname)
-  end,
-  capabilities = lsp_capabilities,
-})
+vim.lsp.enable("terraformls")
+
+-- vim.lsp.config("tflint", {
+-- cmd = { "tflint" },
+-- filetypes = { "hcl", "tf", "tfvars", "terraform" },
+-- root_markers = {
+--   ".terraform",
+--   ".git",
+-- },
+-- root_dir = function(fname)
+--   return lspconfig.util.root_pattern(".terraform", ".git")(fname) or vim.fs.dirname(fname)
+-- end,
+--   capabilities = lsp_capabilities,
+-- })
 
 return {}

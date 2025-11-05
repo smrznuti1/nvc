@@ -1,5 +1,5 @@
 local cmp = require("blink.cmp")
-local lspconfig = require("lspconfig")
+-- local lspconfig = require("lspconfig")
 local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
 lsp_capabilities = vim.tbl_deep_extend("force", lsp_capabilities, cmp.get_lsp_capabilities())
 -- lspconfig.pylsp.setup({
@@ -72,7 +72,7 @@ lsp_capabilities = vim.tbl_deep_extend("force", lsp_capabilities, cmp.get_lsp_ca
 --   root_dir = lspconfig.util.root_pattern("pyproject.toml", "requirements.txt", ".git"),
 -- })
 
-require("lspconfig").jedi_language_server.setup({
+vim.lsp.config("jedi_language_server", {
   init_options = {
     codeAction = {
       nameExtractVariable = "jls_extract_var",
@@ -118,11 +118,18 @@ require("lspconfig").jedi_language_server.setup({
     },
   },
   capabilities = lsp_capabilities,
-  root_dir = function(fname)
-    return lspconfig.util.root_pattern("pyproject.toml", "requirements.txt", ".git")(fname)
-      or vim.fs.dirname(fname)
-  end,
+  root_markers = {
+    "pyproject.toml",
+    "requirements.txt",
+    ".git",
+  },
+  -- root_dir = function(fname)
+  --   return lspconfig.util.root_pattern("pyproject.toml", "requirements.txt", ".git")(fname)
+  --     or vim.fs.dirname(fname)
+  -- end,
   -- root_dir = lspconfig.util.root_pattern("pyproject.toml", "requirements.txt", ".git"),
 })
+
+vim.lsp.enable("jedi_language_server")
 
 return {}

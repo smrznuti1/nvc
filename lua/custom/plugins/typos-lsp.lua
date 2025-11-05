@@ -1,7 +1,8 @@
-local lspconfig = require 'lspconfig'
+-- local lspconfig = require 'lspconfig'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
-lspconfig.typos_lsp.setup {
+capabilities =
+  vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
+vim.lsp.config("typos_lsp", {
   -- Logging level of the language server. Logs appear in :LspLog. Defaults to error.
   -- cmd_env = { RUST_LOG = "error" },
   capabilities = capabilities,
@@ -11,8 +12,10 @@ lspconfig.typos_lsp.setup {
     -- config = "~/code/typos-lsp/crates/typos-lsp/tests/typos.toml",
     -- How typos are rendered in the editor, eg: as errors, warnings, information, or hints.
     -- Defaults to error.
-    diagnosticSeverity = 'Error',
+    diagnosticSeverity = "Error",
   },
-}
+})
+
+vim.lsp.enable("typos_lsp")
 
 return {}
