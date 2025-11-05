@@ -200,11 +200,15 @@ vim.api.nvim_create_autocmd({ "TermRequest" }, {
     if string.sub(ev.data.sequence, 1, 4) == "\x1b]7;" then
       local dir = string.gsub(ev.data.sequence, "\x1b]7;file://[^/]*", "")
       if vim.fn.isdirectory(dir) == 0 then
-        vim.notify("invalid dir: " .. dir)
+        local now = vim.loop.now() / 1000 -- seconds
+        local last = vim.b.osc7_last_notify or 0
+        if now - last > 5 then -- 5 second cooldown
+          vim.notify("invalid dir: " .. dir)
+          vim.b.osc7_last_notify = now
+        end
         return
       end
       vim.api.nvim_buf_set_var(ev.buf, "osc7_dir", dir)
-      -- if vim.o.autochdir and vim.api.nvim_get_current_buf() == ev.buf then
       if vim.api.nvim_get_current_buf() == ev.buf then
         vim.cmd.cd(dir)
       end
