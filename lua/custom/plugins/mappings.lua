@@ -62,6 +62,7 @@ local function executeShellCommand()
         ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 execute_command "
           .. input:gsub("(?<!\\)([()#%%$])", "\\%1")
       )
+      -- execute_command is a simple script containing only zsh -i -c $@
       vim.fn.histadd("input", input)
     else
       vim.fn.execute(
