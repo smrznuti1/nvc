@@ -60,7 +60,9 @@ local function executeShellCommand()
     if input ~= "" then
       vim.fn.execute(
         ":FloatermNew! --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 --title="
+          .. "\\ \\ \\ \\ \\ cmd:\\ "
           .. input:gsub("(?<!\\)([()#%%$])", "\\%1"):gsub(" ", "\\ ")
+          .. "\\ \\ \\ \\ "
           .. " "
           .. input:gsub("(?<!\\)([()#%%$])", "\\%1")
           .. "; exit"
