@@ -65,7 +65,7 @@ local function executeShellCommand()
           .. "\\ \\ \\ \\ "
           .. " "
           .. input:gsub("(?<!\\)([()#%%$])", "\\%1")
-          .. "; exit"
+          .. " ; exit"
       )
       -- execute_command is a simple script containing only zsh -i -c $@
       vim.fn.histadd("input", input)
