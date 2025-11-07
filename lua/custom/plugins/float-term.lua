@@ -55,6 +55,6 @@ return {
       "<cmd>FloatermToggle terminal<cr>",
       { desc = "Terminal Here" }
     )
-    vim.fn.execute("hi FloatermBorder guifg=#5eff50", "silent")
+    vim.fn.execute("hi FloatermBorder guifg=#ed89fa", "silent")
   end,
 }
