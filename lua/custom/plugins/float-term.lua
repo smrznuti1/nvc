@@ -56,6 +56,7 @@ return {
       { desc = "Terminal Here" }
     )
     -- vim.fn.execute("hi FloatermBorder guifg=#ed89fa", "silent")
-    vim.fn.execute("hi FloatermBorder guifg=orange", "silent")
+    -- vim.fn.execute("hi FloatermBorder guifg=orange", "silent")
+    vim.fn.execute("hi FloatermBorder guifg=#f5d16e", "silent")
   end,
 }
