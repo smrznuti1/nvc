@@ -60,8 +60,9 @@ local function executeShellCommand()
     if input ~= "" then
       local input_args = input:gsub("([^\\])(&)", "%1\\%2")
       local escaped_cmd = vim.fn.shellescape(input_args, true)
-      local title = "\\ \\ \\ \\ \\ cmd:\\ " .. input:gsub(" ", "\\ ") .. "\\ \\ \\ \\ "
-      vim.notify(input_args)
+      local title = "\\ \\ \\ \\ \\ cmd:\\ "
+        .. input:sub(1, 100):gsub("[^%w_-]", "_")
+        .. "\\ \\ \\ \\ "
       vim.cmd(
         string.format(
           "FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 --title=%s zsh -ic %s",
@@ -155,9 +156,12 @@ vim.api.nvim_create_user_command("Command", function(input)
   if input.args ~= "" then
     local input_args = input.args:gsub("([^\\])(&)", "%1\\%2")
     local escaped_cmd = vim.fn.shellescape(input_args, true)
+    -- local title = "\\ \\ \\ \\ \\ cmd:\\ " .. input_args:gsub(" ", "\\ ") .. "\\ \\ \\ \\ "
+    local title = input.args:sub(1, 30):gsub("[^%w_-]", "_")
     vim.cmd(
       string.format(
-        "FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 zsh -ic %s",
+        "FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 --title=%s zsh -ic %s",
+        title,
         escaped_cmd
       )
     )
