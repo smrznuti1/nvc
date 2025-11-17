@@ -58,15 +58,26 @@ local function executeShellCommand()
       return
     end
     if input ~= "" then
-      vim.fn.execute(
-        ":FloatermNew! --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 --title="
-          .. "\\ \\ \\ \\ \\ cmd:\\ "
-          .. input:gsub("(?<!\\)([()#%%$])", "\\%1"):gsub(" ", "\\ ")
-          .. "\\ \\ \\ \\ "
-          .. " "
-          .. input:gsub("(?<!\\)([()#%%$])", "\\%1")
-          .. " ; exit"
+      local input_args = input:gsub("([^\\])(&)", "%1\\%2")
+      local escaped_cmd = vim.fn.shellescape(input_args, true)
+      local title = "\\ \\ \\ \\ \\ cmd:\\ " .. input:gsub(" ", "\\ ") .. "\\ \\ \\ \\ "
+      vim.notify(input_args)
+      vim.cmd(
+        string.format(
+          "FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 --title=%s zsh -ic %s",
+          title,
+          escaped_cmd
+        )
       )
+      -- vim.fn.execute(
+      --   ":FloatermNew! --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 --title="
+      --     .. "\\ \\ \\ \\ \\ cmd:\\ "
+      --     .. input:gsub("(?<!\\)([()#%%$])", "\\%1"):gsub(" ", "\\ ")
+      --     .. "\\ \\ \\ \\ "
+      --     .. " "
+      --     .. input:gsub("(?<!\\)([()#%%$])", "\\%1")
+      --     .. " ; exit"
+      -- )
       -- execute_command is a simple script containing only zsh -i -c $@
       vim.fn.histadd("input", input)
     else
@@ -142,10 +153,13 @@ vim.api.nvim_create_user_command("Command", function(input)
   -- )
 
   if input.args ~= "" then
-    vim.fn.execute(
-      ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 ZDOTDIR=$HOME zsh -i -c '"
-        .. input.args:gsub("\\([ ()%%#$])", "\\%1"):gsub("'", '"')
-        .. "'"
+    local input_args = input.args:gsub("([^\\])(&)", "%1\\%2")
+    local escaped_cmd = vim.fn.shellescape(input_args, true)
+    vim.cmd(
+      string.format(
+        "FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 zsh -ic %s",
+        escaped_cmd
+      )
     )
   else
     vim.fn.execute(
