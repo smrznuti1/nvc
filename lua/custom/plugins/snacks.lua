@@ -1,6 +1,6 @@
 return {
-  -- "folke/snacks.nvim",
-  "smrznuti1/snacks.nvim",
+  "folke/snacks.nvim",
+  -- "smrznuti1/snacks.nvim",
   priority = 1000,
   lazy = false,
   ---@type snacks.Config
@@ -716,6 +716,31 @@ return {
     -- },
   },
   init = function()
+    vim.schedule(function()
+      local ctx = {}
+      local snacks_input = Snacks.input
+      local custom_input = function(opts, on_confirm)
+        local win = snacks_input(opts, on_confirm)
+        ctx.opts = opts
+        ctx.win = win
+        return win
+      end
+      Snacks.input.enable = function()
+        vim.ui.input = custom_input
+      end
+      Snacks.input.enable()
+      Snacks.input.complete = function(findstart, base)
+        local completion = ctx.opts.completion
+        if findstart == 1 then
+          return 0
+        end
+        if not completion then
+          return {}
+        end
+        local ok, results = pcall(vim.fn.getcompletion, base, completion)
+        return ok and results or {}
+      end
+    end)
     vim.api.nvim_create_autocmd("User", {
       pattern = "VeryLazy",
       callback = function()
