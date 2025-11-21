@@ -732,7 +732,10 @@ return {
       Snacks.input.complete = function(findstart, base)
         local completion = ctx.opts.completion
         if findstart == 1 then
-          return 0
+          if completion == "customlist,v:lua.custom_completion" then
+            return 0
+          end
+          return #ctx.win:text():gsub("%S+$", "")
         end
         if not completion then
           return {}
