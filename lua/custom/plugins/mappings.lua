@@ -58,7 +58,7 @@ local function executeShellCommand()
       return
     end
     if input ~= "" then
-      local input_args = input:gsub("([^\\])(&)", "%1\\%2")
+      local input_args = input:gsub("([^\\])(&)", "%1\\%2"):gsub("\n", " ")
       local escaped_cmd = vim.fn.shellescape(input_args, true)
       local title = "\\ \\ \\ \\ \\ cmd:\\ "
         .. input:sub(1, 100):gsub("[^%w_-]", "_")
