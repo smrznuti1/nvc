@@ -28,7 +28,7 @@ return {
         -- 'taplo',
         -- 'yaml-language-server',
         -- "jedi-language-server",
-        "yamlfix",
+        -- "yamlfix",
         "cmakelang",
         "cmake-language-server",
         "bash-language-server",
@@ -38,6 +38,7 @@ return {
         -- 'ansible-lint',
         -- 'ansible-language-server',
       },
+      handlers = {},
     })
   end,
 }
