@@ -58,10 +58,12 @@ local function executeShellCommand()
       return
     end
     if input ~= "" then
-      local input_args = input:gsub("([^\\])(&)", "%1\\%2"):gsub("\\\n", " "):gsub("\n", " ")
+      local input_processed =
+        input:gsub("\\\n", " "):gsub("\n", " "):gsub("%s+", " "):gsub("^%s*(.-)%s*$", "%1")
+      local input_args = input_processed:gsub("([^\\])(&)", "%1\\%2")
       local escaped_cmd = vim.fn.shellescape(input_args, true)
       local title = "\\ \\ \\ \\ \\ cmd:\\ "
-        .. input:sub(1, 100):gsub("[^%w_-]", "_")
+        .. input_processed:sub(1, 100):gsub("[^%w_-]", "_")
         .. "\\ \\ \\ \\ "
       vim.cmd(
         string.format(
@@ -80,7 +82,7 @@ local function executeShellCommand()
       --     .. " ; exit"
       -- )
       -- execute_command is a simple script containing only zsh -i -c $@
-      vim.fn.histadd("input", input)
+      vim.fn.histadd("input", input_processed)
     else
       vim.fn.execute(
         ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0"
