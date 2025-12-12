@@ -43,4 +43,3 @@ vim.lsp.enable("terraformls")
 --   capabilities = lsp_capabilities,
 -- })
 
-return {}

@@ -422,5 +422,3 @@ vim.keymap.set("n", "<S-CR>", "O<Esc>", { desc = "New Line Before" })
 --     vim.fn.execute("Telescope file_browser", "silent")
 --   end
 -- end)
-
-return {}

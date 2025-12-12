@@ -25,7 +25,6 @@
 --   single_file_support = true,
 -- })
 --
--- return {}
 
 ---@brief
 ---
@@ -129,4 +128,3 @@ vim.lsp.config("gopls", {
 
 vim.lsp.enable("gopls")
 
-return {}

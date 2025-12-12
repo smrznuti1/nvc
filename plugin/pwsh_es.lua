@@ -12,4 +12,3 @@ vim.lsp.config("powershell_es", {
 
 vim.lsp.enable("powershell_es")
 
-return {}

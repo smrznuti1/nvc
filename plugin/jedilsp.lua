@@ -132,4 +132,3 @@ vim.lsp.config("jedi_language_server", {
 
 vim.lsp.enable("jedi_language_server")
 
-return {}
