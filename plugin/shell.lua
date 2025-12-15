@@ -40,75 +40,94 @@ vim.o.wildmode = "longest:full,full"
 --   end,
 -- })
 
+local function root_dir_length(root_path, file_path)
+  if not root_path or not file_path then
+    return 0
+  end
+  if file_path:sub(1, #root_path) == root_path then
+    return #root_path
+  end
+  return 0
+end
+
+local function find_git_root(path)
+  local git_path = path .. "/.git"
+  if vim.loop.fs_stat(git_path) then
+    return path
+  end
+  local parent = vim.fn.fnamemodify(path, ":h")
+  if parent == path then
+    return nil
+  end
+  return find_git_root(parent)
+end
+
+local function find_lsp_root_dir(file_path)
+  local clients = vim.lsp.get_clients()
+  if not clients then
+    return nil
+  end
+  local buffer_path = vim.fn.expand("%:p")
+  local longest_root_dir = nil
+
+  for _, client in pairs(clients) do
+    if client.name == "null-ls" then
+      goto continue
+    end
+
+    local client_filetypes = client.config.filetypes
+    if client_filetypes and vim.tbl_contains(client_filetypes, vim.bo.filetype) then
+      local root_dir = client.config.root_dir
+      if
+        root_dir
+        and (not longest_root_dir or root_dir_length(root_dir, file_path) > #longest_root_dir)
+      then
+        longest_root_dir = root_dir
+      end
+      local workspace_folders = client.config.workspace_folders
+      if not workspace_folders then
+        goto continue
+      end
+      for _, ws in pairs(workspace_folders) do
+        root_dir = ws["name"]
+        if root_dir and buffer_path:sub(1, #root_dir) == root_dir then
+          if not longest_root_dir or #root_dir > #longest_root_dir then
+            longest_root_dir = root_dir
+          end
+        end
+      end
+    end
+    ::continue::
+  end
+  return longest_root_dir
+end
+
+local function set_path()
+  local file_path = vim.fn.expand("%:p:h")
+  local git_root = find_git_root(file_path)
+  local lsp_root = find_lsp_root_dir(file_path)
+
+  local max_path = root_dir_length(lsp_root, file_path) > root_dir_length(git_root, file_path)
+      and lsp_root
+    or git_root
+
+  -- if lsp_root then
+  --   vim.cmd("silent! lcd " .. lsp_root)
+  -- elseif git_root then
+  --   vim.cmd("silent! lcd " .. git_root)
+  if max_path then
+    vim.cmd("silent! lcd " .. max_path)
+  else
+    vim.cmd("silent! lcd " .. file_path)
+  end
+end
+
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = "*",
   callback = function()
     if vim.bo.buftype ~= "" then
       return
     end
-    local function find_git_root(path)
-      local git_path = path .. "/.git"
-      if vim.loop.fs_stat(git_path) then
-        return path
-      end
-      local parent = vim.fn.fnamemodify(path, ":h")
-      if parent == path then
-        return nil
-      end
-      return find_git_root(parent)
-    end
-
-    local function find_lsp_root_dir()
-      local clients = vim.lsp.get_clients()
-      if not clients then
-        return nil
-      end
-      local buffer_path = vim.fn.expand("%:p")
-      local longest_root_dir = nil
-
-      for _, client in pairs(clients) do
-        if client.name == "null-ls" then
-          goto continue
-        end
-
-        local client_filetypes = client.config.filetypes
-        if client_filetypes and vim.tbl_contains(client_filetypes, vim.bo.filetype) then
-          local root_dir = client.config.root_dir
-          if root_dir and (not longest_root_dir or #root_dir > #longest_root_dir) then
-            longest_root_dir = root_dir
-          end
-          local workspace_folders = client.config.workspace_folders
-          if not workspace_folders then
-            goto continue
-          end
-          for _, ws in pairs(workspace_folders) do
-            root_dir = ws["name"]
-            if root_dir and buffer_path:sub(1, #root_dir) == root_dir then
-              if not longest_root_dir or #root_dir > #longest_root_dir then
-                longest_root_dir = root_dir
-              end
-            end
-          end
-        end
-        ::continue::
-      end
-      return longest_root_dir
-    end
-
-    local function set_path()
-      local file_path = vim.fn.expand("%:p:h")
-      local git_root = find_git_root(file_path)
-      local lsp_root = find_lsp_root_dir()
-
-      if lsp_root then
-        vim.cmd("silent! lcd " .. lsp_root)
-      elseif git_root then
-        vim.cmd("silent! lcd " .. git_root)
-      else
-        vim.cmd("silent! lcd " .. file_path)
-      end
-    end
-
     vim.defer_fn(set_path, 500)
   end,
 })
