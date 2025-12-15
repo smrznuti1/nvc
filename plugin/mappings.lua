@@ -203,7 +203,12 @@ end, {})
 
 -- Workdir
 vim.keymap.set("n", "<leader>b;", ':let @+ = expand("%:p")<cr>', { desc = "Copy Name" })
-vim.keymap.set("n", "<leader>t;", ":tc %:p:h<cr>", { desc = "Change Directory to file path" })
+vim.keymap.set(
+  "n",
+  "<leader>t;",
+  ':let @+ = expand("%:p:h")<cr>',
+  { desc = "Copy Current Buffer Path" }
+)
 vim.keymap.set("n", "<leader>tr", ":tc <C-r>+<cr>", { desc = "Change Directory to file path" })
 vim.keymap.set("n", "<leader>-", ":tc -<cr>:Pwd<cr>", { desc = "Cd -" })
 vim.keymap.set("n", "<C-p>", ":Pwd<cr>", { noremap = false, desc = "Print Working Directory" })
