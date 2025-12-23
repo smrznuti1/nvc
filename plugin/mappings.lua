@@ -209,7 +209,10 @@ vim.keymap.set(
   ':let @+ = expand("%:p:h") .. "/"<cr>',
   { desc = "Copy Current Buffer Path" }
 )
-vim.keymap.set("n", "<leader>tr", ":tc <C-r>+<cr>", { desc = "Change Directory to file path" })
+vim.keymap.set("n", "<leader>tr", function()
+  local path = vim.fn.expand("%:p:h")
+  vim.fn.chdir(path)
+end, { desc = "Change Directory to file path" })
 vim.keymap.set("n", "<leader>-", ":tc -<cr>:Pwd<cr>", { desc = "Cd -" })
 vim.keymap.set("n", "<C-p>", ":Pwd<cr>", { noremap = false, desc = "Print Working Directory" })
 
