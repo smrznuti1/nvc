@@ -340,7 +340,7 @@ vim.keymap.set(
 vim.keymap.set({ "n", "t", "i" }, "<M-b>", "<cmd>OpenDdgr<cr>", { noremap = true, silent = true })
 
 -- Terminal & Navigation
-vim.keymap.set("n", "<leader>T", ":term<cr>", { desc = "Terminal Here" })
+vim.keymap.set("n", "<leader>T", ":term tmux<cr>", { desc = "Terminal Here" })
 vim.keymap.set("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Terminal left window navigation" })
 vim.keymap.set("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Terminal down window navigation" })
 vim.keymap.set("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Terminal up window navigation" })
