@@ -85,7 +85,7 @@ local function executeShellCommand()
       vim.fn.histadd("input", input_processed)
     else
       vim.fn.execute(
-        ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0"
+        ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 tmux"
       )
     end
   end)
