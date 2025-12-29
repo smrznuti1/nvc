@@ -58,6 +58,7 @@ local function executeShellCommand()
       return
     end
     if input ~= "" then
+      input = "tmux new -- " .. input
       local input_processed =
         input:gsub("\\\n", " "):gsub("\n", " "):gsub("%s+", " "):gsub("^%s*(.-)%s*$", "%1")
       local input_args = input_processed:gsub("([^\\])(&)", "%1\\%2")
