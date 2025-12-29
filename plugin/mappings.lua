@@ -58,10 +58,9 @@ local function executeShellCommand()
       return
     end
     if input ~= "" then
-      input = "tmux new -- " .. input
       local input_processed =
         input:gsub("\\\n", " "):gsub("\n", " "):gsub("%s+", " "):gsub("^%s*(.-)%s*$", "%1")
-      local input_args = input_processed:gsub("([^\\])(&)", "%1\\%2")
+      local input_args = "tmux new -- " .. input_processed:gsub("([^\\])(&)", "%1\\%2")
       local escaped_cmd = vim.fn.shellescape(input_args, false)
       local title = "\\ \\ \\ \\ \\ cmd:\\ "
         .. input_processed:sub(1, 100):gsub("[^%w_-]", "_")
