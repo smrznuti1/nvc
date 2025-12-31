@@ -60,14 +60,14 @@ local function executeShellCommand()
     if input ~= "" then
       local input_processed =
         input:gsub("\\\n", " "):gsub("\n", " "):gsub("%s+", " "):gsub("^%s*(.-)%s*$", "%1")
-      local input_args = "tmux new -- " .. input_processed:gsub("([^\\])(&)", "%1\\%2")
+      local input_args = input_processed:gsub("([^\\])(&)", "%1\\%2")
       local escaped_cmd = vim.fn.shellescape(input_args, false)
       local title = "\\ \\ \\ \\ \\ cmd:\\ "
         .. input_processed:sub(1, 100):gsub("[^%w_-]", "_")
         .. "\\ \\ \\ \\ "
       vim.cmd(
         string.format(
-          "FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 --title=%s zsh -ic %s",
+          "FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 --title=%s tmux new -- zsh -ic %s",
           title,
           escaped_cmd
         )
