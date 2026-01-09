@@ -327,7 +327,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.keymap.set({ "n", "i", "t", "v" }, "<M-w>", function()
       vim.fn.execute("bd!")
-      vim.fn.execute("FloatermNext")
+      vim.fn.execute("FloatermPrev")
     end, { buffer = true, desc = "Delete buffer" })
   end,
 })
