@@ -322,6 +322,9 @@ vim.keymap.set(
 vim.keymap.set("n", "[b", "<cmd>BufferLineCyclePrev<CR>", { desc = "Buffer Previous" })
 vim.keymap.set("n", "]b", "<cmd>BufferLineCycleNext<CR>", { desc = "Buffer Next" })
 vim.keymap.set("n", "<leader>Q", ":bd!<cr>", { desc = "Delete buffer" })
+vim.keymap.set({ "n", "i", "t", "v" }, "<M-w>", function()
+  vim.fn.execute("bd!")
+end)
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "floaterm",
   callback = function()
