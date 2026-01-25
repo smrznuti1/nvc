@@ -433,6 +433,7 @@ vim.keymap.set("n", "<leader>gl", function()
 end, { desc = "Git log" })
 
 -- Other
+vim.keymap.set("n", "<C-CR>", "i<cr><Esc>", { desc = "New Line on Cursor" })
 vim.keymap.set("n", "<CR>", "o<Esc>", { desc = "New Line" })
 vim.keymap.set("n", "<S-CR>", "O<Esc>", { desc = "New Line Before" })
 -- vim.keymap.set({ "n", "v", "i" }, "<M-s>", ":Telescope file_browser<CR>")
