@@ -70,7 +70,7 @@ return {
       auto_close_on_accept = true,
       vertical_split = true,
       open_in_current_tab = true,
-      keep_terminal_focus = false,
+      keep_terminal_focus = true,
     },
   },
 }
