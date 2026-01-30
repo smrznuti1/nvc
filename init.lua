@@ -150,7 +150,7 @@ vim.o.splitbelow = true
 --  Notice listchars is set using `vim.opt` instead of `vim.o`.
 --  It is very similar to `vim.o` but offers an interface for conveniently interacting with tables.
 --   See `:help lua-options`
---   and `:help lua-options-guide`
+--   and `:help lua-guide-options`
 vim.o.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
@@ -175,13 +175,23 @@ vim.o.confirm = true
 --  See `:help hlsearch`
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
--- Diagnostic keymaps
-vim.keymap.set(
-  "n",
-  "<leader>ld",
-  vim.diagnostic.setloclist,
-  { desc = "Open diagnostic [Q]uickfix list" }
-)
+-- Diagnostic Config & Keymaps
+-- See :help vim.diagnostic.Opts
+vim.diagnostic.config {
+  update_in_insert = false,
+  severity_sort = true,
+  float = { border = 'rounded', source = 'if_many' },
+  underline = { severity = vim.diagnostic.severity.ERROR },
+
+  -- Can switch between these as you prefer
+  virtual_text = true, -- Text shows up at the end of the line
+  virtual_lines = false, -- Teest shows up underneath the line, with virtual lines
+
+  -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
+  jump = { float = true },
+}
+
+vim.keymap.set('n', '<leader>ld', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -255,8 +265,7 @@ rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  -- "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
-  "NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
+  { "NMAC427/guess-indent.nvim", opts = {} }, -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -312,7 +321,6 @@ require("lazy").setup({
     event = "VimEnter", -- Sets the loading event to 'VimEnter'
     opts = {
       -- delay between pressing a key and opening which-key (milliseconds)
-      -- this setting is independent of vim.o.timeoutlen
       delay = 0,
       icons = {
         -- set icon mappings to true if you have a Nerd Font
@@ -497,7 +505,6 @@ require("lazy").setup({
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
       { "mason-org/mason.nvim", opts = {} },
-      -- { "williamboman/mason.nvim", opts = {} },
       "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
 
@@ -595,19 +602,6 @@ require("lazy").setup({
           --  For example, in C this would take you to the header.
           map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-          -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
-          ---@param client vim.lsp.Client
-          ---@param method vim.lsp.protocol.Method
-          ---@param bufnr? integer some lsp support methods only in specific files
-          ---@return boolean
-          local function client_supports_method(client, method, bufnr)
-            if vim.fn.has("nvim-0.11") == 1 then
-              return client:supports_method(method, bufnr)
-            else
-              return client.supports_method(method, { bufnr = bufnr })
-            end
-          end
-
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
           --    See `:help CursorHold` for information about when this is executed
@@ -616,7 +610,7 @@ require("lazy").setup({
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if
             client
-            and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight)
+            and client:supports_method("textDocument/documentHighlight", event.buf)
           then
             local highlight_augroup =
               vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
@@ -648,41 +642,12 @@ require("lazy").setup({
           -- code, if the language server you are using supports them
           --
           -- This may be unwanted, since they displace some of your code
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+          if client and client:supports_method("textDocument/inlayHint", event.buf) then
             map("<leader>th", function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
             end, "[T]oggle Inlay [H]ints")
           end
         end,
-      })
-
-      -- Diagnostic Config
-      -- See :help vim.diagnostic.Opts
-      vim.diagnostic.config({
-        severity_sort = true,
-        float = { border = "rounded", source = "if_many" },
-        underline = { severity = vim.diagnostic.severity.ERROR },
-        signs = vim.g.have_nerd_font and {
-          text = {
-            [vim.diagnostic.severity.ERROR] = "󰅚 ",
-            [vim.diagnostic.severity.WARN] = "󰀪 ",
-            [vim.diagnostic.severity.INFO] = "󰋽 ",
-            [vim.diagnostic.severity.HINT] = "󰌶 ",
-          },
-        } or {},
-        virtual_text = {
-          source = "if_many",
-          spacing = 2,
-          format = function(diagnostic)
-            local diagnostic_message = {
-              [vim.diagnostic.severity.ERROR] = diagnostic.message,
-              [vim.diagnostic.severity.WARN] = diagnostic.message,
-              [vim.diagnostic.severity.INFO] = diagnostic.message,
-              [vim.diagnostic.severity.HINT] = diagnostic.message,
-            }
-            return diagnostic_message[diagnostic.severity]
-          end,
-        },
       })
 
       -- LSP servers and clients are able to communicate to each other what features they support.
@@ -693,73 +658,18 @@ require("lazy").setup({
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-      --
-      --  Add any additional override configuration in the following tables. Available keys are:
-      --  - cmd (table): Override the default command used to start the server
-      --  - filetypes (table): Override the default list of associated filetypes for the server
-      --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-      --  - settings (table): Override the default settings passed when initializing the server.
-      --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+      --  See `:help lsp-config` for information about keys and how to configure
       local servers = {
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
-        -- pylsp = {
-        --   settings = {
-        --     pylsp = {
-        --       plugins = {
-        --         -- formatter options
-        --         black = { enabled = false },
-        --         autopep8 = { cmd = "autopep8", enabled = true },
-        --         yapf = { enabled = false },
-        --         -- linter options
-        --         pylint = { enabled = false, executable = "pylint" },
-        --         pyflakes = { enabled = false },
-        --         pycodestyle = { enabled = true, maxLineLength = 200 },
-        --         -- type checker
-        --         pylsp_mypy = { enabled = true, live_mode = true, strict = false },
-        --         -- auto-completion options
-        --         jedi_completion = {
-        --           enabled = true,
-        --           fuzzy = true,
-        --           include_params = true,
-        --           include_class_objects = true,
-        --           include_function_objects = true,
-        --           resolve_at_most = 3,
-        --           eager = true,
-        --         },
-        --         -- import sorting
-        --         pyls_isort = { enabled = true },
-        --         rope_autoimport = {
-        --           enabled = false,
-        --           completions = { enabled = true },
-        --           code_actions = { enabled = true },
-        --         },
-        --         rope_completion = {
-        --           enabled = false,
-        --           eager = false,
-        --         },
-        --       },
-        --     },
-        --   },
-        --   flags = {
-        --     debounce_text_changes = 200,
-        --   },
-        --   capabilities = vim.tbl_deep_extend(
-        --     "force",
-        --     vim.lsp.protocol.make_client_capabilities(),
-        --     require("cmp_nvim_lsp").default_capabilities()
-        --   ),
-        --   root_dir = require("lspconfig").util.root_pattern("pyproject.toml", "requirements.txt", ".git"),
-        -- },
 
         lua_ls = {
           -- cmd = { ... },
@@ -784,12 +694,6 @@ require("lazy").setup({
       --    :Mason
       --
       -- You can press `g?` for help in this menu.
-      --
-      -- `mason` had to be setup earlier: to configure its options see the
-      -- `dependencies` table for `nvim-lspconfig` above.
-      --
-      -- You can add other tools here that you want Mason to install
-      -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         "stylua", -- Used to format Lua code
@@ -807,7 +711,6 @@ require("lazy").setup({
               vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
             vim.lsp.config(server_name, { server })
             vim.lsp.enable(server_name)
-            -- require("lspconfig")[server_name].setup(server)
           end,
         },
       })
@@ -1035,9 +938,10 @@ require("lazy").setup({
       end
 
       -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
+      --  Check out: https://github.com/nvim-mini/mini.nvim
     end,
   },
+
   { -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
