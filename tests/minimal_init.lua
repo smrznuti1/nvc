@@ -4,7 +4,7 @@ vim.o.swapfile = false
 vim.bo.swapfile = false
 require("tests.test_util").reset_editor()
 
-local configs = require("nvim-treesitter.configs")
+local configs = require("nvim-treesitter.config")
 configs.setup({
   ensure_installed = { "markdown", "markdown_inline", "lua", "typescript", "html" },
   sync_install = true,
