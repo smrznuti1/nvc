@@ -1,4 +1,4 @@
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { '*' },
+  pattern = { 'yaml' },
   callback = function() vim.treesitter.start() end,
 })
