@@ -206,6 +206,7 @@ end, {})
 
 -- Workdir
 vim.keymap.set("n", "<leader>b;", ':let @+ = expand("%:p")<cr>', { desc = "Copy Name" })
+vim.keymap.set("n", "<leader>bn", ':let @+ = expand("%")<cr>', { desc = "Copy Name" })
 vim.keymap.set(
   "n",
   "<leader>t;",
