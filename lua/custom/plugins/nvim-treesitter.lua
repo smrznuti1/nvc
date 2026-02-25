@@ -184,6 +184,7 @@ return {
             "vim",
             "vimdoc",
             "yaml",
+            "helm"
         }
 
         for _, parser in ipairs(parsers) do
@@ -193,8 +194,7 @@ return {
         -- Not every tree-sitter parser is the same as the file type detected
         -- So the patterns need to be registered more cleverly
         local patterns = {
-            "yaml.helm-values",
-            "helm"
+            "yaml.helm-values"
         }
         for _, parser in ipairs(parsers) do
             local parser_patterns = vim.treesitter.language.get_filetypes(parser)
