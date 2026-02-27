@@ -57,6 +57,7 @@ return {
           FloatermBorder = { fg = colors.text, bg = "none" },
           Cursor = { fg = "#ede874", bg = "#7d5a8c" },
           Visual = { bg = "#5d4f63" },
+          NonText = { fg = "#738599" },
         }
       end,
     }
