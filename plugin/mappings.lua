@@ -22,7 +22,7 @@ function custom_completion(arg_lead, cmd_line, cursor_pos)
   local completions = vim.tbl_extend("keep", file_completions, shellcmd_completions)
 
   completions = vim.tbl_map(function(entry)
-    return entry:gsub("[ ()%%#$]", "\\%0")
+    return entry:gsub("[ %[%]()%%#$]", "\\%0")
   end, completions)
 
   table.remove(words, #words)
