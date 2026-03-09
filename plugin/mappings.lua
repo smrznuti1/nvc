@@ -15,7 +15,7 @@ function completionForRun(arg_lead, cmd_line, cursor_pos)
 end
 
 function custom_completion(arg_lead, cmd_line, cursor_pos)
-  local words = vim.split(cmd_line, "%s+")
+  local words = vim.fn.split(cmd_line, [[\v%(\\@<!)\s+]])
   local last_word = words[#words]
   local file_completions = vim.fn.getcompletion(":e " .. last_word, "cmdline")
   local shellcmd_completions = vim.fn.getcompletion(last_word, "shellcmd")
