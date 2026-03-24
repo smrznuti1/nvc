@@ -1,4 +1,12 @@
 local snacks = require 'custom.plugins.snacks'
+
+local function exit_zen_if_active()
+  local ok, zen = pcall(require, 'snacks.zen')
+  if ok and zen.win and zen.win:valid() then
+    zen.win:close()
+  end
+end
+
 -- Funcs
 function completionForRun(arg_lead, cmd_line, cursor_pos)
   local shellcmd_completions = vim.fn.getcompletion(arg_lead, 'shellcmd')
@@ -42,6 +50,7 @@ function custom_completion(arg_lead, cmd_line, cursor_pos)
 end
 
 local function executeShellCommand()
+  exit_zen_if_active()
   local opts = {
     prompt = 'Command::',
     completion = 'customlist,v:lua.custom_completion',
@@ -145,10 +154,7 @@ _G.change_cwd_to_terminal_path = change_cwd_to_terminal_path
 -- local builtin = require("telescope.builtin")
 -- CMD
 vim.api.nvim_create_user_command('Command', function(input)
-  -- vim.fn.execute(
-  --   ":FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 "
-  --     .. input.args:gsub("\\([ ()%%#$])", "`%1")
-  -- )
+  exit_zen_if_active()
 
   if input.args ~= '' then
     local input_args = input.args:gsub('([^\\])(&)', '%1\\%2')
