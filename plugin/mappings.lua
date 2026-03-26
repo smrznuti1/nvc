@@ -2,9 +2,7 @@ local snacks = require 'custom.plugins.snacks'
 
 local function exit_zen_if_active()
   local ok, zen = pcall(require, 'snacks.zen')
-  if ok and zen.win and zen.win:valid() then
-    zen.win:close()
-  end
+  if ok and zen.win and zen.win:valid() then zen.win:close() end
 end
 
 -- Funcs
@@ -50,7 +48,6 @@ function custom_completion(arg_lead, cmd_line, cursor_pos)
 end
 
 local function executeShellCommand()
-  exit_zen_if_active()
   local opts = {
     prompt = 'Command::',
     completion = 'customlist,v:lua.custom_completion',
@@ -60,9 +57,11 @@ local function executeShellCommand()
   vim.ui.input(opts, function(input)
     local inpt = require 'snacks.input'
     local win = inpt.input(opts, function() end) or nil
-    if win ~= nil then win.destroy(win)       -- vim.api.nvim_win_close(win, true)
-end
+    if win ~= nil then
+      win.destroy(win) -- vim.api.nvim_win_close(win, true)
+    end
     if input == nil then return end
+    exit_zen_if_active()
     if input ~= '' then
       local input_processed =
         input:gsub('\\\n', ' '):gsub('\n', ' '):gsub('%s+', ' '):gsub('^%s*(.-)%s*$', '%1')
