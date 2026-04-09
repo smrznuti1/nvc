@@ -439,3 +439,4 @@ vim.keymap.set('n', '<S-CR>', 'O<Esc>', { desc = 'New Line Before' })
 --     vim.fn.execute("Telescope file_browser", "silent")
 --   end
 -- end)
+vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format() end, { desc = '[F]ormat buffer' })
