@@ -1,53 +1,56 @@
 return {
-  "nvim-neorg/neorg",
+  'nvim-neorg/neorg',
   lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-  version = "*", -- Pin Neorg to the latest stable release
+  version = '*', -- Pin Neorg to the latest stable release
   config = function()
-    require("neorg").setup({
+    require('neorg').setup {
       load = {
-        ["core.defaults"] = {},
-        ["core.concealer"] = {}, -- We added this line!
+        ['core.defaults'] = {},
+        ['core.concealer'] = {}, -- We added this line!
         --
         -- ["core.completion"] = {},
-        ["core.export"] = {},
-        ["core.export.markdown"] = {},
+        ['core.export'] = {},
+        ['core.export.markdown'] = {},
         -- ["core.latex.renderer"] = {},
-        ["core.summary"] = {},
+        ['core.summary'] = {},
         --
-        ["core.text-objects"] = {},
-        ["core.autocommands"] = {},
-        ["core.clipboard"] = {},
-        ["core.dirman.utils"] = {},
-        ["core.fs"] = {},
-        ["core.highlights"] = {},
+        ['core.text-objects'] = {},
+        ['core.autocommands'] = {},
+        ['core.clipboard'] = {},
+        ['core.dirman.utils'] = {},
+        ['core.fs'] = {},
+        ['core.highlights'] = {},
         --
         -- ["core.integrations.nvim-cmp"] = {},
-        ["core.integrations.treesitter"] = {},
-        ["core.neorgcmd"] = {},
-        ["core.neorgcmd.commands.return"] = {},
-        ["core.queries.native"] = {},
-        ["core.scanner"] = {},
-        ["core.storage"] = {},
-        ["core.syntax"] = {},
-        ["core.tempus"] = {},
-        ["core.ui"] = {},
-        ["core.dirman"] = {
+        ['core.integrations.treesitter'] = {},
+        ['core.neorgcmd'] = {},
+        ['core.neorgcmd.commands.return'] = {},
+        ['core.queries.native'] = {},
+        ['core.scanner'] = {},
+        ['core.storage'] = {},
+        ['core.syntax'] = {},
+        ['core.tempus'] = {},
+        ['core.ui'] = {},
+        ['core.dirman'] = {
           config = {
             workspaces = {
-              notes = "~/notes",
+              notes = '~/Documents/notes',
             },
           },
         },
       },
-    })
+    }
     vim.wo.foldlevel = 99
     vim.wo.conceallevel = 2
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "norg",
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'norg',
       callback = function()
-        vim.keymap.set({ "n" }, "<leader>f", function()
-          vim.fn.feedkeys("gg=G``")
-        end, { desc = "Format buffer", buffer = true })
+        vim.keymap.set(
+          { 'n' },
+          '<leader>f',
+          function() vim.fn.feedkeys 'gg=G``' end,
+          { desc = 'Format buffer', buffer = true }
+        )
       end,
     })
     -- vim.api.nvim_create_autocmd("BufWritePre", {
