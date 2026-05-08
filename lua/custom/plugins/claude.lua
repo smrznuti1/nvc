@@ -1,5 +1,5 @@
--- Ensure snacks loaded before claudecode setup so the 'snacks' terminal
--- provider is available (snacks.lua runs full setup later).
+-- Ensure snacks.nvim loaded before claudecode setup so the 'snacks' terminal
+-- provider is available (snacks.lua runs setup later with full opts).
 vim.pack.add { 'https://github.com/folke/snacks.nvim' }
 require 'snacks'
 
@@ -8,6 +8,14 @@ vim.pack.add { 'https://github.com/coder/claudecode.nvim' }
 pcall(function()
   require('which-key').add { { '<leader>a', group = 'AI/Claude Code' } }
 end)
+
+do
+  local orig = vim.notify
+  vim.notify = function(msg, level, opts)
+    if type(msg) == 'string' and msg:find('ECONNRESET', 1, true) then return end
+    return orig(msg, level, opts)
+  end
+end
 
 require('claudecode').setup {
   port_range = { min = 10000, max = 65535 },

@@ -6,18 +6,21 @@ local opts = {
   dashboard = {
     enabled = true,
     preset = {
-      header = [[
-███████ ███    ███ ██████  ████████
-██      ████  ████ ██   ██     ████
-███████ ██ ████ ██ ██████    ████
-     ██ ██  ██  ██ ██   ██ ████
-███████ ██      ██ ██   ██ ████████]],
+      header = table.concat({
+        '███████ ███    ███ ██████  ████████',
+        '██      ████  ████ ██   ██       ██',
+        '███████ ██ ████ ██ ██████    █████ ',
+        '     ██ ██  ██  ██ ██  ██  ███     ',
+        '███████ ██      ██ ██   ██ ████████',
+      }, '\n'),
     },
-    -- Default sections include `startup`, which require lazy.stats from
+    -- Default sections include `startup`, which requires lazy.stats from
     -- lazy.nvim. We use vim.pack, so override sections to skip it.
     sections = {
       { section = 'header' },
       { section = 'keys', gap = 1, padding = 1 },
+      -- { section = 'recent_files', icon = ' ', title = 'Recent Files', indent = 2, padding = 1 },
+      -- { section = 'projects', icon = ' ', title = 'Projects', indent = 2, padding = 1 },
     },
   },
   explorer = { enabled = false },
