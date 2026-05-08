@@ -4,6 +4,15 @@ vim.pack.add { 'https://github.com/folke/snacks.nvim' }
 require 'snacks'
 
 vim.pack.add { 'https://github.com/coder/claudecode.nvim' }
+
+do
+  local orig = vim.notify
+  vim.notify = function(msg, level, opts)
+    if type(msg) == 'string' and msg:find('ECONNRESET', 1, true) then return end
+    return orig(msg, level, opts)
+  end
+end
+
 require('claudecode').setup {
   port_range = { min = 10000, max = 65535 },
   auto_start = true,
