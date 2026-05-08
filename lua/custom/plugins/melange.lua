@@ -1,4 +1,2 @@
-return{
-  "savq/melange-nvim",
-  name = "melange"
-}
+-- melange installed but not active
+vim.pack.add { 'https://github.com/savq/melange-nvim' }
