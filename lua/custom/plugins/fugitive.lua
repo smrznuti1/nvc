@@ -1,7 +1,2 @@
-return {
-  'tpope/vim-fugitive',
-  lazy = false,
-  keys = {
-    { '<leader>gd', '<cmd>Gvdiffsplit!<cr>', desc = 'Split Diff View' },
-  },
-}
+vim.pack.add { 'https://github.com/tpope/vim-fugitive' }
+vim.keymap.set('n', '<leader>gd', '<cmd>Gvdiffsplit!<cr>', { desc = 'Split Diff View' })

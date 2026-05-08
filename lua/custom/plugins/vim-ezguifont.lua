@@ -1,3 +1,1 @@
-return {
-  "mkropat/vim-ezguifont",
-}
+vim.pack.add { 'https://github.com/mkropat/vim-ezguifont' }

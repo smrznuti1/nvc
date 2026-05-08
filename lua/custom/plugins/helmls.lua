@@ -1,15 +1,12 @@
-return {
-  "qvalentin/helm-ls.nvim",
-  ft = "helm",
-  config = function()
-    vim.lsp.config("helm_ls", {
-      settings = {
-        helm_ls = {
-          yamlls = {
-            path = "yaml-language-server",
-          },
-        },
+vim.pack.add { 'https://github.com/qvalentin/helm-ls.nvim' }
+
+vim.lsp.config('helm_ls', {
+  settings = {
+    helm_ls = {
+      yamlls = {
+        path = 'yaml-language-server',
       },
-    })
-  end,
-}
+    },
+  },
+})
+vim.lsp.enable 'helm_ls'

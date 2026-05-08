@@ -1,4 +1,1 @@
-return {
-  -- 'tpope/vim-sleuth',
-  -- config = function() require("vim-sleuth").setup {} end,
-}
+-- vim-sleuth disabled (using guess-indent.nvim)
