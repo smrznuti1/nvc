@@ -197,7 +197,12 @@ do
     },
   }
 
-  vim.keymap.set('n', '<leader>ld', vim.diagnostic.setloclist, { desc = 'Open diagnostic [L]oclist [D]iagnostics' })
+  vim.keymap.set(
+    'n',
+    '<leader>ld',
+    vim.diagnostic.setloclist,
+    { desc = 'Open diagnostic [L]oclist [D]iagnostics' }
+  )
 
   -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
   -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -272,7 +277,9 @@ do
       end
 
       if name == 'LuaSnip' then
-        if vim.fn.has 'win32' ~= 1 and vim.fn.executable 'make' == 1 then run_build(name, { 'make', 'install_jsregexp' }, ev.data.path) end
+        if vim.fn.has 'win32' ~= 1 and vim.fn.executable 'make' == 1 then
+          run_build(name, { 'make', 'install_jsregexp' }, ev.data.path)
+        end
         return
       end
 
@@ -389,7 +396,9 @@ do
     gh 'nvim-telescope/telescope.nvim',
     gh 'nvim-telescope/telescope-ui-select.nvim',
   }
-  if vim.fn.executable 'make' == 1 then table.insert(telescope_plugins, gh 'nvim-telescope/telescope-fzf-native.nvim') end
+  if vim.fn.executable 'make' == 1 then
+    table.insert(telescope_plugins, gh 'nvim-telescope/telescope-fzf-native.nvim')
+  end
 
   vim.pack.add(telescope_plugins)
 
@@ -407,11 +416,21 @@ do
   vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
   vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
   vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-  vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+  vim.keymap.set(
+    { 'n', 'v' },
+    '<leader>sw',
+    builtin.grep_string,
+    { desc = '[S]earch current [W]ord' }
+  )
   vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
   vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
   vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-  vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+  vim.keymap.set(
+    'n',
+    '<leader>s.',
+    builtin.oldfiles,
+    { desc = '[S]earch Recent Files ("." for repeat)' }
+  )
   vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
   vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
@@ -419,21 +438,56 @@ do
     group = vim.api.nvim_create_augroup('telescope-lsp-attach', { clear = true }),
     callback = function(event)
       local buf = event.buf
-      vim.keymap.set('n', 'grr', builtin.lsp_references, { buffer = buf, desc = '[G]oto [R]eferences' })
-      vim.keymap.set('n', 'gri', builtin.lsp_implementations, { buffer = buf, desc = '[G]oto [I]mplementation' })
-      vim.keymap.set('n', 'grd', builtin.lsp_definitions, { buffer = buf, desc = '[G]oto [D]efinition' })
-      vim.keymap.set('n', 'gO', builtin.lsp_document_symbols, { buffer = buf, desc = 'Open Document Symbols' })
-      vim.keymap.set('n', 'gW', builtin.lsp_dynamic_workspace_symbols, { buffer = buf, desc = 'Open Workspace Symbols' })
-      vim.keymap.set('n', 'grt', builtin.lsp_type_definitions, { buffer = buf, desc = '[G]oto [T]ype Definition' })
+      vim.keymap.set(
+        'n',
+        'grr',
+        builtin.lsp_references,
+        { buffer = buf, desc = '[G]oto [R]eferences' }
+      )
+      vim.keymap.set(
+        'n',
+        'gri',
+        builtin.lsp_implementations,
+        { buffer = buf, desc = '[G]oto [I]mplementation' }
+      )
+      vim.keymap.set(
+        'n',
+        'grd',
+        builtin.lsp_definitions,
+        { buffer = buf, desc = '[G]oto [D]efinition' }
+      )
+      vim.keymap.set(
+        'n',
+        'gO',
+        builtin.lsp_document_symbols,
+        { buffer = buf, desc = 'Open Document Symbols' }
+      )
+      vim.keymap.set(
+        'n',
+        'gW',
+        builtin.lsp_dynamic_workspace_symbols,
+        { buffer = buf, desc = 'Open Workspace Symbols' }
+      )
+      vim.keymap.set(
+        'n',
+        'grt',
+        builtin.lsp_type_definitions,
+        { buffer = buf, desc = '[G]oto [T]ype Definition' }
+      )
     end,
   })
 
-  vim.keymap.set('n', '<leader>/', function()
-    builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-      winblend = 10,
-      previewer = false,
-    })
-  end, { desc = '[/] Fuzzily search in current buffer' })
+  vim.keymap.set(
+    'n',
+    '<leader>/',
+    function()
+      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+        winblend = 10,
+        previewer = false,
+      })
+    end,
+    { desc = '[/] Fuzzily search in current buffer' }
+  )
 
   vim.keymap.set(
     'n',
@@ -447,7 +501,12 @@ do
     { desc = '[S]earch [/] in Open Files' }
   )
 
-  vim.keymap.set('n', '<leader>sn', function() builtin.find_files { cwd = vim.fn.stdpath 'config' } end, { desc = '[S]earch [N]eovim files' })
+  vim.keymap.set(
+    'n',
+    '<leader>sn',
+    function() builtin.find_files { cwd = vim.fn.stdpath 'config' } end,
+    { desc = '[S]earch [N]eovim files' }
+  )
 end
 
 -- ============================================================
@@ -487,7 +546,8 @@ do
 
       local client = vim.lsp.get_client_by_id(event.data.client_id)
       if client and client:supports_method('textDocument/documentHighlight', event.buf) then
-        local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
+        local highlight_augroup =
+          vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
           buffer = event.buf,
           group = highlight_augroup,
@@ -510,7 +570,13 @@ do
       end
 
       if client and client:supports_method('textDocument/inlayHint', event.buf) then
-        map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
+        map(
+          '<leader>th',
+          function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
+          end,
+          '[T]oggle Inlay [H]ints'
+        )
       end
     end,
   })
@@ -532,7 +598,12 @@ do
 
         if client.workspace_folders then
           local path = client.workspace_folders[1].name
-          if path ~= vim.fn.stdpath 'config' and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then return end
+          if
+            path ~= vim.fn.stdpath 'config'
+            and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
+          then
+            return
+          end
         end
 
         client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
@@ -593,6 +664,7 @@ do
       local enabled_filetypes = {
         lua = true,
         python = true,
+        cpp = true,
       }
       if enabled_filetypes[vim.bo[bufnr].filetype] then
         return { timeout_ms = 1000, lsp_format = 'fallback' }
@@ -610,7 +682,12 @@ do
     },
   }
 
-  vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format { async = true } end, { desc = '[F]ormat buffer' })
+  vim.keymap.set(
+    { 'n', 'v' },
+    '<leader>f',
+    function() require('conform').format { async = true } end,
+    { desc = '[F]ormat buffer' }
+  )
 end
 
 -- ============================================================
@@ -669,7 +746,19 @@ end
 do
   vim.pack.add { { src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' } }
 
-  local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
+  local parsers = {
+    'bash',
+    'c',
+    'diff',
+    'html',
+    'lua',
+    'luadoc',
+    'markdown',
+    'markdown_inline',
+    'query',
+    'vim',
+    'vimdoc',
+  }
   require('nvim-treesitter').install(parsers)
 
   ---@param buf integer
@@ -695,7 +784,9 @@ do
       if vim.tbl_contains(installed_parsers, language) then
         treesitter_try_attach(buf, language)
       elseif vim.tbl_contains(available_parsers, language) then
-        require('nvim-treesitter').install(language):await(function() treesitter_try_attach(buf, language) end)
+        require('nvim-treesitter')
+          .install(language)
+          :await(function() treesitter_try_attach(buf, language) end)
       else
         treesitter_try_attach(buf, language)
       end
