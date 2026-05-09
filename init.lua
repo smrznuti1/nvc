@@ -661,16 +661,22 @@ do
   require('conform').setup {
     notify_on_error = false,
     format_on_save = function(bufnr)
-      local enabled_filetypes = {
-        lua = true,
-        python = true,
-        cpp = true,
-      }
-      if enabled_filetypes[vim.bo[bufnr].filetype] then
-        return { timeout_ms = 1000, lsp_format = 'fallback' }
-      else
+      local disabled_filetypes = {}
+      if disabled_filetypes[vim.bo[bufnr].filetype] then
         return nil
+      else
+        return { timeout_ms = 1000, lsp_format = 'fallback' }
       end
+      -- local enabled_filetypes = {
+      --   lua = true,
+      --   python = true,
+      --   cpp = true,
+      -- }
+      -- if enabled_filetypes[vim.bo[bufnr].filetype] then
+      --   return { timeout_ms = 1000, lsp_format = 'fallback' }
+      -- else
+      --   return nil
+      -- end
     end,
     default_format_opts = {
       lsp_format = 'fallback',
