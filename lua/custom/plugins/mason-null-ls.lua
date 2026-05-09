@@ -9,7 +9,7 @@ require('mason-null-ls').setup {
     'stylua',
     'jq',
     'fixjson',
-    'lua-language-server',
+    -- 'lua-language-server',
     'texlab',
     'latexindent',
     'actionlint',
