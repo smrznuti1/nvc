@@ -739,7 +739,7 @@ do
 
     snippets = { preset = 'luasnip' },
 
-    fuzzy = { implementation = 'rust' },
+    fuzzy = { implementation = 'lua' },
 
     signature = { enabled = true },
   }
