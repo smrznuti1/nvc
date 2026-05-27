@@ -14,19 +14,19 @@ vim.g.floaterm_autoclose = 0
 vim.keymap.set({ 'n', 't', 'i' }, '<M-l>', function()
   exit_zen_if_active()
   vim.cmd 'FloatermNext'
-  vim.api.nvim_command 'stopinsert'
+  -- vim.api.nvim_command 'stopinsert'
 end, { silent = false, noremap = true })
 
 vim.keymap.set({ 'n', 't', 'i' }, '<M-h>', function()
   exit_zen_if_active()
   vim.cmd 'FloatermPrev'
-  vim.api.nvim_command 'stopinsert'
+  -- vim.api.nvim_command 'stopinsert'
 end, { silent = false, noremap = true })
 
 vim.keymap.set({ 'n', 't', 'i' }, '<M-e>', function()
   exit_zen_if_active()
   vim.cmd 'FloatermToggle'
-  vim.api.nvim_command 'stopinsert'
+  -- vim.api.nvim_command 'stopinsert'
 end, { silent = true, noremap = true })
 
 vim.keymap.set({ 'n', 't', 'i' }, '<M-t>', function()
@@ -34,4 +34,4 @@ vim.keymap.set({ 'n', 't', 'i' }, '<M-t>', function()
   vim.cmd 'FloatermToggle terminal'
 end, { desc = 'Terminal Here' })
 
-vim.fn.execute("hi FloatermBorder guifg=#f5d16e", 'silent')
+vim.fn.execute('hi FloatermBorder guifg=#f5d16e', 'silent')
