@@ -25,7 +25,14 @@ end, { silent = false, noremap = true })
 
 vim.keymap.set({ 'n', 't', 'i' }, '<M-e>', function()
   exit_zen_if_active()
-  vim.cmd 'FloatermToggle'
+  -- vim.cmd 'FloatermToggle'
+  local buf_ft = vim.bo.filetype
+  if buf_ft == 'floaterm' then
+    vim.cmd 'FloatermHide'
+  else
+    vim.cmd 'silent! FloatermShow'
+  end
+
   -- vim.api.nvim_command 'stopinsert'
 end, { silent = true, noremap = true })
 
