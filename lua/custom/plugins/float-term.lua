@@ -31,7 +31,7 @@ vim.keymap.set({ 'n', 't', 'i' }, '<M-e>', function()
     vim.cmd 'FloatermHide'
   else
     local output = vim.fn.execute 'FloatermShow'
-    if output then print '\nEmpty' end
+    if string.find(output, 'No floaterms with the bufnr or name') then print '\nEmpty' end
   end
 
   -- vim.api.nvim_command 'stopinsert'
