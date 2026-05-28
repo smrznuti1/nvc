@@ -308,14 +308,14 @@ vim.keymap.set(
   function() Snacks.picker.lsp_workspace_symbols() end,
   { desc = 'LSP Workspace Symbols' }
 )
-vim.keymap.set('n', '<leader>z', function() Snacks.zen() end, { desc = 'Toggle Zen Mode' })
+vim.keymap.set('n', '<leader>Z', function() Snacks.zen() end, { desc = 'Toggle Zen Mode' })
 vim.keymap.set(
   { 'n', 'i', 't' },
   '<M-z>',
-  function() Snacks.zen() end,
+  function() Snacks.zen.zoom() end,
   { desc = 'Toggle Zen Mode' }
 )
-vim.keymap.set('n', '<leader>Z', function() Snacks.zen.zoom() end, { desc = 'Toggle Zoom' })
+vim.keymap.set('n', '<leader>z', function() Snacks.zen.zoom() end, { desc = 'Toggle Zoom' })
 vim.keymap.set(
   'n',
   '<leader>.',
