@@ -78,7 +78,7 @@ local opts = {
     autowrite = true,
     filekey = {
       cwd = true,
-      branch = false,
+      branch = true,
       count = false,
     },
   },
