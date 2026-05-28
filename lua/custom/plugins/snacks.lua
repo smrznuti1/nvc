@@ -122,7 +122,11 @@ local opts = {
         c_l = {
           '<C-l>',
           function()
-            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-y><tab>', true, false, true), 'i', false)
+            vim.api.nvim_feedkeys(
+              vim.api.nvim_replace_termcodes('<C-y><tab>', true, false, true),
+              'i',
+              false
+            )
           end,
           mode = 'i',
           expr = true,
@@ -148,13 +152,15 @@ local opts = {
             local idx = vim.b[bufnr][key] or 0
 
             if vim.b[bufnr]['input_line'] == nil or idx == 0 then
-              vim.b[bufnr]['input_line'] = vim.api.nvim_buf_get_text(bufnr, 0, 0, -1, -1, {})[1] or ''
+              vim.b[bufnr]['input_line'] = vim.api.nvim_buf_get_text(bufnr, 0, 0, -1, -1, {})[1]
+                or ''
             end
             idx = mod(idx - 1)
             while
               (
                 vim.fn.histget('input', idx) == ''
-                or string.sub(vim.fn.histget('input', idx), 1, #vim.b[bufnr]['input_line']) ~= vim.b[bufnr]['input_line']
+                or string.sub(vim.fn.histget('input', idx), 1, #vim.b[bufnr]['input_line'])
+                  ~= vim.b[bufnr]['input_line']
               ) and idx > 0
             do
               idx = mod(idx - 1)
@@ -185,7 +191,8 @@ local opts = {
             while
               (
                 vim.fn.histget('input', idx) == ''
-                or string.sub(vim.fn.histget('input', idx), 1, #vim.b[bufnr]['input_line']) ~= vim.b[bufnr]['input_line']
+                or string.sub(vim.fn.histget('input', idx), 1, #vim.b[bufnr]['input_line'])
+                  ~= vim.b[bufnr]['input_line']
               ) and idx > 0
             do
               idx = mod(idx + 1)
@@ -211,32 +218,123 @@ local opts = {
 require('snacks').setup(opts)
 
 -- Keymaps
-vim.keymap.set('n', '<leader>sF', function() Snacks.picker.smart() end, { desc = 'Smart Find Files' })
-vim.keymap.set('n', '<leader><leader>', function() Snacks.picker.buffers() end, { desc = 'Buffers' })
+vim.keymap.set(
+  'n',
+  '<leader>sF',
+  function() Snacks.picker.smart() end,
+  { desc = 'Smart Find Files' }
+)
+vim.keymap.set(
+  'n',
+  '<leader><leader>',
+  function() Snacks.picker.buffers() end,
+  { desc = 'Buffers' }
+)
 vim.keymap.set('n', '<leader>sg', function() Snacks.picker.grep() end, { desc = 'Grep' })
-vim.keymap.set('n', '<leader>N', function() Snacks.picker.notifications() end, { desc = 'Notification History' })
-vim.keymap.set('n', '<leader>sn', function() Snacks.picker.files { cwd = vim.fn.stdpath 'config' } end, { desc = 'Find Config File' })
-vim.keymap.set('n', '<leader>sf', function() Snacks.picker.files { hidden = false, ignored = true } end, { desc = 'Find Files' })
+vim.keymap.set(
+  'n',
+  '<leader>N',
+  function() Snacks.picker.notifications() end,
+  { desc = 'Notification History' }
+)
+vim.keymap.set(
+  'n',
+  '<leader>sn',
+  function() Snacks.picker.files { cwd = vim.fn.stdpath 'config' } end,
+  { desc = 'Find Config File' }
+)
+vim.keymap.set(
+  'n',
+  '<leader>sf',
+  function() Snacks.picker.files { hidden = false, ignored = true } end,
+  { desc = 'Find Files' }
+)
 vim.keymap.set('n', '<leader>sp', function() Snacks.picker.projects() end, { desc = 'Projects' })
 vim.keymap.set('n', '<leader>/', function() Snacks.picker.lines() end, { desc = 'Buffer Lines' })
-vim.keymap.set('n', '<leader>sB', function() Snacks.picker.grep_buffers() end, { desc = 'Grep Open Buffers' })
+vim.keymap.set(
+  'n',
+  '<leader>sB',
+  function() Snacks.picker.grep_buffers() end,
+  { desc = 'Grep Open Buffers' }
+)
 vim.keymap.set('n', '<leader>sC', function() Snacks.picker.commands() end, { desc = 'Commands' })
-vim.keymap.set('n', '<leader>sH', function() Snacks.picker.highlights() end, { desc = 'Highlights' })
+vim.keymap.set(
+  'n',
+  '<leader>sH',
+  function() Snacks.picker.highlights() end,
+  { desc = 'Highlights' }
+)
 vim.keymap.set('n', '<leader>sk', function() Snacks.picker.keymaps() end, { desc = 'Keymaps' })
 vim.keymap.set('n', '<leader>su', function() Snacks.picker.undo() end, { desc = 'Undo History' })
-vim.keymap.set('n', 'gd', function() Snacks.picker.lsp_definitions() end, { desc = 'Goto Definition' })
-vim.keymap.set('n', 'gD', function() Snacks.picker.lsp_declarations() end, { desc = 'Goto Declaration' })
-vim.keymap.set('n', 'gr', function() Snacks.picker.lsp_references() end, { nowait = true, desc = 'References' })
-vim.keymap.set('n', 'gI', function() Snacks.picker.lsp_implementations() end, { desc = 'Goto Implementation' })
-vim.keymap.set('n', 'gy', function() Snacks.picker.lsp_type_definitions() end, { desc = 'Goto Type Definition' })
-vim.keymap.set('n', '<leader>ss', function() Snacks.picker.lsp_symbols() end, { desc = 'LSP Symbols' })
-vim.keymap.set('n', '<leader>sS', function() Snacks.picker.lsp_workspace_symbols() end, { desc = 'LSP Workspace Symbols' })
+vim.keymap.set(
+  'n',
+  'gd',
+  function() Snacks.picker.lsp_definitions() end,
+  { desc = 'Goto Definition' }
+)
+vim.keymap.set(
+  'n',
+  'gD',
+  function() Snacks.picker.lsp_declarations() end,
+  { desc = 'Goto Declaration' }
+)
+vim.keymap.set(
+  'n',
+  'gr',
+  function() Snacks.picker.lsp_references() end,
+  { nowait = true, desc = 'References' }
+)
+vim.keymap.set(
+  'n',
+  'gI',
+  function() Snacks.picker.lsp_implementations() end,
+  { desc = 'Goto Implementation' }
+)
+vim.keymap.set(
+  'n',
+  'gy',
+  function() Snacks.picker.lsp_type_definitions() end,
+  { desc = 'Goto Type Definition' }
+)
+vim.keymap.set(
+  'n',
+  '<leader>ss',
+  function() Snacks.picker.lsp_symbols() end,
+  { desc = 'LSP Symbols' }
+)
+vim.keymap.set(
+  'n',
+  '<leader>sS',
+  function() Snacks.picker.lsp_workspace_symbols() end,
+  { desc = 'LSP Workspace Symbols' }
+)
 vim.keymap.set('n', '<leader>z', function() Snacks.zen() end, { desc = 'Toggle Zen Mode' })
+vim.keymap.set(
+  { 'n', 'i', 't' },
+  '<M-z>',
+  function() Snacks.zen() end,
+  { desc = 'Toggle Zen Mode' }
+)
 vim.keymap.set('n', '<leader>Z', function() Snacks.zen.zoom() end, { desc = 'Toggle Zoom' })
-vim.keymap.set('n', '<leader>.', function() Snacks.scratch() end, { desc = 'Toggle Scratch Buffer' })
-vim.keymap.set('n', '<leader>S', function() Snacks.scratch.select() end, { desc = 'Select Scratch Buffer' })
+vim.keymap.set(
+  'n',
+  '<leader>.',
+  function() Snacks.scratch() end,
+  { desc = 'Toggle Scratch Buffer' }
+)
+vim.keymap.set(
+  'n',
+  '<leader>S',
+  function() Snacks.scratch.select() end,
+  { desc = 'Select Scratch Buffer' }
+)
 vim.keymap.set('n', '<leader>bd', function() Snacks.bufdelete() end, { desc = 'Delete Buffer' })
-vim.keymap.set('n', '<leader>cR', function() Snacks.rename.rename_file() end, { desc = 'Rename File' })
+vim.keymap.set(
+  'n',
+  '<leader>cR',
+  function() Snacks.rename.rename_file() end,
+  { desc = 'Rename File' }
+)
 
 -- Init: hook input and add VimEnter setup
 vim.schedule(function()
@@ -266,7 +364,11 @@ vim.api.nvim_create_autocmd('VimEnter', {
   callback = function()
     vim.keymap.set({ 'n', 't', 'i' }, '<M-a>', function()
       local cwd = vim.fn.getcwd()
-      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, false, true), 'i', false)
+      vim.api.nvim_feedkeys(
+        vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, false, true),
+        'i',
+        false
+      )
       Snacks.picker.files { cwd = cwd, focus = 'input', hidden = true, ignored = true }
       pcall(vim.cmd, 'FloatermHide')
     end, { desc = 'Find Files' })
