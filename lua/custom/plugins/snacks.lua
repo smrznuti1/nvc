@@ -310,7 +310,7 @@ vim.keymap.set(
 )
 vim.keymap.set('n', '<leader>Z', function() Snacks.zen() end, { desc = 'Toggle Zen Mode' })
 vim.keymap.set(
-  { 'n', 'i', 't' },
+  { 'n', 'i', 't', 'v' },
   '<M-z>',
   function() Snacks.zen.zoom() end,
   { desc = 'Toggle Zen Mode' }
