@@ -1,9 +1,9 @@
 vim.pack.add { 'https://github.com/voldikss/vim-floaterm' }
 
-local function exit_zen_if_active()
-  local ok, zen = pcall(require, 'snacks.zen')
-  if ok and zen.win and zen.win:valid() then zen.win:close() end
-end
+-- local function exit_zen_if_active()
+--   local ok, zen = pcall(require, 'snacks.zen')
+--   if ok and zen.win and zen.win:valid() then zen.win:close() end
+-- end
 
 vim.g.floaterm_height = 0.5
 vim.g.floaterm_width = 0.8

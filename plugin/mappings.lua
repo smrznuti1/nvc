@@ -1,9 +1,9 @@
 local snacks = require 'custom.plugins.snacks'
 
-local function exit_zen_if_active()
-  local ok, zen = pcall(require, 'snacks.zen')
-  if ok and zen.win and zen.win:valid() then zen.win:close() end
-end
+-- local function exit_zen_if_active()
+--   local ok, zen = pcall(require, 'snacks.zen')
+--   if ok and zen.win and zen.win:valid() then zen.win:close() end
+-- end
 
 -- Funcs
 function completionForRun(arg_lead, cmd_line, cursor_pos)
