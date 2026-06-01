@@ -61,7 +61,7 @@ local function executeShellCommand()
       win.destroy(win) -- vim.api.nvim_win_close(win, true)
     end
     if input == nil then return end
-    exit_zen_if_active()
+    -- exit_zen_if_active()
     if input ~= '' then
       local input_processed =
         input:gsub('\\\n', ' '):gsub('\n', ' '):gsub('%s+', ' '):gsub('^%s*(.-)%s*$', '%1')
@@ -153,7 +153,7 @@ _G.change_cwd_to_terminal_path = change_cwd_to_terminal_path
 -- local builtin = require("telescope.builtin")
 -- CMD
 vim.api.nvim_create_user_command('Command', function(input)
-  exit_zen_if_active()
+  -- exit_zen_if_active()
 
   if input.args ~= '' then
     local input_args = input.args:gsub('([^\\])(&)', '%1\\%2')
