@@ -73,7 +73,7 @@ local opts = {
   scroll = { enabled = false },
   statuscolumn = { enabled = true },
   scratch = {
-    ft = 'norg',
+    ft = 'markdown',
     root = vim.fn.stdpath 'data' .. '/scratch',
     autowrite = true,
     filekey = {
