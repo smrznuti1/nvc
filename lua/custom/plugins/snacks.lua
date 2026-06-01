@@ -100,7 +100,7 @@ local opts = {
       },
       bo = {
         filetype = 'snacks_input',
-        buftype = 'prompt',
+        buftype = 'nofile',
       },
       b = {
         completion = false,
