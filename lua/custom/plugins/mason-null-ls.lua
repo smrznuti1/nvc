@@ -26,7 +26,14 @@ require('mason-null-ls').setup {
     'beautysh',
     'markdownlint',
   },
-  handlers = {},
+  handlers = {
+    markdownlint = function()
+      local nls = require 'null-ls'
+      nls.register(nls.builtins.diagnostics.markdownlint.with {
+        extra_args = { '--config', vim.fn.expand '~/.config/nvim/.markdownlint.yaml' },
+      })
+    end,
+  },
 }
 
 require('mason-lspconfig').setup {

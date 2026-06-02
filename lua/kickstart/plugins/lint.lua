@@ -9,6 +9,9 @@ lint.linters_by_ft = {
   terraform = { 'tflint' },
 }
 
+local markdownlint = lint.linters.markdownlint
+markdownlint.args = { '--config', vim.fn.expand '~/.config/nvim/.markdownlint.yaml' }
+
 -- Disable default linters that would otherwise be enabled.
 lint.linters_by_ft['clojure'] = nil
 lint.linters_by_ft['dockerfile'] = nil
