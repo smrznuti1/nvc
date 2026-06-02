@@ -2,11 +2,14 @@ local snacks = require 'custom.plugins.snacks'
 
 local function exit_zen_if_active()
   local ok, zen = pcall(require, 'snacks.zen')
+  vim.notify(vim.inspect(zen.win.buf))
+  vim.notify(vim.inspect(vim.fn.bufnr()))
   if
     ok
     and zen.win
     and zen.win:valid()
     and vim.api.nvim_buf_get_option(zen.win.buf, 'filetype') == 'floaterm'
+    and vim.fn.bufnr() == zen.win.buf
   then
     zen.win:close()
   end
