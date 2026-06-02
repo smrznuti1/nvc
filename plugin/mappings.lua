@@ -2,8 +2,6 @@ local snacks = require 'custom.plugins.snacks'
 
 local function exit_zen_if_active()
   local ok, zen = pcall(require, 'snacks.zen')
-  vim.notify(vim.inspect(zen.win.buf))
-  vim.notify(vim.inspect(vim.fn.bufnr()))
   if
     ok
     and zen.win
