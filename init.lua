@@ -343,8 +343,6 @@ do
   }
 
   -- [[ Colorscheme ]]
-  -- Active colorscheme is cuddlefish, set in lua/custom/plugins/colorscheme.lua.
-
   -- Highlight todo, notes, etc in comments
   vim.pack.add { gh 'folke/todo-comments.nvim' }
   require('todo-comments').setup { signs = false }
@@ -359,8 +357,6 @@ do
     },
     n_lines = 500,
   }
-
-  -- surround is provided by nvim-surround (see custom/plugins/nvim-surround.lua)
 
   local statusline = require 'mini.statusline'
   statusline.setup { use_icons = vim.g.have_nerd_font }
@@ -382,7 +378,6 @@ end
 -- ============================================================
 -- SECTION 4: SEARCH & NAVIGATION
 -- Picker is provided by snacks.picker (see lua/custom/plugins/snacks.lua).
--- Telescope was removed in favor of snacks.picker.
 -- ============================================================
 
 -- ============================================================
@@ -618,10 +613,6 @@ end
 -- ============================================================
 do
   vim.pack.add { { src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' } }
-
-  -- The parser install list lives in lua/custom/plugins/nvim-treesitter.lua
-  -- (single source of truth). This section only sets up on-demand install +
-  -- attach via the FileType autocmd below.
 
   ---@param buf integer
   ---@param language string
