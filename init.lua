@@ -594,18 +594,13 @@ do
 
     lua_ls = {
       on_init = function(client)
+        -- formatting handled by stylua via conform, not lua_ls
         client.server_capabilities.documentFormattingProvider = false
 
-        if client.workspace_folders then
-          local path = client.workspace_folders[1].name
-          if
-            path ~= vim.fn.stdpath 'config'
-            and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
-          then
-            return
-          end
-        end
-
+        -- NOTE: workspace.library is intentionally NOT set here. lazydev.nvim
+        -- loads the neovim runtime + plugin types lazily (only modules you
+        -- require), which is far faster than indexing the whole runtime via
+        -- nvim_get_runtime_file('', true).
         client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
           runtime = {
             version = 'LuaJIT',
@@ -613,10 +608,6 @@ do
           },
           workspace = {
             checkThirdParty = false,
-            library = vim.tbl_extend('force', vim.api.nvim_get_runtime_file('', true), {
-              '${3rd}/luv/library',
-              '${3rd}/busted/library',
-            }),
           },
         })
       end,
