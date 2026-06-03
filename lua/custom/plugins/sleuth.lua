@@ -1,1 +1,0 @@
--- vim-sleuth disabled (using guess-indent.nvim)

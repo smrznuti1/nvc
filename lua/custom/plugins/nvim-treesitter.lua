@@ -4,6 +4,7 @@
 local ts = require 'nvim-treesitter'
 local parsers = {
   'bash',
+  'c',
   'comment',
   'css',
   'diff',
@@ -24,10 +25,12 @@ local parsers = {
   'json',
   'json5',
   'lua',
+  'luadoc',
   'make',
   'markdown',
   'markdown_inline',
   'python',
+  'query',
   'regex',
   'rst',
   'rust',

@@ -1,1 +1,0 @@
--- alpha-nvim disabled (using snacks.dashboard instead)

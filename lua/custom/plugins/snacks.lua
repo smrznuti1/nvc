@@ -218,6 +218,9 @@ local opts = {
 
 require('snacks').setup(opts)
 
+-- Back vim.ui.select with snacks.picker (replaces telescope-ui-select).
+vim.ui.select = function(...) return Snacks.picker.select(...) end
+
 -- Keymaps
 vim.keymap.set(
   'n',
@@ -267,6 +270,27 @@ vim.keymap.set(
 )
 vim.keymap.set('n', '<leader>sk', function() Snacks.picker.keymaps() end, { desc = 'Keymaps' })
 vim.keymap.set('n', '<leader>su', function() Snacks.picker.undo() end, { desc = 'Undo History' })
+-- Ported from the removed telescope setup:
+vim.keymap.set('n', '<leader>sh', function() Snacks.picker.help() end, { desc = 'Help Pages' })
+vim.keymap.set('n', '<leader>sr', function() Snacks.picker.resume() end, { desc = 'Resume Picker' })
+vim.keymap.set(
+  'n',
+  '<leader>sd',
+  function() Snacks.picker.diagnostics() end,
+  { desc = 'Diagnostics' }
+)
+vim.keymap.set(
+  { 'n', 'v' },
+  '<leader>sw',
+  function() Snacks.picker.grep_word() end,
+  { desc = 'Grep Word/Selection' }
+)
+vim.keymap.set(
+  'n',
+  '<leader>s.',
+  function() Snacks.picker.recent() end,
+  { desc = 'Recent Files' }
+)
 vim.keymap.set(
   'n',
   'gd',

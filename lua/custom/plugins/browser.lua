@@ -1,1 +1,0 @@
--- browse.nvim disabled

@@ -108,6 +108,7 @@ do
 
   -- Make line numbers default
   vim.o.number = true
+
   -- You can also add relative line numbers, to help with jumping.
   vim.o.relativenumber = true
 
@@ -342,14 +343,7 @@ do
   }
 
   -- [[ Colorscheme ]]
-  vim.pack.add { gh 'folke/tokyonight.nvim' }
-  ---@diagnostic disable-next-line: missing-fields
-  require('tokyonight').setup {
-    styles = {
-      comments = { italic = false },
-    },
-  }
-  vim.cmd.colorscheme 'tokyonight-night'
+  -- Active colorscheme is cuddlefish, set in lua/custom/plugins/colorscheme.lua.
 
   -- Highlight todo, notes, etc in comments
   vim.pack.add { gh 'folke/todo-comments.nvim' }
@@ -366,7 +360,7 @@ do
     n_lines = 500,
   }
 
-  require('mini.surround').setup()
+  -- surround is provided by nvim-surround (see custom/plugins/nvim-surround.lua)
 
   local statusline = require 'mini.statusline'
   statusline.setup { use_icons = vim.g.have_nerd_font }
@@ -387,127 +381,9 @@ end
 
 -- ============================================================
 -- SECTION 4: SEARCH & NAVIGATION
--- Telescope setup, keymaps, LSP picker mappings
+-- Picker is provided by snacks.picker (see lua/custom/plugins/snacks.lua).
+-- Telescope was removed in favor of snacks.picker.
 -- ============================================================
-do
-  ---@type (string|vim.pack.Spec)[]
-  local telescope_plugins = {
-    gh 'nvim-lua/plenary.nvim',
-    gh 'nvim-telescope/telescope.nvim',
-    gh 'nvim-telescope/telescope-ui-select.nvim',
-  }
-  if vim.fn.executable 'make' == 1 then
-    table.insert(telescope_plugins, gh 'nvim-telescope/telescope-fzf-native.nvim')
-  end
-
-  vim.pack.add(telescope_plugins)
-
-  require('telescope').setup {
-    extensions = {
-      ['ui-select'] = { require('telescope.themes').get_dropdown() },
-    },
-  }
-
-  pcall(require('telescope').load_extension, 'fzf')
-  pcall(require('telescope').load_extension, 'ui-select')
-
-  local builtin = require 'telescope.builtin'
-  vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-  vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-  vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-  vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-  vim.keymap.set(
-    { 'n', 'v' },
-    '<leader>sw',
-    builtin.grep_string,
-    { desc = '[S]earch current [W]ord' }
-  )
-  vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-  vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-  vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-  vim.keymap.set(
-    'n',
-    '<leader>s.',
-    builtin.oldfiles,
-    { desc = '[S]earch Recent Files ("." for repeat)' }
-  )
-  vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
-  vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-
-  vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('telescope-lsp-attach', { clear = true }),
-    callback = function(event)
-      local buf = event.buf
-      vim.keymap.set(
-        'n',
-        'grr',
-        builtin.lsp_references,
-        { buffer = buf, desc = '[G]oto [R]eferences' }
-      )
-      vim.keymap.set(
-        'n',
-        'gri',
-        builtin.lsp_implementations,
-        { buffer = buf, desc = '[G]oto [I]mplementation' }
-      )
-      vim.keymap.set(
-        'n',
-        'grd',
-        builtin.lsp_definitions,
-        { buffer = buf, desc = '[G]oto [D]efinition' }
-      )
-      vim.keymap.set(
-        'n',
-        'gO',
-        builtin.lsp_document_symbols,
-        { buffer = buf, desc = 'Open Document Symbols' }
-      )
-      vim.keymap.set(
-        'n',
-        'gW',
-        builtin.lsp_dynamic_workspace_symbols,
-        { buffer = buf, desc = 'Open Workspace Symbols' }
-      )
-      vim.keymap.set(
-        'n',
-        'grt',
-        builtin.lsp_type_definitions,
-        { buffer = buf, desc = '[G]oto [T]ype Definition' }
-      )
-    end,
-  })
-
-  vim.keymap.set(
-    'n',
-    '<leader>/',
-    function()
-      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-        winblend = 10,
-        previewer = false,
-      })
-    end,
-    { desc = '[/] Fuzzily search in current buffer' }
-  )
-
-  vim.keymap.set(
-    'n',
-    '<leader>s/',
-    function()
-      builtin.live_grep {
-        grep_open_files = true,
-        prompt_title = 'Live Grep in Open Files',
-      }
-    end,
-    { desc = '[S]earch [/] in Open Files' }
-  )
-
-  vim.keymap.set(
-    'n',
-    '<leader>sn',
-    function() builtin.find_files { cwd = vim.fn.stdpath 'config' } end,
-    { desc = '[S]earch [N]eovim files' }
-  )
-end
 
 -- ============================================================
 -- SECTION 5: LSP
@@ -743,20 +619,9 @@ end
 do
   vim.pack.add { { src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' } }
 
-  local parsers = {
-    'bash',
-    'c',
-    'diff',
-    'html',
-    'lua',
-    'luadoc',
-    'markdown',
-    'markdown_inline',
-    'query',
-    'vim',
-    'vimdoc',
-  }
-  require('nvim-treesitter').install(parsers)
+  -- The parser install list lives in lua/custom/plugins/nvim-treesitter.lua
+  -- (single source of truth). This section only sets up on-demand install +
+  -- attach via the FileType autocmd below.
 
   ---@param buf integer
   ---@param language string
