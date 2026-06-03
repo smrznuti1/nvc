@@ -130,5 +130,10 @@ vim.lsp.config("jedi_language_server", {
   -- root_dir = lspconfig.util.root_pattern("pyproject.toml", "requirements.txt", ".git"),
 })
 
+if not vim.env.VIRTUAL_ENV then
+  vim.env.VIRTUAL_ENV = vim.env.HOME .. "/.local/share/venvs/default-user"
+  vim.env.PATH = vim.env.VIRTUAL_ENV .. "/bin:" .. vim.env.PATH
+end
+
 vim.lsp.enable("jedi_language_server")
 
