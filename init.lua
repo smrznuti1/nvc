@@ -199,7 +199,7 @@ do
 
   vim.keymap.set(
     'n',
-    '<leader>ld',
+    '<leader>lD',
     vim.diagnostic.setloclist,
     { desc = 'Open diagnostic [L]oclist [D]iagnostics' }
   )
