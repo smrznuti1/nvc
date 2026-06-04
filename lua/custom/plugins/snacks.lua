@@ -285,12 +285,7 @@ vim.keymap.set(
   function() Snacks.picker.grep_word() end,
   { desc = 'Grep Word/Selection' }
 )
-vim.keymap.set(
-  'n',
-  '<leader>s.',
-  function() Snacks.picker.recent() end,
-  { desc = 'Recent Files' }
-)
+vim.keymap.set('n', '<leader>s.', function() Snacks.picker.recent() end, { desc = 'Recent Files' })
 vim.keymap.set(
   'n',
   'gd',
@@ -385,20 +380,20 @@ vim.schedule(function()
   end
 end)
 
-vim.api.nvim_create_autocmd('VimEnter', {
-  callback = function()
-    vim.keymap.set({ 'n', 't', 'i' }, '<M-a>', function()
-      local cwd = vim.fn.getcwd()
-      vim.api.nvim_feedkeys(
-        vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, false, true),
-        'i',
-        false
-      )
-      Snacks.picker.files { cwd = cwd, focus = 'input', hidden = true, ignored = true }
-      pcall(vim.cmd, 'FloatermHide')
-    end, { desc = 'Find Files' })
-    _G.dd = function(...) Snacks.debug.inspect(...) end
-    _G.bt = function() Snacks.debug.backtrace() end
-    vim.print = _G.dd
-  end,
-})
+-- vim.api.nvim_create_autocmd('VimEnter', {
+--   callback = function()
+--     vim.keymap.set({ 'n', 't', 'i' }, '<M-a>', function()
+--       local cwd = vim.fn.getcwd()
+--       vim.api.nvim_feedkeys(
+--         vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, false, true),
+--         'i',
+--         false
+--       )
+--       Snacks.picker.files { cwd = cwd, focus = 'input', hidden = true, ignored = true }
+--       pcall(vim.cmd, 'FloatermHide')
+--     end, { desc = 'Find Files' })
+--     _G.dd = function(...) Snacks.debug.inspect(...) end
+--     _G.bt = function() Snacks.debug.backtrace() end
+--     vim.print = _G.dd
+--   end,
+-- })

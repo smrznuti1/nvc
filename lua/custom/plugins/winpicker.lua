@@ -4,4 +4,4 @@ vim.pack.add {
 
 local winpicker = require 'nvim-window'
 
-vim.keymap.set('n', '<leader>wj', function() winpicker.pick() end, { noremap = true })
+vim.keymap.set({ 'n', 't', 'i' }, '<M-a>', function() winpicker.pick() end, { noremap = true })
