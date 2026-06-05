@@ -75,7 +75,7 @@ local function executeShellCommand()
       local input_args = input_processed:gsub('([^\\])(&)', '%1\\%2')
       local escaped_cmd = vim.fn.shellescape(input_args, false)
       local title = '\\ \\ \\ \\ \\ cmd:\\ '
-        .. input_processed:sub(1, 100):gsub('[^%w_-]', '_')
+        .. input_processed:sub(1, 100):gsub('[^%w_-]', '_'):sub(0, 50)
         .. '\\ \\ \\ \\ '
       vim.schedule(
         function()
