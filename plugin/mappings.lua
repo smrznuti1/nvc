@@ -449,3 +449,4 @@ vim.keymap.set('n', '<S-CR>', 'O<Esc>', { desc = 'New Line Before' })
 --   end
 -- end)
 vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format() end, { desc = '[F]ormat buffer' })
+vim.keymap.set({ 'n', 'v', 't', 'i' }, '<C-z>', function() end, { desc = 'Catch Ctrl Z in neovim' })
