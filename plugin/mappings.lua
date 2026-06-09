@@ -6,7 +6,7 @@ local function exit_zen_if_active()
     ok
     and zen.win
     and zen.win:valid()
-    and vim.api.nvim_buf_get_option(zen.win.buf, 'filetype') == 'floaterm'
+    and vim.api.nvim_get_option_value('filetype', { buf = zen.win.buf }) == 'floaterm'
     and vim.fn.bufnr() == zen.win.buf
   then
     zen.win:close()
