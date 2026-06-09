@@ -98,7 +98,7 @@ local function executeShellCommand()
       --     .. " ; exit"
       -- )
       -- execute_command is a simple script containing only zsh -i -c $@
-      vim.fn.histadd('input', input)
+      vim.fn.histadd('debug', input)
     else
       vim.fn.execute ':FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 tmux'
     end

@@ -141,7 +141,7 @@ local opts = {
           '<up>',
           function()
             local mod = function(x)
-              local y = vim.fn.histnr 'input' + 1
+              local y = vim.fn.histnr 'debug' + 1
               while x < 0 do
                 x = x + y
               end
@@ -159,8 +159,8 @@ local opts = {
             idx = mod(idx - 1)
             while
               (
-                vim.fn.histget('input', idx) == ''
-                or string.sub(vim.fn.histget('input', idx), 1, #vim.b[bufnr]['input_line'])
+                vim.fn.histget('debug', idx) == ''
+                or string.sub(vim.fn.histget('debug', idx), 1, #vim.b[bufnr]['input_line'])
                   ~= vim.b[bufnr]['input_line']
               ) and idx > 0
             do
@@ -168,7 +168,7 @@ local opts = {
             end
             vim.b[bufnr][key] = idx
 
-            local text = vim.fn.histget('input', idx)
+            local text = vim.fn.histget('debug', idx)
             if idx == 0 then text = vim.b[bufnr]['input_line'] end
             text = text or ''
             local lines = vim.split(text, '\n', { plain = true })
@@ -181,7 +181,7 @@ local opts = {
           '<down>',
           function()
             local mod = function(x)
-              local y = vim.fn.histnr 'input' + 1
+              local y = vim.fn.histnr 'debug' + 1
               if x <= 1 then return 0 end
               return math.fmod(x, y)
             end
@@ -192,15 +192,15 @@ local opts = {
             idx = mod(idx + 1)
             while
               (
-                vim.fn.histget('input', idx) == ''
-                or string.sub(vim.fn.histget('input', idx), 1, #vim.b[bufnr]['input_line'])
+                vim.fn.histget('debug', idx) == ''
+                or string.sub(vim.fn.histget('debug', idx), 1, #vim.b[bufnr]['input_line'])
                   ~= vim.b[bufnr]['input_line']
               ) and idx > 0
             do
               idx = mod(idx + 1)
             end
             vim.b[bufnr][key] = idx
-            local text = vim.fn.histget('input', idx)
+            local text = vim.fn.histget('debug', idx)
             if idx == 0 then text = vim.b[bufnr]['input_line'] end
             text = text or ''
             local lines = vim.split(text, '\n', { plain = true })
