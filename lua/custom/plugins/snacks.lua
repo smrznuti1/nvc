@@ -171,8 +171,9 @@ local opts = {
             local text = vim.fn.histget('input', idx)
             if idx == 0 then text = vim.b[bufnr]['input_line'] end
             text = text or ''
-            vim.api.nvim_buf_set_lines(0, 0, -1, false, { text })
-            vim.api.nvim_win_set_cursor(0, { 1, #text })
+            local lines = vim.split(text, '\n', { plain = true })
+            vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+            vim.api.nvim_win_set_cursor(0, { #lines, #lines[#lines] })
           end,
           mode = { 'i', 'n' },
         },
@@ -202,8 +203,9 @@ local opts = {
             local text = vim.fn.histget('input', idx)
             if idx == 0 then text = vim.b[bufnr]['input_line'] end
             text = text or ''
-            vim.api.nvim_buf_set_lines(0, 0, -1, false, { text })
-            vim.api.nvim_win_set_cursor(0, { 1, #text })
+            local lines = vim.split(text, '\n', { plain = true })
+            vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+            vim.api.nvim_win_set_cursor(0, { #lines, #lines[#lines] })
           end,
           mode = { 'i', 'n' },
         },
