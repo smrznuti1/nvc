@@ -47,7 +47,7 @@ require('claudecode').setup {
   },
 
   diff_opts = {
-    auto_close_on_accept = true,
+    auto_close_on_accept = false,
     vertical_split = true,
     open_in_new_tab = true,
     keep_terminal_focus = true,
