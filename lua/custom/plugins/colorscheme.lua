@@ -27,6 +27,7 @@ local configuration = {
       Visual = { bg = '#5d4f63' },
       NonText = { fg = '#738599' },
       DiffText = { fg = '#fc19e1' },
+      TabLine = { fg = 'Orange' },
     }
   end,
 }
