@@ -337,7 +337,9 @@ vim.keymap.set('n', '<leader>Q', ':bd!<cr>', { desc = 'Delete buffer' })
 vim.keymap.set({ 'n', 'i', 't', 'v' }, '<M-w>', function()
   local filetype = vim.bo.filetype
   exit_zen_if_active()
+  local win_id = vim.api.nvim_get_current_win()
   vim.fn.execute 'bd!'
+  if win_id == vim.api.nvim_get_current_win() then vim.fn.execute 'q!' end
   if filetype == 'floaterm' then vim.fn.execute 'FloatermPrev' end
 end, { noremap = true })
 vim.keymap.set('n', '<leader>D', ':!ri -Force%<cr>', { noremap = true, desc = 'Delete Item' })
