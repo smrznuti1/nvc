@@ -101,7 +101,7 @@ local opts = {
       },
       bo = {
         filetype = 'snacks_input',
-        buftype = 'nofile',
+        buftype = 'nowrite',
       },
       b = {
         completion = false,
