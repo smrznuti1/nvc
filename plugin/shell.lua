@@ -1,4 +1,4 @@
-vim.opt.shell = "zsh"
+vim.opt.shell = 'zsh'
 -- vim.opt.shell = "pwsh"
 -- vim.opt.shellcmdflag =
 --   "-NoProfile -NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;"
@@ -7,29 +7,31 @@ vim.opt.shell = "zsh"
 -- vim.opt.shellquote = ""
 -- vim.opt.shellxquote = ""
 
-vim.api.nvim_create_user_command("Pterm", "term pwsh", {})
-vim.api.nvim_create_user_command("PT", "term pwsh", {})
-vim.api.nvim_create_user_command("Uterm", "term wsl.exe", {})
-vim.api.nvim_create_user_command("UT", "term wsl.exe", {})
+vim.api.nvim_create_user_command('Pterm', 'term pwsh', {})
+vim.api.nvim_create_user_command('PT', 'term pwsh', {})
+vim.api.nvim_create_user_command('Uterm', 'term wsl.exe', {})
+vim.api.nvim_create_user_command('UT', 'term wsl.exe', {})
 -- vim.api.nvim_create_user_command("BDAll", "%bd! | e#", {})
-vim.api.nvim_create_user_command("BDAll", function()
-  require("snacks").bufdelete.other()
-end, { force = true })
-vim.api.nvim_create_user_command("NT", "bd! % | term", {})
-vim.api.nvim_create_user_command("NUT", "bd! % | Uterm", {})
-vim.api.nvim_create_user_command("WW", "w !sudo tee %", {})
-vim.api.nvim_create_user_command("WA", "noautocmd w", {})
 vim.api.nvim_create_user_command(
-  "Clear",
+  'BDAll',
+  function() require('snacks').bufdelete.other() end,
+  { force = true }
+)
+vim.api.nvim_create_user_command('NT', 'bd! % | term', {})
+vim.api.nvim_create_user_command('NUT', 'bd! % | Uterm', {})
+vim.api.nvim_create_user_command('WW', 'w !sudo tee %', {})
+vim.api.nvim_create_user_command('WA', 'noautocmd w', {})
+vim.api.nvim_create_user_command(
+  'Clear',
   ":bufdo if expand('%:p') !~ 'term:' | bdelete | endif",
   {}
 )
 
-vim.opt.foldmethod = "indent"
+vim.opt.foldmethod = 'indent'
 vim.opt.foldlevelstart = 99
 vim.opt.number = true
 vim.o.wildmenu = true
-vim.o.wildmode = "longest:full,full"
+vim.o.wildmode = 'longest:full,full'
 
 -- vim.opt.autochdir = true
 
@@ -41,39 +43,27 @@ vim.o.wildmode = "longest:full,full"
 -- })
 
 local function root_dir_length(root_path, file_path)
-  if not root_path or not file_path then
-    return 0
-  end
-  if file_path:sub(1, #root_path) == root_path then
-    return #root_path
-  end
+  if not root_path or not file_path then return 0 end
+  if file_path:sub(1, #root_path) == root_path then return #root_path end
   return 0
 end
 
 local function find_git_root(path)
-  local git_path = path .. "/.git"
-  if vim.loop.fs_stat(git_path) then
-    return path
-  end
-  local parent = vim.fn.fnamemodify(path, ":h")
-  if parent == path then
-    return nil
-  end
+  local git_path = path .. '/.git'
+  if vim.loop.fs_stat(git_path) then return path end
+  local parent = vim.fn.fnamemodify(path, ':h')
+  if parent == path then return nil end
   return find_git_root(parent)
 end
 
 local function find_lsp_root_dir(file_path)
   local clients = vim.lsp.get_clients()
-  if not clients then
-    return nil
-  end
-  local buffer_path = vim.fn.expand("%:p")
+  if not clients then return nil end
+  local buffer_path = vim.fn.expand '%:p'
   local longest_root_dir = nil
 
   for _, client in pairs(clients) do
-    if client.name == "null-ls" then
-      goto continue
-    end
+    if client.name == 'null-ls' then goto continue end
 
     local client_filetypes = client.config.filetypes
     if client_filetypes and vim.tbl_contains(client_filetypes, vim.bo.filetype) then
@@ -85,11 +75,9 @@ local function find_lsp_root_dir(file_path)
         longest_root_dir = root_dir
       end
       local workspace_folders = client.config.workspace_folders
-      if not workspace_folders then
-        goto continue
-      end
+      if not workspace_folders then goto continue end
       for _, ws in pairs(workspace_folders) do
-        root_dir = ws["name"]
+        root_dir = ws['name']
         if root_dir and buffer_path:sub(1, #root_dir) == root_dir then
           if not longest_root_dir or #root_dir > #longest_root_dir then
             longest_root_dir = root_dir
@@ -103,7 +91,7 @@ local function find_lsp_root_dir(file_path)
 end
 
 local function set_path()
-  local file_path = vim.fn.expand("%:p:h")
+  local file_path = vim.fn.expand '%:p:h'
   local git_root = find_git_root(file_path)
   local lsp_root = find_lsp_root_dir(file_path)
 
@@ -116,26 +104,26 @@ local function set_path()
   -- elseif git_root then
   --   vim.cmd("silent! lcd " .. git_root)
   if max_path then
-    vim.cmd("silent! lcd " .. max_path)
+    vim.cmd('silent! lcd ' .. max_path)
   else
-    vim.cmd("silent! lcd " .. file_path)
+    vim.cmd('silent! lcd ' .. file_path)
   end
 end
 
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = "*",
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = '*',
   callback = function()
-    if vim.bo.buftype ~= "" then
-      return
-    end
+    if vim.bo.buftype ~= '' then return end
     vim.defer_fn(set_path, 500)
   end,
 })
 
-vim.opt.shortmess = vim.opt.shortmess + "A"
+vim.opt.shortmess = vim.opt.shortmess + 'A'
 
-vim.cmd("set expandtab")
+vim.cmd 'set expandtab'
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.o.cmdheight = 0
+vim.o.sidescroll = 8
+vim.o.sidescrolloff = 12

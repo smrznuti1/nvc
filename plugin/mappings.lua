@@ -398,44 +398,21 @@ vim.api.nvim_set_keymap('n', '<S-n>', '<S-n>:set hlsearch<CR>', { noremap = true
 vim.api.nvim_set_keymap('n', '#', '#:set hlsearch<CR>', { noremap = true, silent = true })
 
 -- Git
-vim.keymap.set({ 'n', 'i', 't' }, '<M-g>', ':G ', { noremap = true })
-vim.keymap.set('n', '<leader>gb', ':G branch<cr>', { desc = 'Git branch' })
-vim.keymap.set('n', '<leader>gB', ':G branch -a <cr>', { desc = 'Git branch all' })
-vim.keymap.set('n', '<leader>gp', ':G pull<cr>', { desc = 'Git pull' })
-vim.keymap.set('n', '<leader>gP', ':G push<cr>', { desc = 'Git push' })
-vim.keymap.set('n', '<leader>gF', ':G push --force<cr>', { desc = 'Git push force' })
-vim.keymap.set('n', '<leader>gf', ':G fetch<cr>', { desc = 'Git fetch' })
-vim.keymap.set('n', '<leader>gA', ':G add -A<cr>', { desc = 'Git stage all' })
-vim.keymap.set('n', '<leader>ga', ':G add %<cr>', { desc = 'Git stage current' })
--- vim.keymap.set('n', '<leader>gc', ':G commit -m ', { desc = 'Git commit' })
-vim.keymap.set('n', '<leader>gs', ':G<cr>', { desc = 'Git status' })
--- vim.keymap.set('n', '<leader>gk', ':G checkout ', { desc = 'Git checkout' })
-
-vim.keymap.set('n', '<leader>gk', function()
-  local checkout_destination = vim.fn.input 'Checkout Destination: '
-  vim.cmd('G checkout ' .. checkout_destination)
-end, { desc = 'Git checkout' })
-
-vim.keymap.set('n', '<leader>gc', function()
-  local commit_message = vim.fn.input 'Commit message: '
-  vim.cmd('G commit -m "' .. commit_message .. '"')
-end, { desc = 'Git commit' })
-
-vim.keymap.set('n', '<leader>gl', function()
-  local number_of_commits = vim.fn.input 'Number of commits: '
-  local cmd =
-    "G log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
-  if number_of_commits == '' then
-    vim.cmd(cmd)
-  else
-    vim.cmd(cmd .. ' -n "' .. number_of_commits .. '"')
-  end
-  -- vim.cmd(
-  --   "G log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative -n '"
-  --     .. number_of_commits
-  --     .. "'"
-  -- )
-end, { desc = 'Git log' })
+vim.keymap.set({ 'n', 'i', 't' }, '<M-g>', ':!git ', { noremap = true })
+vim.keymap.set('n', '<leader>gb', function() require('neogit').open { 'branch' } end, { desc = 'Git branch' })
+vim.keymap.set('n', '<leader>gB', function() require('neogit').open { 'branch' } end, { desc = 'Git branch all' })
+vim.keymap.set('n', '<leader>gp', function() require('neogit').open { 'pull' } end, { desc = 'Git pull' })
+vim.keymap.set('n', '<leader>gP', function() require('neogit').open { 'push' } end, { desc = 'Git push' })
+vim.keymap.set('n', '<leader>gF', '<cmd>!git push --force-with-lease<cr>', { desc = 'Git push force' })
+vim.keymap.set('n', '<leader>gf', function() require('neogit').open { 'fetch' } end, { desc = 'Git fetch' })
+vim.keymap.set('n', '<leader>gA', '<cmd>!git add -A<cr>', { desc = 'Git stage all' })
+vim.keymap.set('n', '<leader>ga', '<cmd>!git add %<cr>', { desc = 'Git stage current' })
+vim.keymap.set('n', '<leader>gs', '<cmd>Neogit<cr>', { desc = 'Git status' })
+vim.keymap.set('n', '<leader>gg', '<cmd>Neogit<cr>', { desc = 'Show Neogit UI' })
+vim.keymap.set('n', '<leader>gd', function() require('neogit').open { 'diff' } end, { desc = 'Git diff' })
+vim.keymap.set('n', '<leader>gk', function() require('neogit').open { 'branch' } end, { desc = 'Git checkout' })
+vim.keymap.set('n', '<leader>gc', function() require('neogit').open { 'commit' } end, { desc = 'Git commit' })
+vim.keymap.set('n', '<leader>gl', function() require('neogit').open { 'log' } end, { desc = 'Git log' })
 
 -- Other
 vim.keymap.set('n', '<C-CR>', 'i<cr><Esc>', { desc = 'New Line on Cursor' })
