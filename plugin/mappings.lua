@@ -398,21 +398,26 @@ vim.api.nvim_set_keymap('n', '<S-n>', '<S-n>:set hlsearch<CR>', { noremap = true
 vim.api.nvim_set_keymap('n', '#', '#:set hlsearch<CR>', { noremap = true, silent = true })
 
 -- Git
+local function neogit_open(popup)
+  local cwd = vim.fn.getcwd()
+  require('neogit.lib.git.repository').instance(cwd)
+  require('neogit').open { popup, cwd = cwd }
+end
 vim.keymap.set({ 'n', 'i', 't' }, '<M-g>', ':!git ', { noremap = true })
-vim.keymap.set('n', '<leader>gb', function() require('neogit').open { 'branch' } end, { desc = 'Git branch' })
-vim.keymap.set('n', '<leader>gB', function() require('neogit').open { 'branch' } end, { desc = 'Git branch all' })
-vim.keymap.set('n', '<leader>gp', function() require('neogit').open { 'pull' } end, { desc = 'Git pull' })
-vim.keymap.set('n', '<leader>gP', function() require('neogit').open { 'push' } end, { desc = 'Git push' })
+vim.keymap.set('n', '<leader>gb', function() neogit_open 'branch' end, { desc = 'Git branch' })
+vim.keymap.set('n', '<leader>gB', function() neogit_open 'branch' end, { desc = 'Git branch all' })
+vim.keymap.set('n', '<leader>gp', function() neogit_open 'pull' end, { desc = 'Git pull' })
+vim.keymap.set('n', '<leader>gP', function() neogit_open 'push' end, { desc = 'Git push' })
 vim.keymap.set('n', '<leader>gF', '<cmd>!git push --force-with-lease<cr>', { desc = 'Git push force' })
-vim.keymap.set('n', '<leader>gf', function() require('neogit').open { 'fetch' } end, { desc = 'Git fetch' })
+vim.keymap.set('n', '<leader>gf', function() neogit_open 'fetch' end, { desc = 'Git fetch' })
 vim.keymap.set('n', '<leader>gA', '<cmd>!git add -A<cr>', { desc = 'Git stage all' })
 vim.keymap.set('n', '<leader>ga', '<cmd>!git add %<cr>', { desc = 'Git stage current' })
-vim.keymap.set('n', '<leader>gs', '<cmd>Neogit<cr>', { desc = 'Git status' })
-vim.keymap.set('n', '<leader>gg', '<cmd>Neogit<cr>', { desc = 'Show Neogit UI' })
-vim.keymap.set('n', '<leader>gd', function() require('neogit').open { 'diff' } end, { desc = 'Git diff' })
-vim.keymap.set('n', '<leader>gk', function() require('neogit').open { 'branch' } end, { desc = 'Git checkout' })
-vim.keymap.set('n', '<leader>gc', function() require('neogit').open { 'commit' } end, { desc = 'Git commit' })
-vim.keymap.set('n', '<leader>gl', function() require('neogit').open { 'log' } end, { desc = 'Git log' })
+vim.keymap.set('n', '<leader>gs', function() require('neogit').open { cwd = vim.fn.getcwd() } end, { desc = 'Git status' })
+vim.keymap.set('n', '<leader>gg', function() require('neogit').open { cwd = vim.fn.getcwd() } end, { desc = 'Show Neogit UI' })
+vim.keymap.set('n', '<leader>gd', function() neogit_open 'diff' end, { desc = 'Git diff' })
+vim.keymap.set('n', '<leader>gk', function() neogit_open 'branch' end, { desc = 'Git checkout' })
+vim.keymap.set('n', '<leader>gc', function() neogit_open 'commit' end, { desc = 'Git commit' })
+vim.keymap.set('n', '<leader>gl', function() neogit_open 'log' end, { desc = 'Git log' })
 
 -- Other
 vim.keymap.set('n', '<C-CR>', 'i<cr><Esc>', { desc = 'New Line on Cursor' })
