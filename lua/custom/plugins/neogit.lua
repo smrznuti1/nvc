@@ -6,6 +6,7 @@ require('neogit').setup {
   mappings = {
     status = {
       ['<c-x>'] = false,
+      ['<c-p>'] = function() vim.notify(vim.fn.getcwd()) end,
     },
   },
 }
