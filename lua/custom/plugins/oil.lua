@@ -110,8 +110,11 @@ oil_module.setup {
   ssh = { border = 'rounded' },
 }
 
-vim.api.nvim_create_autocmd('FileType', {
+vim.api.nvim_create_autocmd('BufEnter', {
   group = vim.api.nvim_create_augroup('OilAutoCwd', {}),
-  pattern = 'oil',
-  callback = function() vim.cmd.lchdir(require('oil').get_current_dir()) end,
+  pattern = 'oil://*',
+  callback = function()
+    local ok, oil = pcall(require, 'oil')
+    if ok then vim.cmd.lchdir(oil.get_current_dir()) end
+  end,
 })
