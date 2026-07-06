@@ -336,7 +336,10 @@ vim.keymap.set('n', ']b', '<cmd>BufferLineCycleNext<CR>', { desc = 'Buffer Next'
 vim.keymap.set('n', '<leader>Q', ':bd!<cr>', { desc = 'Delete buffer' })
 vim.keymap.set({ 'n', 'i', 't', 'v' }, '<M-w>', function()
   local filetype = vim.bo.filetype
-  if filetype == 'NeogitPopup' then vim.fn.feedkeys '<C-\n>q' end
+  if filetype == 'NeogitPopup' then
+    vim.fn.feedkeys('q', 'L')
+    return
+  end
   exit_zen_if_active()
   local win_id = vim.api.nvim_get_current_win()
   vim.fn.execute 'bd!'
