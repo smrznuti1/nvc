@@ -336,6 +336,7 @@ vim.keymap.set('n', ']b', '<cmd>BufferLineCycleNext<CR>', { desc = 'Buffer Next'
 vim.keymap.set('n', '<leader>Q', ':bd!<cr>', { desc = 'Delete buffer' })
 vim.keymap.set({ 'n', 'i', 't', 'v' }, '<M-w>', function()
   local filetype = vim.bo.filetype
+  if filetype == 'NeogitPopup' then vim.fn.feedkeys '<C-\n>q' end
   exit_zen_if_active()
   local win_id = vim.api.nvim_get_current_win()
   vim.fn.execute 'bd!'
@@ -408,12 +409,27 @@ vim.keymap.set('n', '<leader>gb', function() neogit_open 'branch' end, { desc = 
 vim.keymap.set('n', '<leader>gB', function() neogit_open 'branch' end, { desc = 'Git branch all' })
 vim.keymap.set('n', '<leader>gp', function() neogit_open 'pull' end, { desc = 'Git pull' })
 vim.keymap.set('n', '<leader>gP', function() neogit_open 'push' end, { desc = 'Git push' })
-vim.keymap.set('n', '<leader>gF', '<cmd>!git push --force-with-lease<cr>', { desc = 'Git push force' })
+vim.keymap.set(
+  'n',
+  '<leader>gF',
+  '<cmd>!git push --force-with-lease<cr>',
+  { desc = 'Git push force' }
+)
 vim.keymap.set('n', '<leader>gf', function() neogit_open 'fetch' end, { desc = 'Git fetch' })
 vim.keymap.set('n', '<leader>gA', '<cmd>!git add -A<cr>', { desc = 'Git stage all' })
 vim.keymap.set('n', '<leader>ga', '<cmd>!git add %<cr>', { desc = 'Git stage current' })
-vim.keymap.set('n', '<leader>gs', function() require('neogit').open { cwd = vim.fn.getcwd() } end, { desc = 'Git status' })
-vim.keymap.set('n', '<leader>gg', function() require('neogit').open { cwd = vim.fn.getcwd() } end, { desc = 'Show Neogit UI' })
+vim.keymap.set(
+  'n',
+  '<leader>gs',
+  function() require('neogit').open { cwd = vim.fn.getcwd() } end,
+  { desc = 'Git status' }
+)
+vim.keymap.set(
+  'n',
+  '<leader>gg',
+  function() require('neogit').open { cwd = vim.fn.getcwd() } end,
+  { desc = 'Show Neogit UI' }
+)
 vim.keymap.set('n', '<leader>gd', function() neogit_open 'diff' end, { desc = 'Git diff' })
 vim.keymap.set('n', '<leader>gk', function() neogit_open 'branch' end, { desc = 'Git checkout' })
 vim.keymap.set('n', '<leader>gc', function() neogit_open 'commit' end, { desc = 'Git commit' })
