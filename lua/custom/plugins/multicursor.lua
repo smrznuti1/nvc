@@ -35,7 +35,7 @@ vim.keymap.set({ 'n', 'v' }, '<M-q>', function()
   end
 end)
 
-vim.keymap.set('n', '<esc>', function()
+vim.keymap.set('n', '<M-m>', function()
   if not mc.cursorsEnabled() then
     mc.enableCursors()
   elseif mc.hasCursors() then
