@@ -21,7 +21,6 @@ vim.g.floaterm_autoclose = 0
 vim.keymap.set({ 'n', 't', 'i' }, '<M-l>', function()
   exit_zen_if_active()
   vim.cmd 'FloatermNext'
-  -- vim.api.nvim_command 'stopinsert'
 end, { silent = false, noremap = true })
 
 vim.keymap.set({ 'n', 't', 'i' }, '<M-h>', function()
