@@ -55,7 +55,7 @@ local opts = {
       history_bonus = false,
     },
     sort = {
-      fields = { 'score:desc', '#text', 'idx' },
+      fields = { 'score:desc', 'idx' },
     },
     win = {
       input = {
