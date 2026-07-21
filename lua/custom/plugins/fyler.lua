@@ -30,11 +30,11 @@ require('fyler').setup {
   },
   hooks = {
     on_highlight = function(highlights, _)
-      local dir = vim.api.nvim_get_hl(0, { name = 'Directory', link = false })
-      highlights.FylerDirectoryName = { link = 'Directory' }
-      highlights.FylerDirectoryIcon = { link = 'Directory' }
-      highlights.FylerCursorLine = { underline = true, sp = dir.fg }
-      highlights.FylerCursorLineNr = { fg = dir.fg, bold = true }
+      local accent = vim.api.nvim_get_hl(0, { name = 'Constant', link = false }).fg
+      highlights.FylerDirectoryName = { link = 'Constant' }
+      highlights.FylerDirectoryIcon = { link = 'Constant' }
+      highlights.FylerCursorLine = { underline = true, sp = accent }
+      highlights.FylerCursorLineNr = { fg = accent, bold = true }
     end,
   },
   ui = {
