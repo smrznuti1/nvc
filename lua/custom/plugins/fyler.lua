@@ -8,7 +8,7 @@ local function cursor_path(self)
 end
 
 require('fyler').setup {
-  use_as_default_explorer = true,
+  use_as_default_explorer = false,
   kind = 'replace',
   auto_confirm_simple_mutation = true,
   bound_cursor = true,
@@ -70,7 +70,13 @@ require('fyler').setup {
           if path then vim.ui.open(path) end
         end,
       },
-      ['g.'] = { action = 'toggle_ui', args = { 'hidden_items' } },
+      ['g.'] = {
+        action = function(self)
+          local switches = self.cache.ui.hidden_items.switches
+          switches.dotfiles = not switches.dotfiles
+          self:refresh()
+        end,
+      },
       ['/'] = { action = function() require('snacks.picker').lines() end },
       ['gP'] = {
         action = function(self) vim.fn.setreg('+', self.state.pseudo_root_path) end,
@@ -78,3 +84,21 @@ require('fyler').setup {
     },
   },
 }
+
+local hijack = vim.api.nvim_create_augroup('FylerDirHijack', { clear = true })
+local function disable_netrw() pcall(vim.cmd, 'silent! autocmd! FileExplorer *') end
+disable_netrw()
+vim.api.nvim_create_autocmd('VimEnter', { group = hijack, once = true, callback = disable_netrw })
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = hijack,
+  callback = function(args)
+    local name = vim.api.nvim_buf_get_name(args.buf)
+    if name == '' or vim.fn.isdirectory(name) == 0 then return end
+    vim.schedule(function()
+      if vim.api.nvim_buf_is_valid(args.buf) then
+        pcall(vim.api.nvim_buf_delete, args.buf, { force = true })
+      end
+      require('fyler').open { root_path = name }
+    end)
+  end,
+})
