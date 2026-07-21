@@ -29,9 +29,12 @@ require('fyler').setup {
     concealcursor = 'nvic',
   },
   hooks = {
-    on_highlight = function(highlights, palette)
-      highlights.FylerCursorLine = { underline = true, sp = palette.blue }
-      highlights.FylerCursorLineNr = { fg = palette.blue, bold = true }
+    on_highlight = function(highlights, _)
+      local dir = vim.api.nvim_get_hl(0, { name = 'Directory', link = false })
+      highlights.FylerDirectoryName = { link = 'Directory' }
+      highlights.FylerDirectoryIcon = { link = 'Directory' }
+      highlights.FylerCursorLine = { underline = true, sp = dir.fg }
+      highlights.FylerCursorLineNr = { fg = dir.fg, bold = true }
     end,
   },
   ui = {
