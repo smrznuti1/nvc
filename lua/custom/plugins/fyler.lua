@@ -15,6 +15,7 @@ require('fyler').setup {
   follow_current_file = true,
   follow_root_dir = true,
   win_opts = {
+    number = true,
     wrap = false,
     signcolumn = 'no',
     cursorcolumn = false,
@@ -26,7 +27,7 @@ require('fyler').setup {
   },
   ui = {
     hidden_items = {
-      switches = {},
+      switches = { 'dotfiles' },
       patterns = {},
       always_visible = {},
       always_hidden = {},
@@ -59,11 +60,7 @@ require('fyler').setup {
           vim.cmd.cd { args = { vim.fn.fnameescape(self.state.pseudo_root_path) } }
         end,
       },
-      ['~'] = {
-        action = function(self)
-          vim.cmd.tcd { args = { vim.fn.fnameescape(self.state.pseudo_root_path) } }
-        end,
-      },
+      ['~'] = { action = 'visit', args = { cursor = true } },
       ['gx'] = {
         action = function(self)
           local path = cursor_path(self)
