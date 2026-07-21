@@ -72,7 +72,13 @@ require('fyler').setup {
           vim.cmd.cd { args = { vim.fn.fnameescape(self.state.pseudo_root_path) } }
         end,
       },
-      ['~'] = { action = 'visit', args = { cursor = true } },
+      ['~'] = {
+        action = function(self)
+          local node = require('fyler.finder').parse_cursor_line(self)
+          local target = (node and node.type == 'directory') and node.path or self.state.pseudo_root_path
+          require('fyler').open { root_path = target }
+        end,
+      },
       ['gx'] = {
         action = function(self)
           local path = cursor_path(self)
