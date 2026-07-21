@@ -16,6 +16,7 @@ require('fyler').setup {
   follow_root_dir = true,
   win_opts = {
     number = true,
+    relativenumber = true,
     wrap = false,
     signcolumn = 'no',
     cursorcolumn = false,
