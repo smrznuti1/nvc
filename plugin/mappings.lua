@@ -412,6 +412,7 @@ local function neogit_open(popup)
 end
 vim.keymap.set({ 'n', 'i', 't' }, '<M-g>', ':!git ', { noremap = true })
 vim.keymap.set('n', '<leader>gb', function() neogit_open 'branch' end, { desc = 'Git branch' })
+vim.keymap.set('n', '<leader>gm', function() neogit_open 'merge' end, { desc = 'Git merge' })
 vim.keymap.set('n', '<leader>gB', function() neogit_open 'branch' end, { desc = 'Git branch all' })
 vim.keymap.set('n', '<leader>gp', function() neogit_open 'pull' end, { desc = 'Git pull' })
 vim.keymap.set('n', '<leader>gP', function() neogit_open 'push' end, { desc = 'Git push' })
