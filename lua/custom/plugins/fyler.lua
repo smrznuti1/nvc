@@ -17,6 +17,8 @@ require('fyler').setup {
   win_opts = {
     number = true,
     relativenumber = true,
+    cursorline = true,
+    winhighlight = 'CursorLine:FylerCursorLine,CursorLineNr:FylerCursorLineNr',
     wrap = false,
     signcolumn = 'no',
     cursorcolumn = false,
@@ -25,6 +27,12 @@ require('fyler').setup {
     list = false,
     conceallevel = 3,
     concealcursor = 'nvic',
+  },
+  hooks = {
+    on_highlight = function(highlights, palette)
+      highlights.FylerCursorLine = { underline = true, sp = palette.blue }
+      highlights.FylerCursorLineNr = { fg = palette.blue, bold = true }
+    end,
   },
   ui = {
     hidden_items = {
