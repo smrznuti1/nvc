@@ -380,16 +380,14 @@ end, { noremap = true })
 vim.keymap.set(
   'n',
   '<leader>e',
-  function() require('fyler').open() end,
+  function() vim.fn.execute 'e .' end,
   { silent = true, noremap = true, desc = 'Open Fyler' }
 )
 vim.keymap.set('n', '<leader>E', function()
   local cur_buf = vim.fn.bufnr '%'
-  require('fyler').open()
+  vim.fn.execute 'e .'
   local fyler_buf = vim.fn.bufnr '%'
-  if (fyler_buf ~= cur_buf) and (vim.fn.bufexists(cur_buf) == 1) then
-    vim.cmd('bd! ' .. cur_buf)
-  end
+  if (fyler_buf ~= cur_buf) and (vim.fn.bufexists(cur_buf) == 1) then vim.cmd('bd! ' .. cur_buf) end
 end, { noremap = true, desc = 'Open Fyler but close last buffer' })
 
 -- Highlight
