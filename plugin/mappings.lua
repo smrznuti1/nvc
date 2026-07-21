@@ -200,11 +200,6 @@ vim.keymap.set('c', '<Esc>', function()
   end)
 end, {})
 
-vim.api.nvim_create_user_command(
-  'OilRemote',
-  function(args) vim.fn.execute('Oil oil-ssh://' .. args.args:gsub(':', '/', 1)) end,
-  { desc = 'Open Remote File Using the notation: Host:Path', nargs = 1 }
-)
 vim.api.nvim_create_user_command('Notes', 'Neorg workspace notes', {})
 vim.api.nvim_create_user_command('Pwd', function() vim.notify(vim.fn.getcwd()) end, {})
 
@@ -385,18 +380,17 @@ end, { noremap = true })
 vim.keymap.set(
   'n',
   '<leader>e',
-  '<cmd>Oil<cr>',
-  { silent = true, noremap = true, desc = 'Open Oil' }
+  function() require('fyler').open() end,
+  { silent = true, noremap = true, desc = 'Open Fyler' }
 )
 vim.keymap.set('n', '<leader>E', function()
   local cur_buf = vim.fn.bufnr '%'
-  vim.cmd 'Oil'
-  local oil_buf = vim.fn.bufnr '%'
-  if (oil_buf ~= cur_buf) and (vim.fn.bufexists(cur_buf) == 1) then
-    -- vim.api.nvim_buf_delete(cur_buf, { force = true })
+  require('fyler').open()
+  local fyler_buf = vim.fn.bufnr '%'
+  if (fyler_buf ~= cur_buf) and (vim.fn.bufexists(cur_buf) == 1) then
     vim.cmd('bd! ' .. cur_buf)
   end
-end, { noremap = true, desc = 'Open Oil but close last buffer' })
+end, { noremap = true, desc = 'Open Fyler but close last buffer' })
 
 -- Highlight
 vim.cmd 'autocmd CursorMoved * set nohlsearch'

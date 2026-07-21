@@ -66,7 +66,7 @@ vim.keymap.set('n', '<leader>ad', '<cmd>ClaudeCodeDiffDeny<cr>', { desc = 'Deny 
 
 -- Filetype-specific TreeAdd binding for file-explorer buffers
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'NvimTree', 'neo-tree', 'oil', 'minifiles', 'netrw' },
+  pattern = { 'NvimTree', 'neo-tree', 'fyler_finder', 'minifiles', 'netrw' },
   callback = function(args)
     vim.keymap.set('n', '<leader>as', '<cmd>ClaudeCodeTreeAdd<cr>', { buffer = args.buf, desc = 'Add file' })
   end,
