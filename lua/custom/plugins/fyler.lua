@@ -39,7 +39,7 @@ require('fyler').setup {
   },
   ui = {
     hidden_items = {
-      switches = { 'dotfiles' },
+      switches = {},
       patterns = {},
       always_visible = {},
       always_hidden = {},
@@ -75,7 +75,8 @@ require('fyler').setup {
       ['~'] = {
         action = function(self)
           local node = require('fyler.finder').parse_cursor_line(self)
-          local target = (node and node.type == 'directory') and node.path or self.state.pseudo_root_path
+          local target = (node and node.type == 'directory') and node.path
+            or self.state.pseudo_root_path
           require('fyler').open { root_path = target }
         end,
       },
