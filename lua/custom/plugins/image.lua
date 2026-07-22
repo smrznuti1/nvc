@@ -1,3 +1,5 @@
+if vim.g.neovide then return end
+
 vim.pack.add { 'https://github.com/3rd/image.nvim' }
 require('image').setup {
   backend = 'kitty',
