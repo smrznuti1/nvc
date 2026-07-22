@@ -32,15 +32,37 @@ local configuration = {
   end,
 }
 
-require('cuddlefish').setup(configuration)
-vim.cmd.colorscheme 'cuddlefish'
-vim.cmd 'highlight CursorLine cterm=underline gui=underline'
-vim.g.terminal_color_8 = '#81439c'
+local kitty_palette = {
+  '#000000',
+  '#cc0403',
+  '#19cb00',
+  '#cecb00',
+  '#0d73cc',
+  '#cb1ed1',
+  '#0dcdcd',
+  '#dddddd',
+  '#767676',
+  '#f2201f',
+  '#23fd00',
+  '#fffd00',
+  '#1a8fff',
+  '#fd28ff',
+  '#14ffff',
+  '#ffffff',
+}
 
-vim.api.nvim_create_user_command('TT', function()
-  configuration.editor.transparent_background = not configuration.editor.transparent_background
+local function apply()
   require('cuddlefish').setup(configuration)
   vim.cmd.colorscheme 'cuddlefish'
   vim.cmd 'highlight CursorLine cterm=underline gui=underline'
-  vim.g.terminal_color_8 = '#81439c'
+  for i, color in ipairs(kitty_palette) do
+    vim.g['terminal_color_' .. (i - 1)] = color
+  end
+end
+
+apply()
+
+vim.api.nvim_create_user_command('TT', function()
+  configuration.editor.transparent_background = not configuration.editor.transparent_background
+  apply()
 end, {})
