@@ -111,10 +111,10 @@ vim.api.nvim_create_autocmd('BufEnter', {
     local name = vim.api.nvim_buf_get_name(args.buf)
     if name == '' or vim.fn.isdirectory(name) == 0 then return end
     vim.schedule(function()
-      if vim.api.nvim_buf_is_valid(args.buf) then
+      require('fyler').open { root_path = name }
+      if vim.api.nvim_buf_is_valid(args.buf) and #vim.fn.win_findbuf(args.buf) == 0 then
         pcall(vim.api.nvim_buf_delete, args.buf, { force = true })
       end
-      require('fyler').open { root_path = name }
     end)
   end,
 })

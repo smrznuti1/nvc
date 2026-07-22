@@ -379,14 +379,19 @@ end, { noremap = true })
 -- vim.keymap.set({ "n", "i", "t", "c" }, "<C-x>", "<C-\\><C-n>:Command ", { noremap = true })
 vim.keymap.set('n', '<leader>e', function()
   local cur_path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':h')
-  vim.fn.execute('e ' .. cur_path)
+  require('fyler').open { root_path = cur_path }
 end, { silent = true, noremap = true, desc = 'Open Fyler' })
 vim.keymap.set('n', '<leader>E', function()
-  local cur_buf = vim.fn.bufnr '%'
+  local cur_buf = vim.api.nvim_get_current_buf()
   local cur_path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':h')
-  vim.fn.execute('e ' .. cur_path)
-  local fyler_buf = vim.fn.bufnr '%'
-  if (fyler_buf ~= cur_buf) and (vim.fn.bufexists(cur_buf) == 1) then vim.cmd('bd! ' .. cur_buf) end
+  require('fyler').open { root_path = cur_path }
+  if
+    vim.api.nvim_get_current_buf() ~= cur_buf
+    and vim.api.nvim_buf_is_valid(cur_buf)
+    and #vim.fn.win_findbuf(cur_buf) == 0
+  then
+    pcall(vim.api.nvim_buf_delete, cur_buf, { force = true })
+  end
 end, { noremap = true, desc = 'Open Fyler but close last buffer' })
 
 -- Highlight

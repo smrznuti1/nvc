@@ -22,7 +22,7 @@ local configuration = {
       OilDir = { '#cc6a1f' },
       OilDirHidden = { '#6e391a' },
       LeapBackdrop = { '#613869' },
-      FloatermBorder = { fg = colors.text, bg = 'none' },
+      FloatermBorder = { fg = '#f5d16e', bg = 'none' },
       Cursor = { fg = '#ede874', bg = '#7d5a8c' },
       Visual = { bg = '#5d4f63' },
       NonText = { fg = '#738599' },
@@ -36,6 +36,11 @@ require('cuddlefish').setup(configuration)
 vim.cmd.colorscheme 'cuddlefish'
 vim.cmd 'highlight CursorLine cterm=underline gui=underline'
 vim.g.terminal_color_8 = '#81439c'
+
+vim.api.nvim_create_autocmd('VimEnter', {
+  nested = true,
+  callback = function() vim.cmd.colorscheme 'cuddlefish' end,
+})
 
 vim.api.nvim_create_user_command('TT', function()
   configuration.editor.transparent_background = not configuration.editor.transparent_background
