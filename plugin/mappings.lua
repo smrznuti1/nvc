@@ -377,19 +377,14 @@ vim.keymap.set({ 'n', 'i', 't' }, '<C-x>', function()
   executeShellCommand()
 end, { noremap = true })
 -- vim.keymap.set({ "n", "i", "t", "c" }, "<C-x>", "<C-\\><C-n>:Command ", { noremap = true })
-vim.keymap.set('n', '<leader>e', function()
-  local cur_path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':h')
-  require 'custom.fyler_open'(cur_path)
-end, { silent = true, noremap = true, desc = 'Open Fyler' })
+local function open_fyler()
+  require 'custom.fyler_open'(vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':h'))
+end
+vim.keymap.set('n', '<leader>e', open_fyler, { silent = true, noremap = true, desc = 'Open Fyler' })
 vim.keymap.set('n', '<leader>E', function()
   local cur_buf = vim.api.nvim_get_current_buf()
-  local cur_path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':h')
-  require 'custom.fyler_open'(cur_path)
-  if
-    vim.api.nvim_get_current_buf() ~= cur_buf
-    and vim.api.nvim_buf_is_valid(cur_buf)
-    and #vim.fn.win_findbuf(cur_buf) == 0
-  then
+  open_fyler()
+  if vim.api.nvim_get_current_buf() ~= cur_buf and #vim.fn.win_findbuf(cur_buf) == 0 then
     pcall(vim.api.nvim_buf_delete, cur_buf, { force = true })
   end
 end, { noremap = true, desc = 'Open Fyler but close last buffer' })

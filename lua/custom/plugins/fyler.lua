@@ -110,6 +110,10 @@ vim.api.nvim_create_autocmd('BufEnter', {
   callback = function(args)
     local name = vim.api.nvim_buf_get_name(args.buf)
     if name == '' or vim.fn.isdirectory(name) == 0 then return end
+    local alt_buf = vim.fn.bufnr '#'
+    if alt_buf > 0 and vim.bo[alt_buf].filetype == 'fyler_finder' then
+      vim.cmd('let @# = ' .. args.buf)
+    end
     vim.schedule(function()
       require 'custom.fyler_open'(name)
       if vim.api.nvim_buf_is_valid(args.buf) and #vim.fn.win_findbuf(args.buf) == 0 then
