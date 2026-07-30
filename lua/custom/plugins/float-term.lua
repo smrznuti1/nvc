@@ -2,6 +2,7 @@ vim.pack.add { 'https://github.com/voldikss/vim-floaterm' }
 
 local function exit_zen_if_active()
   local ok, zen = pcall(require, 'snacks.zen')
+  local closed = false
   if
     ok
     and zen.win
@@ -9,6 +10,21 @@ local function exit_zen_if_active()
     and vim.api.nvim_get_option_value('filetype', { buf = zen.win.buf }) == 'floaterm'
   then
     zen.win:close()
+    closed = true
+  end
+  return closed
+end
+
+local function execute_floaterm_with_zen(...)
+  local closed = exit_zen_if_active()
+
+  local ok, _ = pcall(vim.fn.execute, ...)
+
+  if not ok then error('Failed to execute' .. select(1, ...), 1) end
+
+  if closed then
+    local ok, zen = pcall(require, 'snacks.zen')
+    if ok then vim.defer_fn(function() zen.zoom() end, 10) end
   end
 end
 
@@ -18,20 +34,22 @@ vim.g.floaterm_wintype = 'float'
 vim.g.floaterm_position = 'bottom'
 vim.g.floaterm_autoclose = 0
 
-vim.keymap.set({ 'n', 't', 'i' }, '<M-l>', function()
-  exit_zen_if_active()
-  vim.cmd 'FloatermNext'
-end, { silent = false, noremap = true })
+vim.keymap.set(
+  { 'n', 't', 'i' },
+  '<M-l>',
+  function() execute_floaterm_with_zen 'FloatermNext' end,
+  { silent = false, noremap = true }
+)
 
-vim.keymap.set({ 'n', 't', 'i' }, '<M-h>', function()
-  exit_zen_if_active()
-  vim.cmd 'FloatermPrev'
-  -- vim.api.nvim_command 'stopinsert'
-end, { silent = false, noremap = true })
+vim.keymap.set(
+  { 'n', 't', 'i' },
+  '<M-h>',
+  function() execute_floaterm_with_zen 'FloatermPrev' end,
+  { silent = false, noremap = true }
+)
 
 vim.keymap.set({ 'n', 't', 'i' }, '<M-e>', function()
   exit_zen_if_active()
-  -- vim.cmd 'FloatermToggle'
   local buf_ft = vim.bo.filetype
   if buf_ft == 'floaterm' then
     vim.cmd 'FloatermHide'

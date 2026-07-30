@@ -1,5 +1,6 @@
 local function exit_zen_if_active()
   local ok, zen = pcall(require, 'snacks.zen')
+  local closed = false
   if not (ok and zen.win and zen.win:valid()) then return end
 
   local zen_filetype = vim.api.nvim_get_option_value('filetype', { buf = zen.win.buf })
@@ -9,7 +10,9 @@ local function exit_zen_if_active()
     or zen_filetype == 'snacks_input'
   then
     zen.win:close()
+    closed = true
   end
+  return closed
 end
 
 -- Funcs
@@ -67,7 +70,7 @@ local function executeShellCommand()
       win.destroy(win) -- vim.api.nvim_win_close(win, true)
     end
     if input == nil then return end
-    exit_zen_if_active()
+    local closed = exit_zen_if_active()
     if input ~= '' then
       local input_processed =
         input:gsub('\\\n', ' '):gsub('\n', '; '):gsub('%s+', ' '):gsub('^%s*(.-)%s*$', '%1')
@@ -100,6 +103,10 @@ local function executeShellCommand()
       vim.fn.histadd('debug', input)
     else
       vim.fn.execute ':FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0 tmux'
+    end
+    if closed then
+      local ok, zen = pcall(require, 'snacks.zen')
+      if ok then vim.defer_fn(function() zen.zoom() end, 10) end
     end
   end)
   --
