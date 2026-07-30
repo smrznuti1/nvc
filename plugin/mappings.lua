@@ -1,5 +1,3 @@
-local snacks = require 'custom.plugins.snacks'
-
 local function exit_zen_if_active()
   local ok, zen = pcall(require, 'snacks.zen')
   if not (ok and zen.win and zen.win:valid()) then return end
@@ -15,7 +13,7 @@ local function exit_zen_if_active()
 end
 
 -- Funcs
-function completionForRun(arg_lead, cmd_line, cursor_pos)
+function CompletionForRun(arg_lead, _, _)
   local shellcmd_completions = vim.fn.getcompletion(arg_lead, 'shellcmd')
   local file_completions = vim.fn.getcompletion('edit ' .. arg_lead, 'cmdline')
 
@@ -31,7 +29,7 @@ function completionForRun(arg_lead, cmd_line, cursor_pos)
   return vim.tbl_extend('keep', file_completions, shellcmd_completions)
 end
 
-function custom_completion(arg_lead, cmd_line, cursor_pos)
+function CustomCompletion(_, cmd_line, _)
   local words = vim.fn.split(cmd_line, [[\v%(\\@<!)\s+]])
   local last_word = words[#words]
   local file_completions = vim.fn.getcompletion(':e ' .. last_word, 'cmdline')
@@ -59,7 +57,7 @@ end
 local function executeShellCommand()
   local opts = {
     prompt = 'Command::',
-    completion = 'customlist,v:lua.custom_completion',
+    completion = 'customlist,v:lua.CustomCompletion',
     icon_pos = false,
     prompt_pos = 'title',
   }
@@ -106,7 +104,7 @@ local function executeShellCommand()
   end)
   --
   -- vim.ui.input(
-  --   { prompt = "Command: ", completion = "customlist,v:lua.custom_completion" },
+  --   { prompt = "Command: ", completion = "customlist,v:lua.CustomCompletion" },
   --   function(input)
   --     if input == nil then
   --       return
@@ -178,7 +176,7 @@ vim.api.nvim_create_user_command('Command', function(input)
   else
     vim.fn.execute ':FloatermNew --height=0.5 --width=0.8 --wintype=float --name=cmd --position=bottom --autoclose=0'
   end
-end, { nargs = '*', complete = 'customlist,v:lua.completionForRun' })
+end, { nargs = '*', complete = 'customlist,v:lua.CompletionForRun' })
 -- vim.keymap.set("c", "<Esc>", "<C-f>", {})
 vim.keymap.set('c', '<Esc>', function()
   local current_cmd = vim.fn.getcmdline()
@@ -190,7 +188,7 @@ vim.keymap.set('c', '<Esc>', function()
   if current_cmd:sub(0, 7) ~= 'Command' then return end
   vim.ui.input({
     prompt = 'cmdline',
-    completion = 'customlist,v:lua.custom_completion',
+    completion = 'customlist,v:lua.CustomCompletion',
     icon_pos = false,
     prompt_pos = 'title',
     default = current_cmd,
@@ -382,7 +380,12 @@ vim.keymap.set({ 'n', 'i', 't' }, '<C-x>', function()
   executeShellCommand()
 end, { noremap = true })
 -- vim.keymap.set({ "n", "i", "t", "c" }, "<C-x>", "<C-\\><C-n>:Command ", { noremap = true })
-vim.keymap.set('n', '<leader>e', '<cmd>Oil<cr>', { silent = true, noremap = true, desc = 'Open Oil' })
+vim.keymap.set(
+  'n',
+  '<leader>e',
+  '<cmd>Oil<cr>',
+  { silent = true, noremap = true, desc = 'Open Oil' }
+)
 vim.keymap.set('n', '<leader>E', function()
   local cur_buf = vim.fn.bufnr '%'
   vim.cmd 'Oil'
