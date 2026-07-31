@@ -291,9 +291,9 @@ local find_file = function(local_opts, opts)
 end
 
 pick.registry['find_file'] = find_file
-vim.keymap.set('n', '<Leader>ff', function() pick.registry.find_file() end)
-vim.keymap.set(
-  'n',
-  '<Leader>f.',
-  function() pick.registry.find_file { dir = fn.expand '%:p:h' } end
-)
+vim.keymap.set('n', '<Leader>o', function() pick.registry.find_file() end)
+-- vim.keymap.set(
+--   'n',
+--   '<Leader>f.',
+--   function() pick.registry.find_file { dir = fn.expand '%:p:h' } end
+-- )
