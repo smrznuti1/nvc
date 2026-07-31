@@ -28,6 +28,10 @@ local configuration = {
       NonText = { fg = '#738599' },
       DiffText = { fg = '#fc19e1' },
       TabLine = { fg = 'Orange' },
+      MiniPickNormal = { bg = 'none' },
+      MiniPickBorder = { fg = '#7d5a8c', bg = 'none' },
+      MiniPickMatchCurrent = { bg = '#5d4f63' },
+      MiniPickMatchRanges = { fg = '#ff8c42', bg = 'none', style = { 'bold' } },
     }
   end,
 }
