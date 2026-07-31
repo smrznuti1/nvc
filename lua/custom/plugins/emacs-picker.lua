@@ -291,7 +291,11 @@ local find_file = function(local_opts, opts)
 end
 
 pick.registry['find_file'] = find_file
-vim.keymap.set({ 'n', 'v', 'i', 't' }, '<M-o>', function() pick.registry.find_file() end)
+vim.keymap.set({ 'n', 'v', 'i', 't' }, '<M-o>', function()
+  local filetype = vim.api.nvim_get_option_value('filetype', {})
+  pick.registry.find_file()
+  if filetype == 'floaterm' then vim.fn.execute('FloatermHide', 'silent!') end
+end)
 -- vim.keymap.set(
 --   'n',
 --   '<Leader>f.',
