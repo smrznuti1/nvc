@@ -291,7 +291,7 @@ local find_file = function(local_opts, opts)
 end
 
 pick.registry['find_file'] = find_file
-vim.keymap.set('n', '<M-o>', function() pick.registry.find_file() end)
+vim.keymap.set({ 'n', 'v', 'i', 't' }, '<M-o>', function() pick.registry.find_file() end)
 -- vim.keymap.set(
 --   'n',
 --   '<Leader>f.',
