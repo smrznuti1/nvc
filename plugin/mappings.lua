@@ -72,8 +72,11 @@ local function executeShellCommand()
     if input == nil then return end
     local closed = exit_zen_if_active()
     if input ~= '' then
-      local input_processed =
-        input:gsub('\\\n', ' '):gsub('\n', '; '):gsub('%s+', ' '):gsub('^%s*(.-)%s*$', '%1')
+      local input_processed = (input .. '; sleep 0.05')
+        :gsub('\\\n', ' ')
+        :gsub('\n', '; ')
+        :gsub('%s+', ' ')
+        :gsub('^%s*(.-)%s*$', '%1')
       local input_args = input_processed:gsub('([^\\])(&)', '%1\\%2')
       local escaped_cmd = vim.fn.shellescape(input_args, false)
       local title = '\\ \\ \\ \\ \\ cmd:\\ '
