@@ -468,3 +468,11 @@ vim.keymap.set(
   '<C-\\><C-n>`>?\\%V',
   { desc = 'Search backward within visual selection' }
 )
+
+vim.api.nvim_create_user_command('EmptyReg', function(register)
+  if register.args == '' then error 'Please specify registry' end
+  for _, reg in ipairs(register.fargs) do
+    vim.fn.setreg(reg, '')
+    vim.notify('Cleared - ' .. reg .. ': ' .. vim.fn.getreg(reg))
+  end
+end, { nargs = '*', desc = 'Clear Specified Register' })
