@@ -369,7 +369,10 @@ vim.keymap.set(
   '<cmd>tabprevious<cr>',
   { noremap = true, silent = true }
 )
-vim.keymap.set({ 'n', 't', 'i' }, '<M-b>', '<cmd>OpenDdgr<cr>', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 't', 'i' }, '<M-b>', function()
+  exit_zen_if_active()
+  vim.fn.execute 'OpenDdgr'
+end, { noremap = true, silent = true })
 
 -- Terminal & Navigation
 vim.keymap.set('n', '<leader>T', ':term tmux<cr>', { desc = 'Terminal Here' })
