@@ -7,7 +7,7 @@ if vim.g.neovide then
   -- Transparency
   -- vim.g.neovide_transparency = 0.8
   vim.g.neovide_opacity = 1
-  vim.g.neovide_normal_opacity = 0.95
+  vim.g.neovide_normal_opacity = 0.98
   -- Blur
   -- vim.g.neovide_window_blurred = true
   -- vim.g.neovide_floating_blur_amount_x = 1.0
