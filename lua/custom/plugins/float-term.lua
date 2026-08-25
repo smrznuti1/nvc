@@ -48,7 +48,7 @@ vim.keymap.set(
   { silent = false, noremap = true }
 )
 
-vim.keymap.set({ 'n', 't', 'i' }, '<M-e>', function()
+vim.keymap.set({ 'n', 't', 'i' }, '<M-u>', function()
   exit_zen_if_active()
   local buf_ft = vim.bo.filetype
   if buf_ft == 'floaterm' then
