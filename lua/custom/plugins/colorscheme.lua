@@ -41,9 +41,15 @@ vim.cmd.colorscheme 'cuddlefish'
 vim.cmd 'highlight CursorLine cterm=underline gui=underline'
 vim.g.terminal_color_8 = '#81439c'
 
+function set_colorscheme()
+  vim.cmd.colorscheme 'cuddlefish'
+  vim.cmd 'highlight CursorLine cterm=underline gui=underline'
+  vim.g.terminal_color_8 = '#81439c'
+end
+
 vim.api.nvim_create_autocmd('VimEnter', {
   nested = true,
-  callback = function() vim.cmd.colorscheme 'cuddlefish' end,
+  callback = function() set_colorscheme() end,
 })
 
 vim.api.nvim_create_user_command('TT', function()
