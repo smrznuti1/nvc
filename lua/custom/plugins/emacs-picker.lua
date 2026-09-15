@@ -214,6 +214,8 @@ local find_file = function(local_opts, opts)
   end
 
   local custom_choose = function()
+    local target_win = local_opts.target_win
+    if target_win and api.nvim_win_is_valid(target_win) then pick.set_picker_target_window(target_win) end
     local current = pick.get_picker_matches().current
     if current then
       pick.default_choose(current)
@@ -291,10 +293,24 @@ local find_file = function(local_opts, opts)
 end
 
 pick.registry['find_file'] = find_file
-vim.keymap.set({ 'n', 'v', 'i', 't' }, '<M-o>', function()
-  local filetype = vim.api.nvim_get_option_value('filetype', {})
-  pick.registry.find_file()
-  if filetype == 'floaterm' then vim.fn.execute('FloatermHide', 'silent!') end
+
+local is_regular_win = function(win) return api.nvim_win_get_config(win).relative == '' end
+
+local main_window = function()
+  local previous = fn.win_getid(fn.winnr '#')
+  if previous ~= 0 and is_regular_win(previous) then return previous end
+  return vim.iter(api.nvim_tabpage_list_wins(0)):find(is_regular_win)
+end
+
+vim.keymap.set({ 'n', 'v', 'i' }, '<M-o>', pick.registry.find_file)
+vim.keymap.set('t', '<M-o>', function()
+  local floaterm_buf = api.nvim_get_current_buf()
+  local target_win = vim.bo.filetype == 'floaterm' and main_window() or nil
+  vim.cmd.stopinsert()
+  vim.schedule(function()
+    pick.registry.find_file { target_win = target_win }
+    if target_win and api.nvim_get_current_win() == target_win then vim.cmd(floaterm_buf .. 'FloatermHide') end
+  end)
 end)
 -- vim.keymap.set(
 --   'n',
