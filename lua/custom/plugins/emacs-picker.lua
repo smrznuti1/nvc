@@ -117,6 +117,7 @@ local CACHE_STUB = { items = {}, text_width = 0 }
 
 local find_file = function(local_opts, opts)
   local_opts = vim.tbl_extend('force', { dir = fn.getcwd() }, local_opts or {})
+  if local_opts.dir == '' then local_opts.dir = vim.uv.os_homedir() end
   local initial_dir = normalized(local_opts.dir)
   vim.schedule(function() set_query_to_path(initial_dir) end)
 
