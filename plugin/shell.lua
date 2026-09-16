@@ -118,6 +118,11 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
 })
 
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = { 'term://*' },
+  callback = function() vim.cmd 'startinsert' end,
+})
+
 vim.api.nvim_create_autocmd('TermRequest', {
   desc = 'Follow shell cwd via OSC 7',
   callback = function(ev)
