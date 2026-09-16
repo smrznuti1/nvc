@@ -118,6 +118,18 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
 })
 
+vim.api.nvim_create_autocmd('TermRequest', {
+  desc = 'Follow shell cwd via OSC 7',
+  callback = function(ev)
+    local dir, n = ev.data.sequence:gsub('\027]7;file://[^/]*', '')
+    if n == 0 then return end
+    dir = vim.uri_decode(dir)
+    if vim.fn.isdirectory(dir) == 0 then return end
+    vim.b[ev.buf].osc7_dir = dir
+    if vim.api.nvim_get_current_buf() == ev.buf then vim.cmd.tcd(dir) end
+  end,
+})
+
 vim.opt.shortmess = vim.opt.shortmess + 'A'
 
 vim.cmd 'set expandtab'
