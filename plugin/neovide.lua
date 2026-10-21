@@ -7,13 +7,14 @@ if vim.g.neovide then
   -- Transparency
   -- vim.g.neovide_transparency = 0.8
   vim.g.neovide_opacity = 1
-  vim.g.neovide_normal_opacity = 0.99
+  vim.g.neovide_normal_opacity = 0.80
   -- Blur
   -- vim.g.neovide_window_blurred = true
   -- vim.g.neovide_floating_blur_amount_x = 1.0
   -- vim.g.neovide_floating_blur_amount_y = 1.0
   -- vim.g.neovide_background_color = '#0f1117' .. alpha()
   vim.g.neovide_fullscreen = false
+  vim.o.guifont = 'FiraCode Nerd Font:h18'
 
   local guifont = 'FiraCode Nerd Font:h18'
   local guifont_synced = false
