@@ -216,7 +216,9 @@ local find_file = function(local_opts, opts)
 
   local custom_choose = function()
     local target_win = local_opts.target_win
-    if target_win and api.nvim_win_is_valid(target_win) then pick.set_picker_target_window(target_win) end
+    if target_win and api.nvim_win_is_valid(target_win) then
+      pick.set_picker_target_window(target_win)
+    end
     local current = pick.get_picker_matches().current
     if current then
       pick.default_choose(current)
@@ -283,6 +285,14 @@ local find_file = function(local_opts, opts)
       custom_choose = { char = '<CR>', func = custom_choose },
       custom_complete = { char = '<C-Space>', func = custom_complete },
       custom_apply_match = { char = '<C-l>', func = custom_apply_match },
+      custom_paste = {
+        char = '<M-p>',
+        func = function()
+          local dirname = query_to_dirname(pick.get_picker_query())
+          if not dirname then dirname = '' end
+          set_query_to_path(fs.joinpath(dirname, vim.fn.getreg '+'))
+        end,
+      },
     },
   })
   -- mandatory opts
@@ -310,7 +320,9 @@ vim.keymap.set('t', '<M-o>', function()
   vim.cmd.stopinsert()
   vim.schedule(function()
     pick.registry.find_file { target_win = target_win }
-    if target_win and api.nvim_get_current_win() == target_win then vim.cmd(floaterm_buf .. 'FloatermHide') end
+    if target_win and api.nvim_get_current_win() == target_win then
+      vim.cmd(floaterm_buf .. 'FloatermHide')
+    end
   end)
 end)
 -- vim.keymap.set(
