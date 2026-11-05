@@ -8,7 +8,7 @@ null_ls.setup {
   sources = {
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.prettierd,
-    require 'none-ls.formatting.latexindent',
+    require('none-ls.formatting.latexindent').with { extra_args = { '-g', '/dev/null' } },
     null_ls.builtins.diagnostics.actionlint,
   },
 }
