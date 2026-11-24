@@ -4,4 +4,7 @@ vim.pack.add {
 
 local winpicker = require 'nvim-window'
 
-vim.keymap.set({ 'n', 't', 'i' }, '<M-a>', function() winpicker.pick() end, { noremap = true })
+vim.keymap.set({ 'n', 't', 'i' }, '<M-a>', function()
+  winpicker.pick()
+  vim.cmd 'stopinsert'
+end, { noremap = true })
