@@ -223,6 +223,7 @@ local opts = {
         inlay_hints = true,
       },
       show = { statusline = true, tabline = true },
+      win = { wo = { winhighlight = 'NormalFloat:NormalFloat' } },
     },
   },
 }
