@@ -2,7 +2,12 @@ vim.pack.add { 'https://github.com/carlos-algms/agentic.nvim' }
 
 local agentic = require 'agentic'
 
-agentic.setup { provider = 'claude-agent-acp' }
+agentic.setup {
+  provider = 'claude-agent-acp',
+  acp_configs = {
+    session_cwd = function() return vim.fs.normalize '~/tmp' end,
+  },
+}
 
 require('which-key').add { { '<leader>a', group = 'AI/Agentic' } }
 
