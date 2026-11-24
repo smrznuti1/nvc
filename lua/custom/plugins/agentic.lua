@@ -15,7 +15,10 @@ local function map(mode, lhs, rhs, desc) vim.keymap.set(mode, lhs, rhs, { desc =
 
 map('n', '<leader>ac', function() agentic.toggle { auto_add_to_context = false } end, 'Toggle chat')
 map('n', '<leader>an', agentic.new_session, 'New session')
-map('n', '<leader>ar', agentic.restore_session, 'Restore session')
+map('n', '<leader>ar', function()
+  vim.cmd 'tcd ~/tmp'
+  agentic.restore_session()
+end, 'Restore session')
 map('n', '<leader>al', agentic.select_session, 'List live sessions')
 map('n', '<leader>ab', agentic.add_file, 'Add current file')
 map('x', '<leader>as', agentic.add_selection, 'Add selection')
