@@ -4,6 +4,13 @@ local agentic = require 'agentic'
 
 agentic.setup {
   provider = 'claude-agent-acp',
+  acp_providers = {
+    ['opencode-acp'] = {
+      env = {
+        NODE_EXTRA_CA_CERTS = vim.fs.normalize '~/.local/share/egzakta-ca/mkcert-egwguard-rootCA.pem',
+      },
+    },
+  },
   acp_configs = {
     session_cwd = function() return vim.fs.normalize '~/tmp' end,
   },
